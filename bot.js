@@ -2,7 +2,7 @@ var dischord = require('discord.js');
 
 var bot = new dischord.Client();
 
-bot.loginWithToken(token, function (token, err) {
+bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
     if(err){
         console.log(err);
     }
