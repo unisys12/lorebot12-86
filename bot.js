@@ -32,8 +32,9 @@ function searchItems() {
     bot.on("message", function(message) {
         var input = message.content;
         var stripeCmd = input.substr('6');
+        var lowercaseify = stripeCmd.toLowerCase();
         var cardSearch = input.startsWith('!item');
-        var stripApostrophe = stripeCmd.replace("'", "");
+        var stripApostrophe = lowercaseify.replace("'", "");
         var trailingUri = stripApostrophe.replace(/\s+/g, "-");
 
         if(cardSearch) {
