@@ -35,5 +35,5 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
     }
 
     searchGrimoire();
-    searchCard();
+    //searchCard();
 });
