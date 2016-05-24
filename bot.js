@@ -3,11 +3,7 @@ var dischord = require('discord.js');
 
 var bot = new dischord.Client();
 
-bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
-    if(err){
-        console.log(err);
-    }
-
+function searchGrimoire() {
     bot.on("message", function(message) {
         var input = message.content;
         var stripeCmd = input.substr('8');
@@ -18,4 +14,12 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
         }
 
     });
+}
+
+bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
+    if(err){
+        console.log(err);
+    }
+
+    searchGrimoire;
 });
