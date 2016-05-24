@@ -1,3 +1,4 @@
+require('server.js');
 var dischord = require('discord.js');
 
 var bot = new dischord.Client();
