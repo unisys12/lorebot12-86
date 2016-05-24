@@ -19,8 +19,9 @@ function searchCard() {
     bot.on("message", function(message) {
         var input = message.content;
         var stripeCmd = input.substr('6');
+        var lowercaseify = stripeCmd.toLowerCase();
         var cardSearch = input.startsWith('!card');
-        var trailingUri = stripeCmd.replace(/\s+/g, "-");
+        var trailingUri = lowercaseify.replace(/\s+/g, "-");
 
         if(cardSearch) {
             bot.reply(message, "http://www.ishtar-collective.net/cards/" + trailingUri);
