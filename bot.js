@@ -21,5 +21,5 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
         console.log(err);
     }
 
-    searchGrimoire;
+    searchGrimoire();
 });
