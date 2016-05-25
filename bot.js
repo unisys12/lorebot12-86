@@ -70,7 +70,7 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
         console.log(err);
     }
 
-    reconnect();
+    //reconnect();
     searchGrimoire();    
     searchCard();
     searchItems();
