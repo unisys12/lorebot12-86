@@ -67,8 +67,7 @@ function help() {
             "ex: `!item ace of spades" +'\n'+
             "This will, like the card method, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
             "**__Display Help Menu__**" +'\n'+
-            "`!help` - Displays this help menu" +'\n'+'\n'+
-            );
+            "`!help` - Displays this help menu" +'\n'+'\n');
         }return
     });
 
