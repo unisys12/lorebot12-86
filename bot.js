@@ -55,16 +55,16 @@ function help() {
             bot.sendMessage(message,
             "**LoreBot Help Menu**" +'\n'+
             "**__Search Ishtar by Topic__**" +'\n'+
-            "**!search** *your search topic* - returns a link to ishtar-collective where your search is performed." +'\n'+
+            "**!search** *your search topic*" +'\n'+
             "ex: `!search osiris`" +'\n'+
             "This will return a link such as - ishtar-collective.net/search/osiris" +'\n'+'\n'+
             "**__Pull Card From Ishtar__**" +'\n'+
-            "**!search** *exact name of card you want to show in chat* - returns a ."+'\n'+
+            "**!search** *exact name of card you want to show in chat*"+'\n'+
             "ex: `!card osiris`" +'\n'+
             "This will return a link to the card, with first 50 or so characters and image of card. If not, then no card name matched your query. The link provided will still take you to Ishtar and give suggestions based on your query." +'\n'+'\n'+
             "**__Pull Item From Ishtar__**" +'\n'+
             "**!item** *item you want to show in chat*" +'\n'+
-            "ex: `!item ace of spades" +'\n'+
+            "ex: `!item ace of spades`" +'\n'+
             "This will, like the card method, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
             "**__Display Help Menu__**" +'\n'+
             "`!help` - Displays this help menu" +'\n'+'\n');
