@@ -45,19 +45,22 @@ function searchItems() {
 }
 
 function help() {
-    var input = message.content;
-    var stripeCmd = input.substr('6');
-    var lowercaseify = stripeCmd.toLowerCase();
-    var help = input.startsWith('!help');
+    bot.on("message", function(message) {
+        var input = message.content;
+        var stripeCmd = input.substr('6');
+        var lowercaseify = stripeCmd.toLowerCase();
+        var help = input.startsWith('!help');
 
-    if(help) {
-        bot.reply(message, 
+        if(help) {
+            bot.sendMessage(message,
             "**LoreBot Help Menu**" +'/\n'+
             "**__Search Ishtar by Topic__**" +'/\n'+
             "**!search** *your search topic* - returns a link to ishtar-collective where your search is performed." +'/\n'+
             "**ex:** `!search osiris`" +'/\n'+
             "This will return a link such as - http://www.ishtar-collective.net/search/osiris" +'/\n');
-    }
+        }return
+    });
+
 }
 
 function reconnect() {
