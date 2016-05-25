@@ -44,6 +44,24 @@ function searchItems() {
     });
 }
 
+function help() {
+    var input = message.content;
+    var stripeCmd = input.substr('6');
+    var lowercaseify = stripeCmd.toLowerCase();
+    var help = input.startsWith('!help');
+
+    if(help) {
+        bot.reply(message, 
+            "**LoreBot Help Menu**" +'/\n'+
+            "**__Search Ishtar by Topic__**" +'/\n'+
+            "**!search** *your search topic* - returns a link to ishtar-collective where your search is performed." +'/\n'+
+            "**ex:** `!search osiris`" +'/\n'+
+            "This will return a link such as - http://www.ishtar-collective.net/search/osiris" +'/\n'+
+            
+        );
+    }
+}
+
 function reconnect() {
     bot.on("disconnected", () => {
         console.log("Disconnected, holy crap!");
@@ -60,6 +78,7 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
     searchGrimoire();    
     searchCard();
     searchItems();
+    help();
     reconnect();
     
 });
