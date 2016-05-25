@@ -56,9 +56,7 @@ function help() {
             "**__Search Ishtar by Topic__**" +'/\n'+
             "**!search** *your search topic* - returns a link to ishtar-collective where your search is performed." +'/\n'+
             "**ex:** `!search osiris`" +'/\n'+
-            "This will return a link such as - http://www.ishtar-collective.net/search/osiris" +'/\n'+
-            
-        );
+            "This will return a link such as - http://www.ishtar-collective.net/search/osiris" +'/\n');
     }
 }
 
