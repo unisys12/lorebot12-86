@@ -73,14 +73,6 @@ function help() {
 
 }
 
-function reconnect() {
-    bot.on("disconnected", () => {
-        console.log("Disconnected, holy crap!");
-        console.log("Gonna try to reconnect now... ");
-        bot.sendMessage(message,'184268959003049989', "Bot has gone offline and trying to reconnect!")
-    })
-}
-
 bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
     if(err){
         console.log(err);
