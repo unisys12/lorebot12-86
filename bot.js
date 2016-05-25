@@ -1,7 +1,7 @@
 require('./server.js');
 var dischord = require('discord.js');
 
-var bot = new dischord.Client();
+var bot = new dischord.Client({revive: true});
 
 function searchGrimoire() {
     bot.on("message", function(message) {
@@ -77,7 +77,7 @@ function reconnect() {
     bot.on("disconnected", () => {
         console.log("Disconnected, holy crap!");
         console.log("Gonna try to reconnect now... ");
-        bot.sendMessage('184268959003049989', "Bot has gone offline and trying to reconnect!")
+        bot.sendMessage(message,'184268959003049989', "Bot has gone offline and trying to reconnect!")
     })
 }
 
@@ -90,6 +90,5 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
     searchCard();
     searchItems();
     help();
-    reconnect();
     
 });
