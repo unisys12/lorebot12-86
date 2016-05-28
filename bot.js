@@ -21,7 +21,8 @@ function searchCard() {
         var stripeCmd = input.substr('6');
         var lowercaseify = stripeCmd.toLowerCase();
         var cardSearch = input.startsWith('!card');
-        var trailingUri = stripeCmd.replace(/\s+/g, "-");
+        var removeColon = stripeCmd.replace(":", "");
+        var trailingUri = removeColon.replace(/\s+/g, "-");
 
         if(cardSearch) {
             bot.reply(message, "http://www.ishtar-collective.net/cards/" + trailingUri);
