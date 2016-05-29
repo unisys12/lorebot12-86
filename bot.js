@@ -3,6 +3,22 @@ var dischord = require('discord.js');
 
 var bot = new dischord.Client({revive: true});
 
+function normalizeCardInput(msg) {
+    var lowercaseify = msg.toLowerCase();
+    var removeColon = lowercaseify.replace(":", "");
+    var output = removeColon.replace(/\s+/g, "-");
+
+    return output;    
+}
+
+function normalizeItemInput(msg) {
+    var lowercaseify = msg.toLowerCase();
+    var stripApostrophe = lowercaseify.replace("'", "");
+    var output = stripApostrophe.replace(/\s+/g, "-");
+
+    return output;
+}
+
 function searchGrimoire() {
     bot.on("message", function(message) {
         var input = message.content;
@@ -19,13 +35,12 @@ function searchCard() {
     bot.on("message", function(message) {
         var input = message.content;
         var stripeCmd = input.substr('6');
-        var lowercaseify = stripeCmd.toLowerCase();
-        var cardSearch = input.startsWith('!card');
-        var removeColon = stripeCmd.replace(":", "");
-        var trailingUri = removeColon.replace(/\s+/g, "-");
+        var cardSearch = input.startsWith('!card');        
+        
+        var query = normalizeCardInput(stripeCmd);
 
         if(cardSearch) {
-            bot.reply(message, "http://www.ishtar-collective.net/cards/" + trailingUri);
+            bot.reply(message, "http://www.ishtar-collective.net/cards/" + query);
         } return
     });
 }
@@ -34,13 +49,12 @@ function searchItems() {
     bot.on("message", function(message) {
         var input = message.content;
         var stripeCmd = input.substr('6');
-        var lowercaseify = stripeCmd.toLowerCase();
         var cardSearch = input.startsWith('!item');
-        var stripApostrophe = lowercaseify.replace("'", "");
-        var trailingUri = stripApostrophe.replace(/\s+/g, "-");
+        
+        var query = normalizeItemInput(stripeCmd);
 
         if(cardSearch) {
-            bot.reply(message, "http://www.ishtar-collective.net/items/" + trailingUri);
+            bot.reply(message, "http://www.ishtar-collective.net/items/" + query);
         } return
     });
 }
@@ -54,7 +68,7 @@ function help() {
 
         if(help) {
             bot.sendMessage(message,
-            "**LoreBot Help Menu**" +'\n'+
+            "**LoreBot Help Menu**" +'\n'+'\n'+
             "**__Search Ishtar by Topic__**" +'\n'+
             "**!search** *your search topic*" +'\n'+
             "ex: `!search osiris`" +'\n'+
@@ -67,6 +81,8 @@ function help() {
             "**!item** *item you want to show in chat*" +'\n'+
             "ex: `!item ace of spades`" +'\n'+
             "This will, like the card method, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
+            "**__Magic Word__**" +'\n'+
+            "Don't do it! Really? I dare ya!" +'\n'+'\n'+
             "**__Display Help Menu__**" +'\n'+
             "`!help` - Displays this help menu" +'\n'+'\n');
         }return
