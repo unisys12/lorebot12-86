@@ -3,6 +3,22 @@ var dischord = require('discord.js');
 
 var bot = new dischord.Client({revive: true});
 
+function normalizeCardInput(msg) {
+    var lowercaseify = msg.toLowerCase();
+    var removeColon = lowercaseify.replace(":", "");
+    var output = removeColon.replace(/\s+/g, "-");
+
+    return output;    
+}
+
+function normalizeItemInput(msg) {
+    var lowercaseify = msg.toLowerCase();
+    var stripApostrophe = lowercaseify.replace("'", "");
+    var output = stripApostrophe.replace(/\s+/g, "-");
+
+    return output;
+}
+
 function searchGrimoire() {
     bot.on("message", function(message) {
         var input = message.content;
@@ -19,13 +35,12 @@ function searchCard() {
     bot.on("message", function(message) {
         var input = message.content;
         var stripeCmd = input.substr('6');
-        var lowercaseify = stripeCmd.toLowerCase();
-        var cardSearch = input.startsWith('!card');
-        var removeColon = stripeCmd.replace(":", "");
-        var trailingUri = removeColon.replace(/\s+/g, "-");
+        var cardSearch = input.startsWith('!card');        
+        
+        var query = normalizeCardInput(stripeCmd);
 
         if(cardSearch) {
-            bot.reply(message, "http://www.ishtar-collective.net/cards/" + trailingUri);
+            bot.reply(message, "http://www.ishtar-collective.net/cards/" + query);
         } return
     });
 }
@@ -34,13 +49,12 @@ function searchItems() {
     bot.on("message", function(message) {
         var input = message.content;
         var stripeCmd = input.substr('6');
-        var lowercaseify = stripeCmd.toLowerCase();
         var cardSearch = input.startsWith('!item');
-        var stripApostrophe = lowercaseify.replace("'", "");
-        var trailingUri = stripApostrophe.replace(/\s+/g, "-");
+        
+        var query = normalizeItemInput(stripeCmd);
 
         if(cardSearch) {
-            bot.reply(message, "http://www.ishtar-collective.net/items/" + trailingUri);
+            bot.reply(message, "http://www.ishtar-collective.net/items/" + query);
         } return
     });
 }
