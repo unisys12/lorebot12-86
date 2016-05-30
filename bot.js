@@ -90,19 +90,26 @@ function help() {
 
 }
 
-function paean() {
-    var help = input.startsWith('!help');
-    if(help == false) {
-        bot.on("message", function(message) {
-            var input = message.content;
-            var re = /(paean)/i;
+function paean() {    
 
-            if (input.search(re) != -1) {
-                bot.sendMessage(message, "That does not return any results. But, I have noticed a pattern. Because I am a genius HE HE HE");
-                bot.sendFile( message.channel, "https://cdn.discordapp.com/attachments/143886914326495233/186270379533139979/IMG_0800.GIF", "IMG_0800.GIF");
-            }
-        });
-    }
+    bot.on("message", function(message) {
+        var re = /(paean)/i;
+        var input = message.content;
+        var help = input.startsWith('!help');
+
+        console.log(help);
+        console.log();
+        
+        if (help) {
+            return
+        } 
+        if (input.search(re) != -1){
+            bot.sendMessage(message, "That does not return any results. But, I have noticed a pattern. Because I am a genius HE HE HE");
+            bot.sendFile( message.channel, "https://cdn.discordapp.com/attachments/143886914326495233/186270379533139979/IMG_0800.GIF", "IMG_0800.GIF");
+        }return
+
+    });
+
 }
 
 bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
