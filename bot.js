@@ -97,14 +97,13 @@ function paean() {
         var input = message.content;
         var help = input.startsWith('!help');
 
-        console.log(help);
-        console.log();
+        console.log("Paean has been mentioned");
         
         if (help) {
             return
         } 
         if (input.search(re) != -1){
-            bot.sendMessage(message, "That does not return any results. But, I have noticed a pattern. Because I am a genius HE HE HE");
+            bot.reply(message, "That does not return any results. But, I have noticed a pattern. Because I am a genius HE HE HE");
             bot.sendFile( message.channel, "https://cdn.discordapp.com/attachments/143886914326495233/186270379533139979/IMG_0800.GIF", "IMG_0800.GIF");
         }return
 
