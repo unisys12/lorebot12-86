@@ -76,7 +76,7 @@ function help() {
         var input = message.content;
         var stripeCmd = input.substr('6');
         var lowercaseify = stripeCmd.toLowerCase();
-        var help = input.startsWith('!help');
+        var help = input.startsWith('!lorehelp');
 
         if(help) {
             bot.sendMessage(message,
