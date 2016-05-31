@@ -19,6 +19,17 @@ function normalizeItemInput(msg) {
     return output;
 }
 
+function filetype (file) {
+    var jpg = file.endsWith('.jpg');
+    var gif = file.endsWith('.gif');
+    
+    if (jpg) {
+        return ".jpg";
+    } else {
+        return ".gif";
+    };
+}
+
 
 function searchGrimoire() {
     bot.on("message", function(message) {
@@ -107,17 +118,6 @@ function paean() {
             ]
         var pick = memes[Math.round(Math.random()*(memes.length-1))];
         var name = pick.substr(40, 5);
-
-        function filetype (file) {
-            var jpg = pick.endsWith('.jpg');
-            var gif = pick.endsWith('.gif');
-            
-            if (jpg) {
-                return ".jpg";
-            } else {
-                return ".gif";
-            };
-        }
 
         if (help) {
             return
