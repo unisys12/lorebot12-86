@@ -96,8 +96,6 @@ function paean() {
         var re = /(paean)/i;
         var input = message.content;
         var help = input.startsWith('!help');
-
-        console.log("Paean has been mentioned");
         
         if (help) {
             return
