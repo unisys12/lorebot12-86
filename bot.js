@@ -19,6 +19,7 @@ function normalizeItemInput(msg) {
     return output;
 }
 
+
 function searchGrimoire() {
     bot.on("message", function(message) {
         var input = message.content;
@@ -96,13 +97,34 @@ function paean() {
         var re = /(paean)/i;
         var input = message.content;
         var help = input.startsWith('!help');
-        
+        var memes = [
+            "http://sos.campmobile.net/e/2h28ej_g/he7Ud015a309a37y82it_awsowi.jpg",
+            "http://sos.campmobile.net/e/2h28ef_6/bbjUd015pzbbt8dfcbse_hsmjp8.jpg",
+            "http://sos.campmobile.net/d/2h204b_e/469Ud0151fl3ky5g3fy6u_o6iq9q.jpg",
+            "http://sos.campmobile.net/d/2h28cd_d/2d5Ud015psn7vdj6a3wt_l0ky7l.jpg",
+            "http://sos.campmobile.net/d/2h068g_i/3e8Ud0158cjt8r6d5mxb_l0ky7l.jpg",
+            "https://cdn.discordapp.com/attachments/143886914326495233/186270379533139979/IMG_0800.GIF"
+            ]
+        var pick = memes[Math.round(Math.random()*(memes.length-1))];
+        var name = pick.substr(40, 5);
+
+        function filetype (file) {
+            var jpg = pick.endsWith('.jpg');
+            var gif = pick.endsWith('.gif');
+            
+            if (jpg) {
+                return ".jpg";
+            } else {
+                return ".gif";
+            };
+        }
+
         if (help) {
             return
         } 
         if (input.search(re) != -1){
             bot.reply(message, "That does not return any results. But, I have noticed a pattern. Because I am a genius HE HE HE");
-            bot.sendFile( message.channel, "https://cdn.discordapp.com/attachments/143886914326495233/186270379533139979/IMG_0800.GIF", "IMG_0800.GIF");
+            bot.sendFile( message.channel, pick, name + filetype(pick));
         }return
 
     });
