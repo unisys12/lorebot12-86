@@ -96,7 +96,7 @@ function help() {
             "**__Magic Word__**" +'\n'+
             "Don't do it! Really? I dare ya!" +'\n'+'\n'+
             "**__Display Help Menu__**" +'\n'+
-            "`!help` - Displays this help menu" +'\n'+'\n');
+            "`!lorehelp` - Displays this help menu" +'\n'+'\n');
         }return
     });
 
