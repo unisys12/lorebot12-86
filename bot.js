@@ -105,9 +105,13 @@ function help() {
 function paean() {    
 
     bot.on("message", function(message) {
-        var re = /(paean)/i;
         var input = message.content;
-        var help = input.startsWith('!help');
+        var help = /(!help)/;
+        var paean = /(paean)/i;
+        var poster = message.author.id;
+        var checkPoster = '159985870458322944';
+        var checkForPaean = input.search(paean) != -1;
+        var checkForHelp = input.search(help) != -1;
         var memes = [
             "http://sos.campmobile.net/e/2h28ej_g/he7Ud015a309a37y82it_awsowi.jpg",
             "http://sos.campmobile.net/e/2h28ef_6/bbjUd015pzbbt8dfcbse_hsmjp8.jpg",
@@ -117,16 +121,14 @@ function paean() {
             "https://cdn.discordapp.com/attachments/143886914326495233/186270379533139979/IMG_0800.GIF"
             ]
         var pick = memes[Math.round(Math.random()*(memes.length-1))];
-        var name = pick.substr(40, 5);
+        var name = pick.substr(40, 5);     
 
-        if (help) {
-            return
-        } 
-        if (input.search(re) != -1){
+        breakMyth: if ( checkPoster === poster ) {
+            break breakMyth;
+        } else if ( checkForPaean ) {
             bot.reply(message, "That does not return any results. But, I have noticed a pattern. Because I am a genius HE HE HE");
             bot.sendFile( message.channel, pick, name + filetype(pick));
-        }return
-
+        }       
     });
 }
 
