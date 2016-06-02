@@ -210,7 +210,7 @@ function quotes (input, message) {
             bot.sendMessage(message.channel, "**Master Rahool: **" + randomQuote(qRahool));
             break;
         default:
-            bot.reply(message, "Sorry, either that NPC does not exist or I have not gathered their qoutes just yet. Check your spelling or check back soon.")
+            bot.reply(message, "Sorry, either that NPC does not exist or I have not gathered their quotes just yet. Check your spelling or check back soon.")
     }
 }
 
