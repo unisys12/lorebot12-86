@@ -27,8 +27,10 @@ This will return a link to the card, with first 50 or so characters and image of
 ex: `!item ace of spades` 
 This will, like the card method, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for. 
 
-**__Magic Word__**
-Don't do it! Really? I dare ya!
+**__NPC Quotes__**
+**!quotes** *the person your wanting the quotes from*
+ex: `!quotes mara`
+This will return a random quote, which is pulled from `./assets/<persons name>.js`. 
 
 **__Display Help Menu__**
-`!help` - Displays this help menu
+`!lorehelp` - Displays this help menu
