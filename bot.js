@@ -209,6 +209,30 @@ function quotes (input, message) {
             var qRahool = require('./assets/rahool.js');
             bot.sendMessage(message.channel, "**Master Rahool: **" + randomQuote(qRahool));
             break;
+        case: "shaxx":
+        case: "lord-shaxx":
+            var qShaxx = require("./assets/shaxx.js");
+            bot.sendMessage(message.channel, "**Lord Shaxx: **" + randomQuote(qShaxx));
+            break;
+        case: "saladin":
+        case: "lord-saladin":
+        case: "saladin-forge":
+        case: "forge":
+            var qSaladin = require("./assets/saladin.js");
+            bot.sendMessage(message.channel, "**Lord Saladin Forge: **" + randomQuote(qSaladin));
+            break;
+        case: "arcite":
+        case: "arcite-99-40":
+        case: "crucible quartermaster":
+            var qArcite = require('./assets/arcite.js');
+            bot.sendMessage(message.channel, "**Arcite 99-40: **" + randomQuote(qArcite));
+            break;
+        case: "kadi":
+        case: "postmaster":
+        case: "tower postmaster":
+        case: "vanguard postmaster":
+            var qKadi = require('./assets/kadi.js');
+            bot.sendMessage(message.channel, "**Kadi 55-30: **" + randomQuote(qKadi));
         default:
             bot.reply(message, "Sorry, either that NPC does not exist or I have not gathered their quotes just yet. Check your spelling or check back soon.")
     }
