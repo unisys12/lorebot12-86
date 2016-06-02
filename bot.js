@@ -162,7 +162,7 @@ function quotes (input, message) {
         case "zavala":
         case "commander-zavala":
             var qZavala = require('./assets/zavala.js');
-            bot.sendMessage(message.channel, "**Zavala Rey: **" + randomQuote(qZavala));
+            bot.sendMessage(message.channel, "**Commander Zavala: **" + randomQuote(qZavala));
             break;
         case "xur":
         case "agent-of-the-nine":
