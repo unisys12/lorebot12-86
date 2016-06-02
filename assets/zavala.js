@@ -1,0 +1,15 @@
+module.exports = [
+"The Scout's reporting from Mumbai.",
+"There is a difference between victory and invincibility.",
+"Tell me, about their light.",
+"What's wrong with these people?",
+"Didn't we have enough Kings after the Collapse? Have we forgotten our history?",
+"Still, the walls stand.",
+"Despite it all, here we are.",
+"What do they think of us? Do they think of us?",
+"One victory is not enough. Regard your soldiers as your children, and they will follow you into the dark.",
+"Deploy the Fifth. The North West wall is weak.",
+"The Traveler weakens while we remain idle.",
+"What sort of game does Shaxx think he's playing?",
+"Every second we waste in idleness is a second lost to Darkness.",
+]
