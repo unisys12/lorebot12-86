@@ -98,6 +98,7 @@ function help() {
             "This will, like the card method, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
             "**__Magic Word__**" +'\n'+
             "Don't do it! Really? I dare ya!" +'\n'+'\n'+
+            "**__NPC Quotes__**" +'\n'+
             "**!quotes** *the person your wanting the quotes from*" +'\n'+
             "ex: `!quotes mara`" +'\n'+
             "This will return a single random quote from Mara Sov. You can type in Mara, mara, mara sov or queen of the reef, etc to get these quotes." +'\n'+'\n'+
