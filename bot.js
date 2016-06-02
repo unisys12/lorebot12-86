@@ -102,7 +102,7 @@ function help() {
 
 }
 
-function paean() {    
+/*function paean() {    
 
     bot.on("message", function(message) {
         var input = message.content;
@@ -130,7 +130,7 @@ function paean() {
             bot.sendFile( message.channel, pick, name + filetype(pick));
         }       
     });
-}
+}*/
 
 function quotes (input, message) {
         
@@ -216,7 +216,7 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
     searchCard();
     searchItems();
     help();
-    paean();
+    //paean();
     bot.on("message", function (message) {
         var input = message.content;
         var quoteCmd = input.startsWith('!quotes');
