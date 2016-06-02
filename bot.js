@@ -102,7 +102,7 @@ function help() {
 
 }
 
-function paean() {    
+/*function paean() {    
 
     bot.on("message", function(message) {
         var input = message.content;
@@ -130,7 +130,81 @@ function paean() {
             bot.sendFile( message.channel, pick, name + filetype(pick));
         }       
     });
+}*/
 
+function quotes (input, message) {
+        
+    var query = normalizeItemInput(input.substr('8')).replace(/\s+/g, "-");
+
+    switch (query) {
+        case "speaker":
+        case "the-speaker":
+            var qSpeaker = require('./assets/speaker.js');
+            bot.sendMessage(message.channel, "**The Speaker: **" + randomQuote(qSpeaker));
+            break;
+        case "cayde":
+        case "cayde-6":
+            var qCayde = require('./assets/cayde.js');
+            bot.sendMessage(message.channel, "**Cayde-6: **" + randomQuote(qCayde));
+            break;
+        case "ikora":
+        case "ikora-rey":
+            var qIkora = require('./assets/ikora.js');
+            bot.sendMessage(message.channel, "**Ikora Rey: **" + randomQuote(qIkora));
+            break;
+        case "zavala":
+        case "commander-zavala":
+            var qZavala = require('./assets/zavala.js');
+            bot.sendMessage(message.channel, "**Zavala Rey: **" + randomQuote(qZavala));
+            break;
+        case "xur":
+        case "agent-of-the-nine":
+        case "agent-of-the-9":
+            var qXur = require('./assets/xur.js');
+            bot.sendMessage(message.channel, "**Xur: **" + randomQuote(qXur));
+            break;
+        case "eris":
+        case "eris-morn":
+            var qEris = require('./assets/eris.js');
+            bot.sendMessage(message.channel, "**Eris Morn: **" + randomQuote(qEris));
+            break;
+        case "ives":
+        case "master ives":
+        case "reef-cryptarch":
+        case "the-reef-cryptarch":
+        case "reefs-cryptarch":
+        case "the-reefs-cryptarch":
+            var qIves = require('./assets/ives.js');
+            bot.sendMessage(message.channel, "**Master Ives: **" + randomQuote(qIves));
+            break;
+        case "mara":
+        case "mara-sov":
+        case "the-queen":
+        case "queen-of-the-reef":
+        case "the-queen-of-the-reef":
+            var qMara = require('./assets/mara.js');
+            bot.sendMessage(message.channel, "**Mara Sov: **" + randomQuote(qMara));
+            break;
+        case "osiris":
+            var qOsiris = require('./assets/osiris.js');
+            bot.sendMessage(message.channel, "**Osiris: **" + randomQuote(qOsiris));
+            break;
+        case "petra":
+        case "petra-venj":
+            var qPetra = require('./assets/petra.js');
+            bot.sendMessage(message.channel, "**Petra Venj: **" + randomQuote(qPetra));
+            break;
+        case "rahool":
+        case "master-rahool":
+        case "the-cryptarch":
+        case "the-tower-cryptarch":
+        case "the-towers-cryptarch":
+            var qRahool = require('./assets/rahool.js');
+            bot.sendMessage(message.channel, "**Master Rahool: **" + randomQuote(qRahool));
+            break;
+        default:
+            bot.reply(message, "Sorry, either that NPC does not exist or I have not gathered their qoutes just yet. Check your spelling or check back soon.")
+    }
 }
 
 bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
@@ -142,6 +216,14 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
     searchCard();
     searchItems();
     help();
-    paean();
+    //paean();
+    bot.on("message", function (message) {
+        var input = message.content;
+        var quoteCmd = input.startsWith('!quotes');
+        
+        if (quoteCmd) {
+            quotes(input,message);
+        }
+    }) 
     
 });
