@@ -30,6 +30,9 @@ function filetype (file) {
     };
 }
 
+function randomQuote(list) {
+    return list[Math.round(Math.random()*(list.length-1))];
+}
 
 function searchGrimoire() {
     bot.on("message", function(message) {
