@@ -4,7 +4,7 @@ var dischord = require('discord.js');
 
 var bot = new dischord.Client({revive: true});
 
-function searchGrimoire() {
+function searchGrimoire(input, message) {
 
     var stripeCmd = input.substr('8');
 
