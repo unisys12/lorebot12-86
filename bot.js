@@ -66,8 +66,6 @@ function help() {
             "**!item** *item you want to show in chat*" +'\n'+
             "ex: `!item ace of spades`" +'\n'+
             "This will, like the card command, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
-            "**__Magic Word__**" +'\n'+
-            "Don't do it! Really? I dare ya!" +'\n'+'\n'+
             "**__NPC Quotes__**" +'\n'+
             "**!quotes** *the person your wanting the quotes from*" +'\n'+
             "ex: `!quotes mara`" +'\n'+
