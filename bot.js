@@ -5,75 +5,53 @@ var dischord = require('discord.js');
 var bot = new dischord.Client({revive: true});
 
 function searchGrimoire() {
-    bot.on("message", function(message) {
-        var input = message.content;
-        var stripeCmd = input.substr('8');
-        var siteSearch = input.startsWith('!search');
 
-        if(siteSearch) {
-            bot.reply(message, "http://www.ishtar-collective.net/search/" + encodeURIComponent(stripeCmd));
-        } return
-    });
+    var stripeCmd = input.substr('8');
+
+    bot.reply(message, "http://www.ishtar-collective.net/search/" + encodeURIComponent(stripeCmd));
+
 }
 
-function searchCard() {
-    bot.on("message", function(message) {
-        var input = message.content;
+function searchCard(input, message) {
+
         var stripeCmd = input.substr('6');
-        var cardSearch = input.startsWith('!card');        
-        
         var query = scripts.normalizeCardInput(stripeCmd);
 
-        if(cardSearch) {
-            bot.reply(message, "http://www.ishtar-collective.net/cards/" + query);
-        } return
-    });
+        bot.reply(message, "http://www.ishtar-collective.net/cards/" + query);
+
 }
 
-function searchItems() {
-    bot.on("message", function(message) {
-        var input = message.content;
-        var stripeCmd = input.substr('6');
-        var cardSearch = input.startsWith('!item');
-        
+function searchItems(input, message) {
+
+        var stripeCmd = input.substr('6');        
         var query = scripts.normalizeItemInput(stripeCmd);
 
-        if(cardSearch) {
-            bot.reply(message, "http://www.ishtar-collective.net/items/" + query);
-        } return
-    });
+        bot.reply(message, "http://www.ishtar-collective.net/items/" + query);
+
 }
 
-function help() {
-    bot.on("message", function(message) {
-        var input = message.content;
-        var stripeCmd = input.substr('6');
-        var lowercaseify = stripeCmd.toLowerCase();
-        var help = input.startsWith('!lorehelp');
+function help(input, message) {
 
-        if(help) {
-            bot.sendMessage(message,
-            "**LoreBot Help Menu**" +'\n'+'\n'+
-            "**__Search Ishtar by Topic__**" +'\n'+
-            "**!search** *your search topic*" +'\n'+
-            "ex: `!search osiris`" +'\n'+
-            "This will return a link such as - ishtar-collective.net/search/osiris" +'\n'+'\n'+
-            "**__Search Ishtar for Grimoire Card__**" +'\n'+
-            "**!card** *exact name of card you want to show in chat*"+'\n'+
-            "ex: `!card osiris`" +'\n'+
-            "This will return a link to the card, with first 50 or so characters and image of card. If not, then no card name matched your query. The link provided will still take you to Ishtar and give suggestions based on your query." +'\n'+'\n'+
-            "**__Search Ishtar for Item__**" +'\n'+
-            "**!item** *item you want to show in chat*" +'\n'+
-            "ex: `!item ace of spades`" +'\n'+
-            "This will, like the card command, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
-            "**__NPC Quotes__**" +'\n'+
-            "**!quotes** *the person your wanting the quotes from*" +'\n'+
-            "ex: `!quotes mara`" +'\n'+
-            "This will return a single random quote from Mara Sov. You can type in Mara, mara, mara sov or queen of the reef, etc to get these quotes." +'\n'+'\n'+
-            "**__Display Help Menu__**" +'\n'+
-            "`!lorehelp` - Displays this help menu" +'\n'+'\n');
-        }return
-    });
+    bot.sendMessage(message,
+        "**LoreBot Help Menu**" +'\n'+'\n'+
+        "**__Search Ishtar by Topic__**" +'\n'+
+        "**!search** *your search topic*" +'\n'+
+        "ex: `!search osiris`" +'\n'+
+        "This will return a link such as - ishtar-collective.net/search/osiris" +'\n'+'\n'+
+        "**__Search Ishtar for Grimoire Card__**" +'\n'+
+        "**!card** *exact name of card you want to show in chat*"+'\n'+
+        "ex: `!card osiris`" +'\n'+
+        "This will return a link to the card, with first 50 or so characters and image of card. If not, then no card name matched your query. The link provided will still take you to Ishtar and give suggestions based on your query." +'\n'+'\n'+
+        "**__Search Ishtar for Item__**" +'\n'+
+        "**!item** *item you want to show in chat*" +'\n'+
+        "ex: `!item ace of spades`" +'\n'+
+        "This will, like the card command, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
+        "**__NPC Quotes__**" +'\n'+
+        "**!quotes** *the person your wanting the quotes from*" +'\n'+
+        "ex: `!quotes mara`" +'\n'+
+        "This will return a single random quote from Mara Sov. You can type in Mara, mara, mara sov or queen of the reef, etc to get these quotes." +'\n'+'\n'+
+        "**__Display Help Menu__**" +'\n'+
+        "`!lorehelp` - Displays this help menu" +'\n'+'\n');
 
 }
 
@@ -211,23 +189,21 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
         console.log(err);
     }
 
-    searchGrimoire();    
-    searchCard();
-    searchItems();
-    help();
     //paean();
     bot.on("message", function (message) {
         var input = message.content;
+
         var quoteCmd = input.startsWith('!quotes');
         var helpCmd = input.startsWith('!lorehelp');
+        var itemCmd = input.startsWith('!item');
+        var cardCmd = input.startsWith('!card');
+        var siteCmd = input.startsWith('!search'); 
         
-        if (quoteCmd) {
-            quotes(input,message);
-        }
-
-        if (helpCmd) {
-            help(input, message);
-        }
+        if (quoteCmd) { quotes(input,message) };
+        if (helpCmd) { help(input, message) };
+        if (itemCmd) { searchItmes(input, message) };
+        if (cardCmd) { searchCard(input, message) };
+        if (siteCmd) { searchGrimoire(input, message) };
     }) 
     
 });
