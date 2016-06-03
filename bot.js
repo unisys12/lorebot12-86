@@ -1,38 +1,8 @@
 require('./server.js');
+require('./utilities/utilities.js');
 var dischord = require('discord.js');
 
 var bot = new dischord.Client({revive: true});
-
-function normalizeCardInput(msg) {
-    var lowercaseify = msg.toLowerCase();
-    var removeColon = lowercaseify.replace(":", "");
-    var output = removeColon.replace(/\s+/g, "-");
-
-    return output;    
-}
-
-function normalizeItemInput(msg) {
-    var lowercaseify = msg.toLowerCase();
-    var stripApostrophe = lowercaseify.replace("'", "");
-    var output = stripApostrophe.replace(/\s+/g, "-");
-
-    return output;
-}
-
-function filetype (file) {
-    var jpg = file.endsWith('.jpg');
-    var gif = file.endsWith('.gif');
-    
-    if (jpg) {
-        return ".jpg";
-    } else {
-        return ".gif";
-    };
-}
-
-function randomQuote(list) {
-    return list[Math.round(Math.random()*(list.length-1))];
-}
 
 function searchGrimoire() {
     bot.on("message", function(message) {
@@ -88,14 +58,14 @@ function help() {
             "**!search** *your search topic*" +'\n'+
             "ex: `!search osiris`" +'\n'+
             "This will return a link such as - ishtar-collective.net/search/osiris" +'\n'+'\n'+
-            "**__Pull Card From Ishtar__**" +'\n'+
-            "**!search** *exact name of card you want to show in chat*"+'\n'+
+            "**__Search Ishtar for Grimoire Card__**" +'\n'+
+            "**!card** *exact name of card you want to show in chat*"+'\n'+
             "ex: `!card osiris`" +'\n'+
             "This will return a link to the card, with first 50 or so characters and image of card. If not, then no card name matched your query. The link provided will still take you to Ishtar and give suggestions based on your query." +'\n'+'\n'+
-            "**__Pull Item From Ishtar__**" +'\n'+
+            "**__Search Ishtar for Item__**" +'\n'+
             "**!item** *item you want to show in chat*" +'\n'+
             "ex: `!item ace of spades`" +'\n'+
-            "This will, like the card method, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
+            "This will, like the card command, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
             "**__Magic Word__**" +'\n'+
             "Don't do it! Really? I dare ya!" +'\n'+'\n'+
             "**__NPC Quotes__**" +'\n'+
