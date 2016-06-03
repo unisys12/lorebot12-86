@@ -201,7 +201,7 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
         
         if (quoteCmd) { quotes(input,message) };
         if (helpCmd) { help(input, message) };
-        if (itemCmd) { searchItmes(input, message) };
+        if (itemCmd) { searchItems(input, message) };
         if (cardCmd) { searchCard(input, message) };
         if (siteCmd) { searchGrimoire(input, message) };
     }) 
