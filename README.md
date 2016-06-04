@@ -17,12 +17,12 @@ This bot was written for use by Focused Fire Chat on their Discord server. For a
 ex: `!search osiris` 
 This will return a link such as - ishtar-collective.net/search/osiris
 
-**__Pull Card From Ishtar__** 
+**__Search Ishtar for Grimoire Card__** 
 **!search** *exact name of card you want to show in chat*
 ex: `!card osiris` 
 This will return a link to the card, with first 50 or so characters and image of card. If not, then no card name matched your query. The link provided will still take you to Ishtar and give suggestions based on your query. 
 
-**__Pull Item From Ishtar__** 
+**__Search Ishtar for Item__** 
 **!item** *item you want to show in chat* 
 ex: `!item ace of spades` 
 This will, like the card method, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for. 
