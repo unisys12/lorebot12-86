@@ -196,11 +196,11 @@ function quotes (input, message) {
                 "**Commander Zavala** - _zavala_ , _commander zavala_" +'\n'+
                 "**Xur** - _xur_ , _agent of the nine_ , _agent of the 9_ " +'\n'+
                 "**Eris Morn** - _eris_ , _eris morn_ " +'\n'+
-                "**Master Ives** - _ives_ , _master ives_ , _reef cryptarch_, _the reef cryptarch_ , _reefs cryptarch_ , _the reefs cryptarch_ " +'\n'+
+                "**Master Ives** - _ives_ , _master ives_ , _reef cryptarch_ , _the reef cryptarch_ , _reefs cryptarch_ , _the reefs cryptarch_ " +'\n'+
                 "**Mara Sov** - _mara_ , _mara sov_ , _the queen_ , _the queen of the reef_ , _queen of the reef_ " +'\n'+
                 "**Osiris** - _osiris_ " +'\n'+
                 "**Petra Venj** - _petra venj_ , _petra_ " +'\n'+
-                "**Master Rahool** - _master rahool_, _rahool_ , _the cryptarch_ , _the tower cryptarch_ , _the towers cryptarch_ " +'\n'+
+                "**Master Rahool** - _master rahool_ , _rahool_ , _the cryptarch_ , _the tower cryptarch_ , _the towers cryptarch_ " +'\n'+
                 "**Lore Shaxx** - _lord shaxx_ , _shaxx_ " +'\n'+
                 "**Lord Saladin Forge** - _lord saladin_ , _saladin_ , _saladin forge_ , _forge_" +'\n'+
                 "**Arcite 99-40** - _arcite_ , _arcite 99-40_ , _crucible quartermaster_" +'\n'+
