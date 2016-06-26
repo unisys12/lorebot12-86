@@ -25,6 +25,7 @@
   "homepage": "https://github.com/unisys12/lorebot12-86#readme",
   "dependencies": {
     "discord.js": "^7.0.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "mongodb": "^2.1.18"
   }
 }

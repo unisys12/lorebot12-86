@@ -64,4 +64,6 @@ module.exports = [
 "You've defeated his Will, but the body remains.",
 "How long have the Hive been on our Moon? No time according to their standards. Imagine the kings of their worlds.",
 "I am bidden to grant you dried fruit candies.",
+"Return to them the misery they've borne.",
+"The Hive's faith in the Darkness infects them to the core. The pulsing heart of that twisted faith will bind the contents of the Urn.",
 ];
