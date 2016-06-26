@@ -179,13 +179,36 @@ function quotes (input, message) {
             bot.sendMessage(message.channel, "**Arcite 99-40: **" + scripts.randomQuote(qArcite));
             break;
         case "kadi":
+        case "kadi 55-30":
         case "postmaster":
         case "tower postmaster":
         case "vanguard postmaster":
             var qKadi = require('./assets/kadi.js');
             bot.sendMessage(message.channel, "**Kadi 55-30: **" + scripts.randomQuote(qKadi));
+        case "list":
+        case "show list":
+            bot.sendMessage(message.channel, 
+                "**__List of NPC's Currently in My System Followed by How to Call Them__**" +'\n'+
+                "_ex:_ `!quotes ives`" +'\n'+'\n'+
+                "**The Speaker** - _speaker_ , _the speaker_" +'\n'+
+                "**Cayde-6** - _cayde_ , _cayde 6_ , _cayde-6_" +'\n'+
+                "**Ikora Rey** - _ikora_ , _ikora rey_ " +'\n'+
+                "**Commander Zavala** - _zavala_ , _commander zavala_" +'\n'+
+                "**Xur** - _xur_ , _agent of the nine_ , _agent of the 9_ " +'\n'+
+                "**Eris Morn** - _eris_ , _eris morn_ " +'\n'+
+                "**Master Ives** - _ives_ , _master ives_ , _reef cryptarch_, _the reef cryptarch_ , _reefs cryptarch_ , _the reefs cryptarch_ " +'\n'+
+                "**Mara Sov** - _mara_ , _mara sov_ , _the queen_ , _the queen of the reef_ , _queen of the reef_ " +'\n'+
+                "**Osiris** - _osiris_ " +'\n'+
+                "**Petra Venj** - _petra venj_ , _petra_ " +'\n'+
+                "**Master Rahool** - _master rahool_, _rahool_ , _the cryptarch_ , _the tower cryptarch_ , _the towers cryptarch_ " +'\n'+
+                "**Lore Shaxx** - _lord shaxx_ , _shaxx_ " +'\n'+
+                "**Lord Saladin Forge** - _lord saladin_ , _saladin_ , _saladin forge_ , _forge_" +'\n'+
+                "**Arcite 99-40** - _arcite_ , _arcite 99-40_ , _crucible quartermaster_" +'\n'+
+                "**Kadi 55-30** - _kadi_ , _postmaster_ , _tower postmaster_ , _vanguard postmaster_ " +'\n'+
+                );
+            break;
         default:
-            bot.reply(message, "Sorry, either that NPC does not exist or I have not gathered their quotes just yet. Check your spelling or check back soon.")
+            bot.reply(message, "Sorry, either that NPC does not exist or I have not gathered their qoutes just yet. For a listing of supported NPC's issue the following command `!quotes list`.")
     }
 }
 
