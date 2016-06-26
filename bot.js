@@ -37,7 +37,7 @@ function searchItems(input, message) {
 
 function help(input, message) {
 
-    bot.sendMessage(message,
+    bot.sendMessage(message.author,
         "**LoreBot Help Menu**" +'\n'+'\n'+
         "**__Search Ishtar by Topic__**" +'\n'+
         "**!search** *your search topic*" +'\n'+
@@ -187,7 +187,7 @@ function quotes (input, message) {
             bot.sendMessage(message.channel, "**Kadi 55-30: **" + scripts.randomQuote(qKadi));
         case "list":
         case "show list":
-            bot.sendMessage(message.channel, 
+            bot.sendMessage(message.author, 
                 "**__List of NPC's Currently in My System Followed by How to Call Them__**" +'\n'+
                 "_ex:_ `!quotes ives`" +'\n'+'\n'+
                 "**The Speaker** - _speaker_ , _the speaker_" +'\n'+
