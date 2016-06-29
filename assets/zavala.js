@@ -12,4 +12,5 @@ module.exports = [
 "The Traveler weakens while we remain idle.",
 "What sort of game does Shaxx think he's playing?",
 "Every second we waste in idleness is a second lost to Darkness.",
+"Fireteam... _takes a breath_ Fireteam The Enemy Doesn't Care What We Call Ourselves... Report in! Zavala out.",
 ]
