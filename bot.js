@@ -216,21 +216,22 @@ bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
         console.log(err);
     }
 
-    //paean();
-    bot.on("message", function (message) {
-        var input = message.content;
+    bot.once("ready", function() {
+        bot.on("message", function (message) {
+            var input = message.content;
 
-        var quoteCmd = input.startsWith('!quotes');
-        var helpCmd = input.startsWith('!lorehelp');
-        var itemCmd = input.startsWith('!item');
-        var cardCmd = input.startsWith('!card');
-        var siteCmd = input.startsWith('!search'); 
-        
-        if (quoteCmd) { quotes(input,message) };
-        if (helpCmd) { help(input, message) };
-        if (itemCmd) { searchItems(input, message) };
-        if (cardCmd) { searchCard(input, message) };
-        if (siteCmd) { searchGrimoire(input, message) };
-    }) 
+            var quoteCmd = input.startsWith('!quotes');
+            var helpCmd = input.startsWith('!lorehelp');
+            var itemCmd = input.startsWith('!item');
+            var cardCmd = input.startsWith('!card');
+            var siteCmd = input.startsWith('!search'); 
+            
+            if (quoteCmd) { quotes(input,message) };
+            if (helpCmd) { help(input, message) };
+            if (itemCmd) { searchItems(input, message) };
+            if (cardCmd) { searchCard(input, message) };
+            if (siteCmd) { searchGrimoire(input, message) };
+        });
+    });
     
 });
