@@ -25,5 +25,8 @@
   "homepage": "https://github.com/unisys12/lorebot12-86#readme",
   "dependencies": {
     "discord.js": "^8.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0"
   }
 }
