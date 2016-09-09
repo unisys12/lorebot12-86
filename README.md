@@ -34,3 +34,6 @@ This will return a random quote, which is pulled from `./assets/<persons name>.j
 
 **__Display Help Menu__**
 `!lorehelp` - Displays this help menu
+
+**Quotes Help**
+As a side note, if you enter `!quotes list` in either a DM or chat, LoreBot 12-86 will send you a DM with a separate help menu that will aid/assist you in enter your NPC quotes. 
