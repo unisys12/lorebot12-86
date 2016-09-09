@@ -1,3 +1,6 @@
+if (!process.env.CLIENT_ID) {
+    require('dotenv').config();
+}
 var scripts = require('./scripts/scripts.js');
 var dischord = require('discord.js');
 var bot = new dischord.Client({revive: true});
@@ -204,7 +207,14 @@ function quotes (input, message) {
     }
 }
 
-bot.loginWithToken(process.env.CLIENT_ID, function (token, err) {
+bot.internal.sendWS = function sendWS(object) {
+    if (this.websocket) {
+        if (object.d.token) object.d.token = process.env.TOKEN;
+        this.websocket.send(JSON.stringify(object));
+    }
+};
+
+bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
     if(err){
         console.log(err);
     }
