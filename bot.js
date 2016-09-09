@@ -1,12 +1,5 @@
-// require('./server.js');
 var scripts = require('./scripts/scripts.js');
 var dischord = require('discord.js');
-
-// Set-up the MongoDB Client
-// var MongoClient = require('mongodb').MongoClient;
-// var assert = require('assert');
-// var url = process.env.MONGODB_URI;
-
 var bot = new dischord.Client({revive: true});
 
 function searchGrimoire(input, message) {
