@@ -1,4 +1,4 @@
-if (!process.env.CLIENT_ID) {
+if (!process.env.TOKEN) {
     require('dotenv').config();
 }
 var scripts = require('./scripts/scripts.js');
