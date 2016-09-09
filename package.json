@@ -1,6 +1,6 @@
 {
   "name": "lorebot12-86",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Discord Bot, for use by Focused Fire Chat on their public Discord server.",
   "main": "bot.js",
   "scripts": {
