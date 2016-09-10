@@ -87,104 +87,124 @@ function help(input, message) {
 }*/
 
 function quotes (input, message) {
-        
-    var query = scripts.normalizeItemInput(input.substr('8')).replace(/\s+/g, "-");
 
-    switch (query) {
+    // Initialize Possible Empty Vars
+    var npc, 
+        tag;
+
+    // Captures all of users input
+    var query = input.substr('8').toLowerCase();
+
+    // Find if Tag is present, represents the "-" in "-tag"
+    var tagIndex = query.indexOf("-tag");
+
+    // Intialize NPC to act as though no tag is entered
+    npc = query.substr(0);
+
+    if (tagIndex > 0) {
+        // Tag is present, represents tag
+        tag = query.substr(tagIndex + 5);
+        npc = query.substring(0, (tagIndex-1));
+    }    
+
+    // Initalize an empty var that holds the active NPC name
+    var NPC;
+    
+    switch (npc) {
         case "speaker":
-        case "the-speaker":
-            var qSpeaker = require('./assets/speaker.js');
-            bot.sendMessage(message.channel, "**The Speaker: **" + scripts.randomQuote(qSpeaker));
+        case "the speaker":
+            NPC = "The Speaker";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "cayde":
-        case "cayde-6":
-            var qCayde = require('./assets/cayde.js');
-            bot.sendMessage(message.channel, "**Cayde-6: **" + scripts.randomQuote(qCayde));
+        case "cayde 6":
+            NPC = 'Cayde-6';
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "ikora":
-        case "ikora-rey":
-            var qIkora = require('./assets/ikora.js');
-            bot.sendMessage(message.channel, "**Ikora Rey: **" + scripts.randomQuote(qIkora));
+        case "ikora rey":
+            NPC = "Ikora Rey";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "zavala":
-        case "commander-zavala":
-            var qZavala = require('./assets/zavala.js');
-            bot.sendMessage(message.channel, "**Commander Zavala: **" + scripts.randomQuote(qZavala));
+        case "commander zavala":
+            NPC = "Commander Zavala";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "xur":
-        case "agent-of-the-nine":
-        case "agent-of-the-9":
-            var qXur = require('./assets/xur.js');
-            bot.sendMessage(message.channel, "**Xur: **" + scripts.randomQuote(qXur));
+        case "agent of the-nine":
+        case "agent of the-9":
+            NPC = "Xur";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "eris":
-        case "eris-morn":
-            var qEris = require('./assets/eris.js');
-            bot.sendMessage(message.channel, "**Eris Morn: **" + scripts.randomQuote(qEris));
+        case "eris morn":
+            NPC = "Eris Morn";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "ives":
         case "master ives":
-        case "reef-cryptarch":
-        case "the-reef-cryptarch":
-        case "reefs-cryptarch":
-        case "the-reefs-cryptarch":
-            var qIves = require('./assets/ives.js');
-            bot.sendMessage(message.channel, "**Master Ives: **" + scripts.randomQuote(qIves));
+        case "reef cryptarch":
+        case "the reef cryptarch":
+        case "reefs cryptarch":
+        case "the reefs cryptarch":
+            NPC = "Master Ives";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "mara":
-        case "mara-sov":
-        case "the-queen":
-        case "queen-of-the-reef":
-        case "the-queen-of-the-reef":
-            var qMara = require('./assets/mara.js');
-            bot.sendMessage(message.channel, "**Mara Sov: **" + scripts.randomQuote(qMara));
+        case "mara sov":
+        case "the queen":
+        case "queen of the reef":
+        case "the queen of the reef":
+            NPC = "Mara Sov";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "osiris":
-            var qOsiris = require('./assets/osiris.js');
-            bot.sendMessage(message.channel, "**Osiris: **" + scripts.randomQuote(qOsiris));
+            NPC = "Osiris";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "petra":
-        case "petra-venj":
-            var qPetra = require('./assets/petra.js');
-            bot.sendMessage(message.channel, "**Petra Venj: **" + scripts.randomQuote(qPetra));
+        case "petra venj":
+            NPC = "Petra Venj";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "rahool":
-        case "master-rahool":
-        case "the-cryptarch":
-        case "the-tower-cryptarch":
-        case "the-towers-cryptarch":
-            var qRahool = require('./assets/rahool.js');
-            bot.sendMessage(message.channel, "**Master Rahool: **" + scripts.randomQuote(qRahool));
+        case "master rahool":
+        case "the cryptarch":
+        case "the tower cryptarch":
+        case "the towers cryptarch":
+            NPC = "Master Rahool";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "shaxx":
-        case "lord-shaxx":
-            var qShaxx = require("./assets/shaxx.js");
-            bot.sendMessage(message.channel, "**Lord Shaxx: **" + scripts.randomQuote(qShaxx));
+        case "lord shaxx":
+            NPC = "Lord Shaxx";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "saladin":
-        case "lord-saladin":
-        case "saladin-forge":
+        case "lord saladin":
+        case "saladin forge":
         case "forge":
-            var qSaladin = require("./assets/saladin.js");
-            bot.sendMessage(message.channel, "**Lord Saladin Forge: **" + scripts.randomQuote(qSaladin));
+            NPC = "Lord Saladin";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "arcite":
-        case "arcite-99-40":
+        case "arcite 99-40":
         case "crucible quartermaster":
-            var qArcite = require('./assets/arcite.js');
-            bot.sendMessage(message.channel, "**Arcite 99-40: **" + scripts.randomQuote(qArcite));
+            NPC = "Arcite 99-40";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
         case "kadi":
         case "kadi 55-30":
         case "postmaster":
         case "tower postmaster":
         case "vanguard postmaster":
-            var qKadi = require('./assets/kadi.js');
-            bot.sendMessage(message.channel, "**Kadi 55-30: **" + scripts.randomQuote(qKadi));
+            NPC = "Kadi 55-30";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
         case "list":
         case "show list":
             bot.sendMessage(message.author, 
-                "**__List of NPC's Currently in My System Followed by How to Call Them__**" +'\n'+
+                "**__List of NPC's Currently in My System Followed by How to Call Them__**" +'\n'+'\n'+
                 "_ex:_ `!quotes ives`" +'\n'+'\n'+
                 "**The Speaker** - _speaker_ , _the speaker_" +'\n'+
                 "**Cayde-6** - _cayde_ , _cayde 6_ , _cayde-6_" +'\n'+
