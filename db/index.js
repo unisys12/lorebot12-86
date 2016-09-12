@@ -2,7 +2,7 @@ var mysql = require('mysql2');
 var scripts = require('../scripts/scripts');
 
 // Configure MySQL2 Connection
-var connection = mysql.createConnection({
+var pool = mysql.createPool({
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
     user: process.env.DB_USERNAME,
@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
  * @returns {resource}
  */
 var findByTag = function (tag, callback) {
-    connection.query(
+    pool.query(
         "SELECT * FROM `npcs` WHERE `tags` LIKE '%" + tag + "%'", function (err, rows){
             
             // Handle any errors. Display errors and exit program
@@ -42,17 +42,12 @@ var findByTag = function (tag, callback) {
  */
 var findByNPC = function (name, callback) {
     var npcColumns = ['name', 'quote'];
-    var npcQuery = connection.query("SELECT ?? FROM ?? WHERE ?? = ?", 
+    var npcQuery = pool.query("SELECT ?? FROM ?? WHERE ?? = ?", 
         [npcColumns, 'npcs', 'name', name], function (err, rows) {
 
         // Handle any errors. Display errors and exit program
         if (err) {
             callback("Error Connecting: " + err + ". Do me a favor and let 'unisys12' know.");
-        }
-        
-        // Check number of rows returned. If none, then output message showing their input.
-        if (rows.length < 1) {            
-            callback("No results found when searching for '" + name + "'");
         }
 
         // Send the results to be processed
@@ -68,28 +63,20 @@ var findByNPC = function (name, callback) {
  * @returns {callback}
  */
 var findTagByNPC = function (name, tag, callback) {
-    var query = connection.query("SELECT `quote` FROM `npcs` WHERE `name` = " + "'" + name + "'" + " AND `tags` LIKE '%" + tag + "%'",
+    var query = pool.query("SELECT `quote` FROM `npcs` WHERE `name` = " + "'" + name + "'" + " AND `tags` LIKE '%" + tag + "%'",
     
      function (err, rows) {
         
         // Handle any errors. Display errors and exit program
         if (err) {
             console.log("Error occured in findTagByNPC: " + err);
-            callback(["Error Connecting: " + err + ". Do me a favor and let 'unisys12' know."]);
-        }
-
-        console.log("Number of rows returned are: " + rows.length);
-
-        // Check number of rows returned. If none, then output message showing their input.
-        if(rows.length < 1) {
-            callback(["No results found when searching quotes for NPC: " + name + " with tags: " +tag]);
+            callback("Error Connecting: " + err + ". Do me a favor and let '@unisys12' know.");
         }
 
         // simply return the callback...
         callback(rows);
     });
 }
-
 
 module.exports.findByTag = findByTag;
 module.exports.findByNPC = findByNPC;

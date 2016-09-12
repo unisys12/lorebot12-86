@@ -18,7 +18,6 @@ var processNpcQuotes = function (npc, tag, message) {
     var results = [];
 
     // If no tags are passed, run findByNPC
-    console.log(tag);
     if (!tag) {
         // Return random quote for NPC from database
 
@@ -28,23 +27,33 @@ var processNpcQuotes = function (npc, tag, message) {
         // Run Query to find NPC and return results
         db.findByNPC(npc, function (cb) {
 
-            // Pick a random number between 0 and the length of the results
-            var num = Math.floor(Math.random() * (cb.length - 0 + 1));
+            console.log(cb);
+            console.log('\n');
 
-            console.log("Out of " + cb.length + " results, I choose " + num);
+            // Return message if NPC is not in the database
+            if (cb.length < 1) {
+                results.push(npc + " is currently not in the database! Let "+app.bot.user+" know.");
+            }else{
 
-            // Iterate over the results to retrieve the index from above.
-            for (var i = 0; i < cb.length; i++) {
-                var quote = cb[num].quote;
-            }
+                // Pick a random number between 0 and the length of the results
+                var num = Math.floor(Math.random() * (cb.length - 1));
 
-            console.log("Quote chosen is : " + quote);
+                console.log("Index chosen is: " + num);
 
-            results.push(quote);
+                // Iterate over the results to retrieve the index from above.
+                for (var i = 0; i < cb.length; i++) {
+                    var quote = cb[num].quote;
+                }
 
-        app.bot.sendMessage(message, results);
+                // Add response to message body
+                results.push(quote);
+            }            
 
-        results = [];
+            // Send the message to chat
+            app.bot.sendMessage(message, results);
+
+            // reset results to empty array
+            results = [];
 
         });                
     }else{
@@ -57,17 +66,19 @@ var processNpcQuotes = function (npc, tag, message) {
         
         db.findTagByNPC(npc, tag, function (cb) {
             
-            // Check if response is a message
-            if (cb.indexOf('No Results') || cb.indexOf('Error') !== -1) {
-                // Send the feedback to the enduser
-                results.push(cb);
-                return;
-            }
-            
-            // Process results into separate reponses
-            for (var i = 0; i < cb.length; i++) {
+            // Check for results
+            if (cb.length < 1) {
+                results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any of _" + npc + "'s_ quotes.");
+            }else{
+                // Process results into separate reponses
+                for (var i = 0; i < cb.length; i++) {
+                    // Gather the responses
+                    var quotes = cb[i].quote;
+                }
+                
                 // Add responses to message body
-                results.push("- " + cb[i].quote);
+                results.push("- " + quotes);
+                
             }
 
             // Send the message to chat

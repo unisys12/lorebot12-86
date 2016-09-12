@@ -2,6 +2,7 @@ if (!process.env.TOKEN) {
     require('dotenv').config();
 }
 var scripts = require('./scripts/scripts.js');
+var npcQuotes = require('./scripts/quotes.js');
 var dischord = require('discord.js');
 var bot = new dischord.Client({revive: true});
 
@@ -109,7 +110,7 @@ function quotes (input, message) {
 
     // Initalize an empty var that holds the active NPC name
     var NPC;
-    
+
     switch (npc) {
         case "speaker":
         case "the speaker":
@@ -258,3 +259,5 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
     });
     
 });
+
+module.exports.bot = bot;
