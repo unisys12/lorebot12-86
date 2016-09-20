@@ -206,7 +206,7 @@ function quotes (input, message) {
         case "show list":
             bot.sendMessage(message.author, 
                 "**__List of NPC's Currently in My System Followed by How to Call Them__**" +'\n'+'\n'+
-                "_ex:_ `!quotes ives`" +'\n'+'\n'+
+                
                 "**The Speaker** - _speaker_ , _the speaker_" +'\n'+
                 "**Cayde-6** - _cayde_ , _cayde 6_ , _cayde-6_" +'\n'+
                 "**Ikora Rey** - _ikora_ , _ikora rey_ " +'\n'+
@@ -221,7 +221,14 @@ function quotes (input, message) {
                 "**Lore Shaxx** - _lord shaxx_ , _shaxx_ " +'\n'+
                 "**Lord Saladin Forge** - _lord saladin_ , _saladin_ , _saladin forge_ , _forge_" +'\n'+
                 "**Arcite 99-40** - _arcite_ , _arcite 99-40_ , _crucible quartermaster_" +'\n'+
-                "**Kadi 55-30** - _kadi_ , _postmaster_ , _tower postmaster_ , _vanguard postmaster_ " +'\n');
+                "**Kadi 55-30** - _kadi_ , _postmaster_ , _tower postmaster_ , _vanguard postmaster_ " +'\n'+
+                ""+'\n'+
+                "If you would like to view a random quote from an NPC "+'\n'+
+                "_ex:_ `!quotes ives`" +'\n'+'\n'+
+                "To see a list of quotes for an NPC related to a tag or subject"+'\n'+
+                "_ex:_ `!quotes petra -tag queen` will return a list of quotes related to The Queen of the Reef."+'\n'+'\n'+
+                "A special thanks to Focused Fire Community members @bluecrew86, @ryno-666 and @taylor-b- for helping me gather the quotes currently in LoreBot. More are on the way."+'\n'+
+                "If you have any questions, comments or requests, follow me on twitter @unisys12.");
             break;
         default:
             bot.reply(message, "Sorry, either that NPC does not exist or I have not gathered their qoutes just yet. For a listing of supported NPC's issue the following command `!quotes list`.")
