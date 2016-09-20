@@ -27,9 +27,6 @@ var processNpcQuotes = function (npc, tag, message) {
         // Run Query to find NPC and return results
         db.findByNPC(npc, function (cb) {
 
-            console.log(cb);
-            console.log('\n');
-
             // Return message if NPC is not in the database
             if (cb.length < 1) {
                 results.push(npc + " is currently not in the database! Let "+app.bot.user+" know.");
@@ -37,8 +34,6 @@ var processNpcQuotes = function (npc, tag, message) {
 
                 // Pick a random number between 0 and the length of the results
                 var num = Math.floor(Math.random() * (cb.length - 1));
-
-                console.log("Index chosen is: " + num);
 
                 // Iterate over the results to retrieve the index from above.
                 for (var i = 0; i < cb.length; i++) {
@@ -72,12 +67,10 @@ var processNpcQuotes = function (npc, tag, message) {
             }else{
                 // Process results into separate reponses
                 for (var i = 0; i < cb.length; i++) {
-                    // Gather the responses
-                    var quotes = cb[i].quote;
+                    // Add responses to message body
+                    results.push("- " + cb[i].quote);
+                    //console.log(cb[i].quote);
                 }
-                
-                // Add responses to message body
-                results.push("- " + quotes);
                 
             }
 
