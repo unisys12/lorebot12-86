@@ -84,4 +84,34 @@ var processNpcQuotes = function (npc, tag, message) {
     }
 }
 
+/**
+ * Return a message containing quotes related to a tag
+ */
+
+var processTagQuotes = function(tag, message) {
+    var results = [];
+
+    results.push("**__All quotes related to _" + tag + "_ __**" +'\n');
+
+    db.findByTag(tag, function(cb) {
+        
+        if (cb.length < 1) {
+            results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any of npc's quotes.");
+        }else{
+            var list = [];
+            for (var i = 0; i < cb.length; i++) {
+                results.push(cb[i].name + " - " + cb[i].quote);
+            }
+        }
+
+        // Send the message to chat
+        app.bot.sendMessage(message, results);
+
+        // reset results to empty array
+        results = [];
+
+    });
+}
+
 module.exports.processNpcQuotes = processNpcQuotes;
+module.exports.processTagQuotes = processTagQuotes;
