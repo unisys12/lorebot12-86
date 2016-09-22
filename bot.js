@@ -112,8 +112,8 @@ function quotes (input, message) {
     var NPC;
 
     switch (npc) {
-        case: "":
-        case: " ":
+        case "all":
+        case "a":
             NPC = "";
             npcQuotes.processTagQuotes(tag, message);
             break;
