@@ -102,8 +102,6 @@ var processTagQuotes = function(tag, message) {
             
             // Generate a list of names.
             var names = _.pluck(cb, 'name');
-            // ignore the first line since it is undefinded
-            var ignore = names.shift();
             // Generate a list of unique names
             var uniq = _.uniq(names);
 
@@ -122,8 +120,6 @@ var processTagQuotes = function(tag, message) {
 
             }
         }
-
-        //console.log(results);
 
         // Send the message to chat
         app.bot.sendMessage(message, results);
