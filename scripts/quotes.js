@@ -2,6 +2,7 @@
 
 var db = require('../db/index.js');
 var app = require.main.exports;
+var _ = require('underscore');
 
 /**
  * Process query results for NPC quoutes from the database
@@ -96,13 +97,33 @@ var processTagQuotes = function(tag, message) {
     db.findByTag(tag, function(cb) {
         
         if (cb.length < 1) {
-            results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any of npc's quotes.");
+            results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any npc quotes.");
         }else{
-            var list = [];
-            for (var i = 0; i < cb.length; i++) {
-                results.push(cb[i].name + " - " + cb[i].quote);
+            
+            // Generate a list of names.
+            var names = _.pluck(cb, 'name');
+            // ignore the first line since it is undefinded
+            var ignore = names.shift();
+            // Generate a list of unique names
+            var uniq = _.uniq(names);
+
+            results = [];
+
+            //iterate through that list, search for quotes within the object
+            for(var i=0; i<uniq.length; i++){
+              // Push out header containing NPC name of iteration
+              results.push("__**Quotes by " + uniq[i] + " related to " + tag + "**__");
+                
+                for(var n=0; n<cb.length; n++) {
+                    if(cb[n].name === uniq[i]){
+                    results.push("- " + cb[n].quote);
+                    }
+                }
+
             }
         }
+
+        //console.log(results);
 
         // Send the message to chat
         app.bot.sendMessage(message, results);
