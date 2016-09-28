@@ -207,6 +207,13 @@ function quotes (input, message) {
         case "vanguard postmaster":
             NPC = "Kadi 55-30";
             npcQuotes.processNpcQuotes(NPC, tag, message);
+            break;
+        case "amanda":
+        case "amanda holliday":
+        case "shipwright":
+            NPC = "Amanda Holliday";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
+            break;
         case "list":
         case "show list":
             bot.sendMessage(message.author, 
@@ -227,6 +234,7 @@ function quotes (input, message) {
                 "**Lord Saladin Forge** - _lord saladin_ , _saladin_ , _saladin forge_ , _forge_" +'\n'+
                 "**Arcite 99-40** - _arcite_ , _arcite 99-40_ , _crucible quartermaster_" +'\n'+
                 "**Kadi 55-30** - _kadi_ , _postmaster_ , _tower postmaster_ , _vanguard postmaster_ " +'\n'+
+                "**Amanda Holliday** - _amanda_ , _amanda holliday_ , _shipwright_ " +'\n'+
                 ""+'\n'+
                 "If you would like to view a random quote from an NPC "+'\n'+
                 "_ex:_ `!quotes ives`" +'\n'+'\n'+
