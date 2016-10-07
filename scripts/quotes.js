@@ -70,7 +70,6 @@ var processNpcQuotes = function (npc, tag, message) {
                 for (var i = 0; i < cb.length; i++) {
                     // Add responses to message body
                     results.push("- " + cb[i].quote);
-                    //console.log(cb[i].quote);
                 }
                 
             }
