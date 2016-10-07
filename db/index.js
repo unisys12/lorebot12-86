@@ -26,7 +26,7 @@ var findByTag = function (tag, callback) {
             }
 
             // Check number of rows returned. If none, then output message showing their input.
-            if (rows.length < 1) {
+            if (typeof rows === 'undefined') {
                 callback("No results found when searching for '" + tag + "'")
             }
 
