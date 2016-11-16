@@ -214,6 +214,12 @@ function quotes (input, message) {
             NPC = "Amanda Holliday";
             npcQuotes.processNpcQuotes(NPC, tag, message);
             break;
+        case "banshee":
+        case "banshee 44":
+        case "banshee-44":
+            NPC = "Banshee-44";
+            npcQuotes.processNpcQuotes(NPC, tag, message);
+            break;
         case "list":
         case "show list":
             bot.sendMessage(message.author, 

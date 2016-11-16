@@ -30,7 +30,7 @@ var processNpcQuotes = function (npc, tag, message) {
 
             // Return message if NPC is not in the database
             if (cb.length < 1) {
-                results.push(npc + " is currently not in the database! Let "+app.bot.user+" know.");
+                results.push(npc + " is currently not in the database! Let @Unisys12#5080 know.");
             }else{
 
                 // Pick a random number between 0 and the length of the results

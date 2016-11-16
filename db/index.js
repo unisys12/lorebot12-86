@@ -47,7 +47,7 @@ var findByNPC = function (name, callback) {
 
         // Handle any errors. Display errors and exit program
         if (err) {
-            callback("Error Connecting: " + err + ". Do me a favor and let 'unisys12' know.");
+            callback("Error Connecting: " + err + ". Do me a favor and let '@Unisys12#5080' know.");
         }
 
         // Send the results to be processed
