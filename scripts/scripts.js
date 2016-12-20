@@ -1,3 +1,7 @@
+'use strict'
+
+const date = new Date();
+
 module.exports = {
 
 // Utility Functions for Bot.js
@@ -13,10 +17,10 @@ normalizeCardInput: function (msg) {
     var removeColon = lowercaseify.replace(":", "");
     var output = removeColon.replace(/\s+/g, "-");
 
-    return output;    
+    return output;
 },
 
-/** 
+/**
   * Normalizes input from chat for item searches
   * - converts all characters to lower case
   * - removes any semi-colons
@@ -31,12 +35,12 @@ normalizeItemInput: function (msg) {
 },
 
 /**
-  * very poor method of checking file type. 
+  * very poor method of checking file type.
   */
 filetype: function (file) {
     var jpg = file.endsWith('.jpg');
     var gif = file.endsWith('.gif');
-    
+
     if (jpg) {
         return ".jpg";
     } else {
@@ -50,5 +54,39 @@ filetype: function (file) {
 randomQuote: function (list) {
     return list[Math.round(Math.random()*(list.length-1))];
 },
+
+// Returns the current day of the week
+curDay: function() {
+  const day = date.getDay();
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+  return days[day];
+},
+// Returns the current of month of the year
+curMonth: function() {
+  const month = date.getMonth();
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  return months[month];
+}
 
 }
