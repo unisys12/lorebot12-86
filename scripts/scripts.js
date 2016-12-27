@@ -57,17 +57,7 @@ randomQuote: function (list) {
 
 // Returns the current day of the week
 curDay: function() {
-  const day = date.getDay();
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
-  return days[day];
+  return date.getDate();
 },
 // Returns the current of month of the year
 curMonth: function() {
@@ -87,6 +77,15 @@ curMonth: function() {
     "December"
   ];
   return months[month];
+},
+
+findHaloChannel: function(channel) {
+  return channel.name == 'general'//'halo__lore'
+},
+
+filterMonthlyHaloEvents: function(spreadsheet) {
+  //console.log(this.curMonth());
+  return spreadsheet == this.curMonth();
 }
 
 }

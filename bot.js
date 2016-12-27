@@ -9,10 +9,6 @@ var bot = new dischord.Client({revive: true});
 const google = require('googleapis');
 const sheet = google.sheets('v4');
 
-var thisMonthInHalo = [];
-var todayInHalo = [];
-var nonMatchingEvents = [];
-
 function searchGrimoire(input, message) {
 
     var stripeCmd = input.substr('8');
@@ -261,58 +257,24 @@ function quotes (input, message) {
     }
 }
 
-function haloRequest(message, channel) {
-
-  var msg;
-
+function haloRequest(channel) {
   sheet.spreadsheets.values.get({
     key: process.env.googleSheetsKey,
     spreadsheetId: process.env.googleSheetID,
     range: process.env.googleSheetRange
   }, function(err, response) {
     if (err) {
+      console.log(err)
       bot.sendMessage(channel, 'No rows found due to error: ' + err);
     }else{
-      // capture the spreadsheets values/cells
+          // capture the spreadsheets values/cells
       var rows = response.values;
       // Check if the cells are empty
       if (rows.length == 0) {
+        console.log('No rows found! Something happend to the spreadsheet!!')
         bot.sendMessage(channel, "No rows found! Something happend to the spreadsheet!!");
       }else{
-        // pass the spreadsheet to method that filters the rows down to only
-        // those that happened today
-        var cannon = halo.getDailyActivities(rows);
-        if (cannon.length > 0) {
-          for (var i = 0; i < todayInHalo.length; i++) {
-            var result = todayInHalo[i];
-          }
-          bot.pinMessage(channel, '**__TODAY IN HALO__**' + '\n' + result)
-        }else{
-          var otherCannon = halo.getNonMatchingEvents(rows);
-          var randomCannon = scripts.randomQuote(otherCannon);
-          var year, month, day;
-
-          if (randomCannon[0] == 'N/A') {
-            year = '__Unknown__'
-          }else{
-            year = randomCannon[0];
-          }
-
-          if (randomCannon[1] == 'N/A') {
-            month = '__Unknown__'
-          }else{
-            month = randomCannon[1];
-          }
-
-          if (randomCannon[2] == 'N/A') {
-            day = '__Unknown__'
-          }else{
-            day = randomCannon[2];
-          }
-          // Index 3 of randomCannon is the text of the event
-          bot.sendMessage(channel, '**__Random Halo Cannon for Today__**' +
-          '\n'+'\n' + '**Year:** ' + year + '\n' + '**Month:** '+ month + '\n' + '**Day:** ' + day + '\n' + randomCannon[3]);
-        }
+        bot.sendMessage(channel, halo.messageConstruct(rows))
       }
     }
   });
@@ -333,25 +295,28 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
     bot.once("ready", function() {
         bot.on("message", function (message) {
             var input = message.content;
-            var channel = message.channel;
 
             var quoteCmd = input.startsWith('!quotes');
             var helpCmd = input.startsWith('!lorehelp');
             var itemCmd = input.startsWith('!item');
             var cardCmd = input.startsWith('!card');
             var siteCmd = input.startsWith('!search');
-            var haloCmd = input.startsWith('!halo');
 
             if (quoteCmd) { quotes(input,message) };
             if (helpCmd) { help(input, message) };
             if (itemCmd) { searchItems(input, message) };
             if (cardCmd) { searchCard(input, message) };
             if (siteCmd) { searchGrimoire(input, message) };
-            if (haloCmd) { haloRequest(message, channel) };
-
         });
+        // Today In Halo
+        var channel = bot.channels.get('name', 'lorebot').id;
+        
+        if (channel) {
+          setInterval(function() {
+            return haloRequest(channel)
+          }, 10000);
+        }
+      });
     });
-
-});
 
 module.exports.bot = bot;
