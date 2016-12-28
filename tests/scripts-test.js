@@ -18,12 +18,10 @@ describe('scripts', function() {
 
 describe('scripts', function() {
   it('randomQuote() should return a random index from an Object', function() {
-    const quotes = require('../assets/cayde');
+    const quotes = require('./testData/cayde');
     const quoteOne = scripts.randomQuote(quotes);
     const quoteTwo = scripts.randomQuote(quotes);
-    const quoteThree = scripts.randomQuote(quotes);
     expect(quoteOne).to.not.equal(quoteTwo);
-    expect(quoteThree).to.not.equal(quoteTwo);
   })
 })
 
@@ -56,7 +54,7 @@ describe('scripts', function() {
     ];
     const currentTestMonth = months[TestMonth];
     const scriptMonth = scripts.curMonth();
-    expect(scriptMonth).to.be.a('string');
+    expect(currentTestMonth).to.be.a('string');
     expect(scriptMonth).to.equal(currentTestMonth);
   })
 })
