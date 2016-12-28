@@ -281,12 +281,12 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
             if (siteCmd) { searchGrimoire(input, message) };
         });
         // Today In Halo
-        let channel = bot.channels.get('name', 'lorebot').id;
+        let channel = bot.channels.get('name', process.env.halo_channel).id;
 
         if (channel) {
           setInterval(function() {
             return haloRequest(channel)
-          }, (1000*60)*24);
+          }, process.env.halo_timer);
         }
       });
     });
