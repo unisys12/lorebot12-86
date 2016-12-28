@@ -4,7 +4,8 @@
   "description": "Discord Bot, for use by Focused Fire Chat on their public Discord server.",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node bot.js",
+    "test": "mocha tests --recursive --watch"
   },
   "repository": {
     "type": "git",
