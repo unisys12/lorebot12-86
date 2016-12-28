@@ -1,5 +1,6 @@
 'use strict'
 
+const scripts = require('./scripts');
 const db = require('../db/index.js');
 const app = require.main.exports;
 const _ = require('underscore');
@@ -34,15 +35,10 @@ let processNpcQuotes = function (npc, tag, message) {
             }else{
 
                 // Pick a random number between 0 and the length of the results
-                let num = Math.floor(Math.random() * (cb.length - 1));
-
-                // Iterate over the results to retrieve the index from above.
-                for (var i = 0; i < cb.length; i++) {
-                    let quote = cb[num].quote;
-                }
+                let quote = scripts.randomQuote(cb);
 
                 // Add response to message body
-                results.push(quote);
+                results.push(quote.quote);
             }
 
             // Send the message to chat
