@@ -5,7 +5,8 @@
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
-    "test": "mocha tests --recursive --watch"
+    "test": "mocha tests --recursive",
+    "dev": "mocha tests --recursive --watch"
   },
   "repository": {
     "type": "git",
