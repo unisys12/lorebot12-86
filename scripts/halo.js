@@ -17,7 +17,6 @@ function filterDailyHaloEvents(data) {
       return data[i];
     }
   }
-
 }
 
 function getMonthlyActivities(spreadsheet) {
@@ -25,11 +24,17 @@ function getMonthlyActivities(spreadsheet) {
 }
 
 function getDailyActivities(spreadsheet) {
-
   // We now have an array with activities for the current month.
   let monthlyActivities = getMonthlyActivities(spreadsheet);
-  return filterDailyHaloEvents(monthlyActivities);
-
+  let daily = filterDailyHaloEvents(monthlyActivities);
+  if (daily == undefined) {
+    console.log('Getting NonMatchingEvents')
+    getNonMatchingEvents(spreadsheet)
+    return false;
+  }else{
+    todayInHalo.push(daily);
+    return true;
+  }
 }
 
 function getNonMatchingEvents(list) {
@@ -50,11 +55,13 @@ function messageConstruct(spreadsheet) {
   let message = [];
   let result = [];
 
-  // Check if we have matching events for today
-  if (cannon.length > 0) {
+  console.log('Today: ', todayInHalo.length)
 
-    for (var i = 0; i < cannon.length; i++) {
-      result.push(cannon[i]);
+  // Check if we have matching events for today
+  if (cannon) {
+
+    for (var i = 0; i < todayInHalo.length; i++) {
+      result.push(todayInHalo[i]);
     }
 
     message.push('**__TODAY IN HALO__**');
@@ -62,7 +69,7 @@ function messageConstruct(spreadsheet) {
     // If not, gather a random event
   }else {
 
-    let result = scripts.randomQuote(nonMatchingEvents);
+    result = scripts.randomQuote(nonMatchingEvents);
 
     message.push('**__RANDOM HALO CANNON__**');
 
@@ -106,7 +113,7 @@ function messageConstruct(spreadsheet) {
     notes = 'No Notes Found on Selected Reference'
   }
 
-  var content = '\n'+'\n' + '**Year:** ' + year + '\n' +
+  let content = '\n' + '**Year:** ' + year + '\n' +
   '**Month:** '+ month + '\n' +
   '**Day:** ' + day + '\n' + '\n' +
   '*' + result[3] + '*' + '\n' + '\n' +
