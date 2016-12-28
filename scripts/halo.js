@@ -2,10 +2,10 @@
 
 const scripts = require('./scripts');
 const date = new Date();
-var msg;
-var thisMonthInHalo = [];
-var nonMatchingEvents = [];
-var todayInHalo = [];
+let msg;
+let thisMonthInHalo = [];
+let nonMatchingEvents = [];
+let todayInHalo = [];
 
 function filterMonthlyHaloEvents(data) {
   return data[1] == scripts.curMonth();
@@ -27,7 +27,7 @@ function getMonthlyActivities(spreadsheet) {
 function getDailyActivities(spreadsheet) {
 
   // We now have an array with activities for the current month.
-  var monthlyActivities = getMonthlyActivities(spreadsheet);
+  let monthlyActivities = getMonthlyActivities(spreadsheet);
   return filterDailyHaloEvents(monthlyActivities);
 
 }
@@ -36,7 +36,7 @@ function getNonMatchingEvents(list) {
   // Make sure array is empty before adding to it
   nonMatchingEvents = [];
   for (var i = 0; i < list.length; i++) {
-    var row = list[i];
+    let row = list[i];
     if (row[1] | row[2] == "N/A") {
       nonMatchingEvents.push(row);
     }
@@ -45,10 +45,10 @@ function getNonMatchingEvents(list) {
 }
 
 function messageConstruct(spreadsheet) {
-  var cannon = getDailyActivities(spreadsheet);
-  var year, month, day, pageSource, infoOrigin, notes;
-  var message = [];
-  var result = [];
+  let cannon = getDailyActivities(spreadsheet);
+  let year, month, day, pageSource, infoOrigin, notes;
+  let message = [];
+  let result = [];
 
   // Check if we have matching events for today
   if (cannon.length > 0) {
@@ -62,7 +62,7 @@ function messageConstruct(spreadsheet) {
     // If not, gather a random event
   }else {
 
-    var result = scripts.randomQuote(nonMatchingEvents);
+    let result = scripts.randomQuote(nonMatchingEvents);
 
     message.push('**__RANDOM HALO CANNON__**');
 

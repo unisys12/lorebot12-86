@@ -1,8 +1,8 @@
 'use strict'
 
-var db = require('../db/index.js');
-var app = require.main.exports;
-var _ = require('underscore');
+const db = require('../db/index.js');
+const app = require.main.exports;
+const _ = require('underscore');
 
 /**
  * Process query results for NPC quoutes from the database
@@ -13,10 +13,10 @@ var _ = require('underscore');
  *
  * @returns {object} - returns a message object to the chat
  */
- 
-var processNpcQuotes = function (npc, tag, message) {
+
+let processNpcQuotes = function (npc, tag, message) {
     // Empty Message Body
-    var results = [];
+    let results = [];
 
     // If no tags are passed, run findByNPC
     if (!tag) {
@@ -34,16 +34,16 @@ var processNpcQuotes = function (npc, tag, message) {
             }else{
 
                 // Pick a random number between 0 and the length of the results
-                var num = Math.floor(Math.random() * (cb.length - 1));
+                let num = Math.floor(Math.random() * (cb.length - 1));
 
                 // Iterate over the results to retrieve the index from above.
                 for (var i = 0; i < cb.length; i++) {
-                    var quote = cb[num].quote;
+                    let quote = cb[num].quote;
                 }
 
                 // Add response to message body
                 results.push(quote);
-            }            
+            }
 
             // Send the message to chat
             app.bot.sendMessage(message, results);
@@ -51,7 +51,7 @@ var processNpcQuotes = function (npc, tag, message) {
             // reset results to empty array
             results = [];
 
-        });                
+        });
     }else{
         /**
           * Return set of quotes for npc based on tag
@@ -59,9 +59,9 @@ var processNpcQuotes = function (npc, tag, message) {
 
         // Set Message Header
         results.push("__**" + npc + " Quotes on the topic of `" + tag + "` : **__");
-        
+
         db.findTagByNPC(npc, tag, function (cb) {
-            
+
             // Check for results
             if (cb.length < 1) {
                 results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any of _" + npc + "'s_ quotes.");
@@ -71,7 +71,7 @@ var processNpcQuotes = function (npc, tag, message) {
                     // Add responses to message body
                     results.push("- " + cb[i].quote);
                 }
-                
+
             }
 
             // Send the message to chat
@@ -79,7 +79,7 @@ var processNpcQuotes = function (npc, tag, message) {
 
             // reset results to empty array
             results = [];
-            
+
         });
     }
 }
@@ -88,21 +88,21 @@ var processNpcQuotes = function (npc, tag, message) {
  * Return a message containing quotes related to a tag
  */
 
-var processTagQuotes = function(tag, message) {
-    var results = [];
+let processTagQuotes = function(tag, message) {
+    let results = [];
 
     results.push("**__All quotes related to _" + tag + "_ __**" +'\n');
 
     db.findByTag(tag, function(cb) {
-        
+
         if (cb.length < 1) {
             results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any npc quotes.");
         }else{
-            
+
             // Generate a list of names.
-            var names = _.pluck(cb, 'name');
+            let names = _.pluck(cb, 'name');
             // Generate a list of unique names
-            var uniq = _.uniq(names);
+            let uniq = _.uniq(names);
 
             results = [];
 
@@ -110,7 +110,7 @@ var processTagQuotes = function(tag, message) {
             for(var i=0; i<uniq.length; i++){
               // Push out header containing NPC name of iteration
               results.push("__**Quotes by " + uniq[i] + " related to " + tag + "**__");
-                
+
                 for(var n=0; n<cb.length; n++) {
                     if(cb[n].name === uniq[i]){
                     results.push("- " + cb[n].quote);

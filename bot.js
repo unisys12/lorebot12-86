@@ -1,17 +1,19 @@
+'use strict'
+
 if (!process.env.TOKEN) {
     require('dotenv').config();
 }
-var scripts = require('./scripts/scripts.js');
-var npcQuotes = require('./scripts/quotes.js');
-var halo = require('./scripts/halo.js');
-var dischord = require('discord.js');
-var bot = new dischord.Client({revive: true});
+const scripts = require('./scripts/scripts.js');
+const npcQuotes = require('./scripts/quotes.js');
+const halo = require('./scripts/halo.js');
+const dischord = require('discord.js');
+const bot = new dischord.Client({revive: true});
 const google = require('googleapis');
 const sheet = google.sheets('v4');
 
 function searchGrimoire(input, message) {
 
-    var stripeCmd = input.substr('8');
+    let stripeCmd = input.substr('8');
 
     bot.reply(message, "http://www.ishtar-collective.net/search/" + encodeURIComponent(stripeCmd));
 
@@ -19,8 +21,8 @@ function searchGrimoire(input, message) {
 
 function searchCard(input, message) {
 
-        var stripeCmd = input.substr('6');
-        var query = scripts.normalizeCardInput(stripeCmd);
+        let stripeCmd = input.substr('6');
+        let query = scripts.normalizeCardInput(stripeCmd);
 
         bot.reply(message, "http://www.ishtar-collective.net/cards/" + query);
 
@@ -28,8 +30,8 @@ function searchCard(input, message) {
 
 function searchItems(input, message) {
 
-        var stripeCmd = input.substr('6');
-        var query = scripts.normalizeItemInput(stripeCmd);
+        let stripeCmd = input.substr('6');
+        let query = scripts.normalizeItemInput(stripeCmd);
 
         bot.reply(message, "http://www.ishtar-collective.net/items/" + query);
 
@@ -60,47 +62,17 @@ function help(input, message) {
 
 }
 
-/*function paean() {
-
-    bot.on("message", function(message) {
-        var input = message.content;
-        var help = /(!help)/;
-        var paean = /(paean)/i;
-        var poster = message.author.id;
-        var checkPoster = '159985870458322944';
-        var checkForPaean = input.search(paean) != -1;
-        var checkForHelp = input.search(help) != -1;
-        var memes = [
-            "http://sos.campmobile.net/e/2h28ej_g/he7Ud015a309a37y82it_awsowi.jpg",
-            "http://sos.campmobile.net/e/2h28ef_6/bbjUd015pzbbt8dfcbse_hsmjp8.jpg",
-            "http://sos.campmobile.net/d/2h204b_e/469Ud0151fl3ky5g3fy6u_o6iq9q.jpg",
-            "http://sos.campmobile.net/d/2h28cd_d/2d5Ud015psn7vdj6a3wt_l0ky7l.jpg",
-            "http://sos.campmobile.net/d/2h068g_i/3e8Ud0158cjt8r6d5mxb_l0ky7l.jpg",
-            "https://cdn.discordapp.com/attachments/143886914326495233/186270379533139979/IMG_0800.GIF"
-            ]
-        var pick = memes[Math.round(Math.random()*(memes.length-1))];
-        var name = pick.substr(40, 5);
-
-        breakMyth: if ( checkPoster === poster ) {
-            break breakMyth;
-        } else if ( checkForPaean ) {
-            bot.reply(message, "That does not return any results. But, I have noticed a pattern. Because I am a genius HE HE HE");
-            bot.sendFile( message.channel, pick, name + filetype(pick));
-        }
-    });
-}*/
-
 function quotes (input, message) {
 
     // Initialize Possible Empty Vars
-    var npc,
+    let npc,
         tag;
 
     // Captures all of users input
-    var query = input.substr('8').toLowerCase();
+    let query = input.substr('8').toLowerCase();
 
     // Find if Tag is present, represents the "-" in "-tag"
-    var tagIndex = query.indexOf("-tag");
+    let tagIndex = query.indexOf("-tag");
 
     // Intialize NPC to act as though no tag is entered
     npc = query.substr(0);
@@ -111,8 +83,8 @@ function quotes (input, message) {
         npc = query.substring(0, (tagIndex-1));
     }
 
-    // Initalize an empty var that holds the active NPC name
-    var NPC;
+    // Initalize an empty let that holds the active NPC name
+    let NPC;
 
     switch (npc) {
         case "all":
@@ -268,7 +240,7 @@ function haloRequest(channel) {
       bot.sendMessage(channel, 'No rows found due to error: ' + err);
     }else{
           // capture the spreadsheets values/cells
-      var rows = response.values;
+      let rows = response.values;
       // Check if the cells are empty
       if (rows.length == 0) {
         console.log('No rows found! Something happend to the spreadsheet!!')
@@ -294,13 +266,13 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
 
     bot.once("ready", function() {
         bot.on("message", function (message) {
-            var input = message.content;
+            let input = message.content;
 
-            var quoteCmd = input.startsWith('!quotes');
-            var helpCmd = input.startsWith('!lorehelp');
-            var itemCmd = input.startsWith('!item');
-            var cardCmd = input.startsWith('!card');
-            var siteCmd = input.startsWith('!search');
+            let quoteCmd = input.startsWith('!quotes');
+            let helpCmd = input.startsWith('!lorehelp');
+            let itemCmd = input.startsWith('!item');
+            let cardCmd = input.startsWith('!card');
+            let siteCmd = input.startsWith('!search');
 
             if (quoteCmd) { quotes(input,message) };
             if (helpCmd) { help(input, message) };
@@ -309,7 +281,7 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
             if (siteCmd) { searchGrimoire(input, message) };
         });
         // Today In Halo
-        var channel = bot.channels.get('name', 'lorebot').id;
+        let channel = bot.channels.get('name', 'lorebot').id;
 
         if (channel) {
           setInterval(function() {

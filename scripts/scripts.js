@@ -13,9 +13,9 @@ module.exports = {
   * - removes any spaces and replaces with slug "-"
   */
 normalizeCardInput: function (msg) {
-    var lowercaseify = msg.toLowerCase();
-    var removeColon = lowercaseify.replace(":", "");
-    var output = removeColon.replace(/\s+/g, "-");
+    let lowercaseify = msg.toLowerCase();
+    let removeColon = lowercaseify.replace(":", "");
+    let output = removeColon.replace(/\s+/g, "-");
 
     return output;
 },
@@ -27,9 +27,9 @@ normalizeCardInput: function (msg) {
   * - removes any spaces and replaces with slug "-"
   */
 normalizeItemInput: function (msg) {
-    var lowercaseify = msg.toLowerCase();
-    var stripApostrophe = lowercaseify.replace("'", "");
-    var output = stripApostrophe.replace(/\s+/g, "-");
+    let lowercaseify = msg.toLowerCase();
+    let stripApostrophe = lowercaseify.replace("'", "");
+    let output = stripApostrophe.replace(/\s+/g, "-");
 
     return output;
 },
@@ -38,8 +38,8 @@ normalizeItemInput: function (msg) {
   * very poor method of checking file type.
   */
 filetype: function (file) {
-    var jpg = file.endsWith('.jpg');
-    var gif = file.endsWith('.gif');
+    let jpg = file.endsWith('.jpg');
+    let gif = file.endsWith('.gif');
 
     if (jpg) {
         return ".jpg";
@@ -61,7 +61,7 @@ curDay: function() {
 },
 // Returns the current of month of the year
 curMonth: function() {
-  const month = date.getMonth();
+  let month = date.getMonth();
   const months = [
     "January",
     "February",
