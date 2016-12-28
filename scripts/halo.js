@@ -5,62 +5,47 @@ const date = new Date();
 var msg;
 var thisMonthInHalo = [];
 var nonMatchingEvents = [];
+var todayInHalo = [];
+
+function filterMonthlyHaloEvents(data) {
+  return data[1] == scripts.curMonth();
+}
+
+function filterDailyHaloEvents(data) {
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][2] == scripts.curDay()) {
+      return data[i];
+    }
+  }
+
+}
 
 function getMonthlyActivities(spreadsheet) {
-  var thisMonthInHalo = [];
-  // var monthFilter = spreadsheet.filter(scripts.filterMonthlyHaloEvents);
-  // console.log("Monthly Events: ", monthFilter);
-  // Pass in the "list" of cell values, iterate over them and assign them to a var
-  for (var i = 0; i < spreadsheet.length; i++) {
-    // Represents a single row instance
-    var row = spreadsheet[i];
-    // Compare month values against current month.
-    if (row[1] == scripts.curMonth()) {
-      // If we find a match, push it into the monthly array
-      thisMonthInHalo.push(row);
-    }
-    nonMatchingEvents.push(row);
-  }
+  return spreadsheet.filter(filterMonthlyHaloEvents);
 }
 
 function getDailyActivities(spreadsheet) {
-  var todayInHalo = [];
-  // Check for Monthly Activities
-  if (thisMonthInHalo.length == 0) {
-    getMonthlyActivities(spreadsheet);
-  }
-  // Iterate over the monthly array to find any matching days
-  for (var i = 0; i < thisMonthInHalo.length; i++) {
-    // Represents a single row instance from the current month
-    var row = thisMonthInHalo[i];
-    // Check if each row from the month matches the current day
-    if (row[2] == scripts.curDay()) {
-      // If so, push them into a daily array to be returned
-      todayInHalo.push(row);
-      console.log('Today In Halo: ', todayInHalo);
-    }else{
-      nonMatchingEvents.push(row);
-    }
-  }
-  // Reintialize to an empty array for next time bot cycles through
-  thisMonthInHalo = [];
-  return todayInHalo;
+
+  // We now have an array with activities for the current month.
+  var monthlyActivities = getMonthlyActivities(spreadsheet);
+  return filterDailyHaloEvents(monthlyActivities);
+
 }
 
 function getNonMatchingEvents(list) {
-  // Make double array is empty before adding to it
+  // Make sure array is empty before adding to it
   nonMatchingEvents = [];
   for (var i = 0; i < list.length; i++) {
     var row = list[i];
-    if (row[1] || row[2] == "N/A") {
+    if (row[1] | row[2] == "N/A") {
       nonMatchingEvents.push(row);
     }
   }
   return nonMatchingEvents;
 }
 
-function messageConstruct(rows) {
-  var cannon = getDailyActivities(rows);
+function messageConstruct(spreadsheet) {
+  var cannon = getDailyActivities(spreadsheet);
   var year, month, day, pageSource, infoOrigin, notes;
   var message = [];
   var result = [];
@@ -68,17 +53,16 @@ function messageConstruct(rows) {
   // Check if we have matching events for today
   if (cannon.length > 0) {
 
-    for (var i = 0; i < todayInHalo.length; i++) {
-      result = todayInHalo[i];
+    for (var i = 0; i < cannon.length; i++) {
+      result.push(cannon[i]);
     }
 
-    message.push('**__TODAY IN HALO__**' + '\n');
+    message.push('**__TODAY IN HALO__**');
 
     // If not, gather a random event
   }else {
 
-    var randomList = getNonMatchingEvents(rows);
-    var result = scripts.randomQuote(randomList);
+    var result = scripts.randomQuote(nonMatchingEvents);
 
     message.push('**__RANDOM HALO CANNON__**');
 

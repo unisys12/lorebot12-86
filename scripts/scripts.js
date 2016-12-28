@@ -77,15 +77,6 @@ curMonth: function() {
     "December"
   ];
   return months[month];
-},
-
-findHaloChannel: function(channel) {
-  return channel.name == 'general'//'halo__lore'
-},
-
-filterMonthlyHaloEvents: function(spreadsheet) {
-  //console.log(this.curMonth());
-  return spreadsheet == this.curMonth();
 }
 
 }

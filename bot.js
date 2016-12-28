@@ -310,11 +310,11 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
         });
         // Today In Halo
         var channel = bot.channels.get('name', 'lorebot').id;
-        
+
         if (channel) {
           setInterval(function() {
             return haloRequest(channel)
-          }, 10000);
+          }, (1000*60)*24);
         }
       });
     });
