@@ -28,7 +28,6 @@ function getDailyActivities(spreadsheet) {
   let monthlyActivities = getMonthlyActivities(spreadsheet);
   let daily = filterDailyHaloEvents(monthlyActivities);
   if (daily == undefined) {
-    console.log('Getting NonMatchingEvents')
     getNonMatchingEvents(spreadsheet)
     return false;
   }else{
@@ -54,8 +53,6 @@ function messageConstruct(spreadsheet) {
   let year, month, day, pageSource, infoOrigin, notes;
   let message = [];
   let result = [];
-
-  console.log('Today: ', todayInHalo.length)
 
   // Check if we have matching events for today
   if (cannon) {
