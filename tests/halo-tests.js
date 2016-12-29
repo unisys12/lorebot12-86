@@ -36,8 +36,14 @@ describe('halo', function() {
         expect(todayInHalo[i][2]).to.equal(scripts.curDay());
       }
     }else{
-      expect(nonMatchingEvents).to.not.be.empty;
       expect(todayInHalo).to.be.empty;
     }
-  });
+  })
+
+  it('getNonMatchingEvents() should return an array of events containing "N/A" in the month and/or year column', function() {
+    const spreadsheet = require('./testData/sheetresponse');
+    const nonMatchingEvents = [];
+    let results = halo.getNonMatchingEvents(spreadsheet);
+    expect(results).to.be.a('array');
+  })
 })
