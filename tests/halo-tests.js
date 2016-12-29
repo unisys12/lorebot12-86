@@ -7,6 +7,7 @@ const halo = require('../scripts/halo');
 const scripts = require('../scripts/scripts');
 
 describe('halo', function() {
+
   it('getMonthlyActivities() should return an array of filtered events matching the current month of the year', function() {
     const spreadsheet = require('./testData/sheetresponse');
     const values = spreadsheet.values;
@@ -17,9 +18,7 @@ describe('halo', function() {
       expect(res[i][1]).to.equal(scripts.curMonth());
     }
   })
-})
 
-describe('halo', function() {
   it('getDailyActivities() should return an array of filtered events from monthlyActivities that match the current day of the week', function(){
     const spreadsheet = require('./testData/sheetresponse');
     const events = spreadsheet.values;
@@ -46,4 +45,5 @@ describe('halo', function() {
     let results = halo.getNonMatchingEvents(spreadsheet);
     expect(results).to.be.a('array');
   })
+
 })
