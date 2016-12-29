@@ -19,7 +19,7 @@ describe('halo', function() {
     }
   })
 
-  it('getDailyActivities() should return an array of filtered events from monthlyActivities that match the current day of the week', function(){
+  it('getDailyActivities() should return an array of filtered events from monthlyActivities that match the current day of the week or fire getNonMatchingEvents()', function(){
     const spreadsheet = require('./testData/sheetresponse');
     const events = spreadsheet.values;
     const monthlyEvents = halo.getMonthlyActivities(events);
@@ -35,6 +35,7 @@ describe('halo', function() {
         expect(todayInHalo[i][2]).to.equal(scripts.curDay());
       }
     }else{
+      halo.getNonMatchingEvents()
       expect(todayInHalo).to.be.empty;
     }
   })
@@ -44,6 +45,20 @@ describe('halo', function() {
     const nonMatchingEvents = [];
     let results = halo.getNonMatchingEvents(spreadsheet);
     expect(results).to.be.a('array');
+    for (var i = 0; i < results.length; i++) {
+      let row = results[i];
+      expect(row[1] | row[2]).to.equal("N/A");
+    }
+  })
+
+  it('messageConstruct() should contruct a message inside an array from the results of getDailyActivities()', function() {
+    const spreadsheet = require('./testData/sheetresponse');
+    const values = spreadsheet.values;
+    const halo = require('../scripts/halo');
+    let message = halo.messageConstruct(values);
+
+    expect(message).to.be.a('array');
+
   })
 
 })
