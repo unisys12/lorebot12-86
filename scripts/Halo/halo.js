@@ -1,6 +1,8 @@
 'use strict'
 
 const scripts = require('./scripts');
+const google = require('googleapis');
+const sheet = google.sheets('v4');
 const date = new Date();
 let msg;
 let thisMonthInHalo = [];
@@ -119,7 +121,28 @@ function messageConstruct(spreadsheet) {
   return message;
 }
 
+function haloRequest(channel) {
+  sheet.spreadsheets.values.get({
+    key: process.env.googleSheetsKey,
+    spreadsheetId: process.env.googleSheetID,
+    range: process.env.googleSheetRange
+  }, function(err, response) {
+    if (err) {
+      console.log(err)
+      return 'No rows found due to error: ' + err);
+    }else{
+      let rows = response.values;
+      if (rows.length == 0) {
+        return "No rows found! Something happend to the spreadsheet!!";
+      }else{
+        return messageConstruct(rows)
+      }
+    }
+  });
+}
+
 module.exports.getMonthlyActivities = getMonthlyActivities;
 module.exports.getDailyActivities = getDailyActivities;
 module.exports.getNonMatchingEvents = getNonMatchingEvents;
 module.exports.messageConstruct = messageConstruct;
+module.exports.haloRequest = haloRequest;
