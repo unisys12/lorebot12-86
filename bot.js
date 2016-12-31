@@ -25,7 +25,7 @@ function searchCard(input, message) {
 
 function searchItems(input, message) {
 
-        var stripeCmd = input.substr('6');        
+        var stripeCmd = input.substr('6');
         var query = scripts.normalizeItemInput(stripeCmd);
 
         bot.reply(message, "http://www.ishtar-collective.net/items/" + query);
@@ -57,7 +57,7 @@ function help(input, message) {
 
 }
 
-/*function paean() {    
+/*function paean() {
 
     bot.on("message", function(message) {
         var input = message.content;
@@ -76,21 +76,21 @@ function help(input, message) {
             "https://cdn.discordapp.com/attachments/143886914326495233/186270379533139979/IMG_0800.GIF"
             ]
         var pick = memes[Math.round(Math.random()*(memes.length-1))];
-        var name = pick.substr(40, 5);     
+        var name = pick.substr(40, 5);
 
         breakMyth: if ( checkPoster === poster ) {
             break breakMyth;
         } else if ( checkForPaean ) {
             bot.reply(message, "That does not return any results. But, I have noticed a pattern. Because I am a genius HE HE HE");
             bot.sendFile( message.channel, pick, name + filetype(pick));
-        }       
+        }
     });
 }*/
 
 function quotes (input, message) {
 
     // Initialize Possible Empty Vars
-    var npc, 
+    var npc,
         tag;
 
     // Captures all of users input
@@ -106,7 +106,7 @@ function quotes (input, message) {
         // Tag is present, represents tag
         tag = query.substr(tagIndex + 5);
         npc = query.substring(0, (tagIndex-1));
-    }    
+    }
 
     // Initalize an empty var that holds the active NPC name
     var NPC;
@@ -222,9 +222,9 @@ function quotes (input, message) {
             break;
         case "list":
         case "show list":
-            bot.sendMessage(message.author, 
+            bot.sendMessage(message.author,
                 "**__List of NPC's Currently in My System Followed by How to Call Them__**" +'\n'+'\n'+
-                
+
                 "**The Speaker** - _speaker_ , _the speaker_" +'\n'+
                 "**Cayde-6** - _cayde_ , _cayde 6_ , _cayde-6_" +'\n'+
                 "**Ikora Rey** - _ikora_ , _ikora rey_ " +'\n'+
@@ -254,12 +254,12 @@ function quotes (input, message) {
     }
 }
 
-bot.internal.sendWS = function sendWS(object) {
-    if (this.websocket) {
-        if (object.d.token) object.d.token = process.env.TOKEN;
-        this.websocket.send(JSON.stringify(object));
-    }
-};
+// bot.internal.sendWS = function sendWS(object) {
+//     if (this.websocket) {
+//         if (object.d.token) object.d.token = process.env.TOKEN;
+//         this.websocket.send(JSON.stringify(object));
+//     }
+// };
 
 bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
     if(err){
@@ -274,8 +274,8 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
             var helpCmd = input.startsWith('!lorehelp');
             var itemCmd = input.startsWith('!item');
             var cardCmd = input.startsWith('!card');
-            var siteCmd = input.startsWith('!search'); 
-            
+            var siteCmd = input.startsWith('!search');
+
             if (quoteCmd) { quotes(input,message) };
             if (helpCmd) { help(input, message) };
             if (itemCmd) { searchItems(input, message) };
@@ -283,7 +283,7 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
             if (siteCmd) { searchGrimoire(input, message) };
         });
     });
-    
+
 });
 
 module.exports.bot = bot;
