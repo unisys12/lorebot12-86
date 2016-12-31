@@ -236,7 +236,7 @@ function haloRequest(channel) {
     range: process.env.googleSheetRange
   }, function(err, response) {
     if (err) {
-      console.log(err)
+      console.log('Seems there was an error accessing the spreadsheet:', err)
       bot.sendMessage(channel, 'No rows found due to error: ' + err);
     }else{
           // capture the spreadsheets values/cells
@@ -281,13 +281,20 @@ bot.loginWithToken("Bot "+process.env.TOKEN, function (token, err) {
             if (siteCmd) { searchGrimoire(input, message) };
         });
         // Today In Halo
-        let channel = bot.channels.get('name', 'lorebot').id;
+        try {
+          let channel = bot.channels.get('name', process.env.halo_channel).id;
 
-        if (channel) {
-          setInterval(function() {
-            return haloRequest(channel)
-          }, (1000*60)*24);
+          if (channel) {
+            setInterval(function() {
+              return haloRequest(channel)
+            }, (process.env.halo_timer));
+          }
+        } catch (e) {
+          console.log('#halo__lore could not be found: ' + e)
+        } finally {
+          console.log('Carry on then...')
         }
+
       });
     });
 
