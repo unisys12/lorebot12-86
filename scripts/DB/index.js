@@ -1,7 +1,7 @@
 'use strict'
 
 const mysql = require('mysql2');
-const scripts = require('../scripts/scripts');
+const scripts = require('../scripts');
 
 // Configure MySQL2 Connection
 let pool = mysql.createPool({
@@ -44,7 +44,7 @@ let findByTag = function (tag, callback) {
  */
 let findByNPC = function (name, callback) {
     let npcColumns = ['name', 'quote'];
-    let npcQuery = pool.query("SELECT ?? FROM ?? WHERE ?? = ?", 
+    let npcQuery = pool.query("SELECT ?? FROM ?? WHERE ?? = ?",
         [npcColumns, 'npcs', 'name', name], function (err, rows) {
 
         // Handle any errors. Display errors and exit program
