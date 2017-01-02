@@ -1,10 +1,13 @@
 // Testing Dependencies
 const chai = require('chai');
 const expect = chai.expect;
+const sinon = require('sinon');
 
 // App Dependencies N/A
 const halo = require('../../scripts/Halo/halo');
 const scripts = require('../../scripts/scripts');
+const google = require('googleapis');
+const sheet = google.sheets('v4');
 const spreadsheet = require('../testData/sheetresponse');
 const values = spreadsheet.values;
 
@@ -57,10 +60,26 @@ describe('halo', function() {
     expect(message).to.be.a('array');
   })
 
-  // it('haloRequest() should fetch the spreadsheet and fire the messageConstruct() with the rows of the sheet', function() {
-  //   let message = halo.haloRequest();
+  // it('haloRequest() should call the Google Sheets API wrapper to retrieve the spreadsheet', sinon.test(function() {
+  //   let spy = this.spy();
+  //   let mthd = sheet.spreadsheets.values.get(spy);
   //
-  //   expect(message).to.be.a('array')
-  // })
+  //   sheet.spreadsheets.values.get()
+  //
+  //   expect(spy.called);
+  //
+  // }))
+
+  // Come back to this test after I have everything else tested without using Sinon
+  /*it('haloRequest() should then fire the messageConstruct() if successful', sinon.test(function() {
+    let spy = this.spy()
+    let mthd = halo.messageConstruct(spy)
+    const spreadsheet = require('../testData/sheetresponse');
+    const rows = spreadsheet.values;
+
+    halo.messageConstruct(values)
+
+    expect(spy.called)
+  }))*/
 
 })
