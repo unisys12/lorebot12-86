@@ -53,7 +53,7 @@ describe('halo', function() {
   })
 
   it('messageConstruct() should contruct a message inside an array from the results of getDailyActivities()', function() {
-    const spreadsheet = require('../TestData/sheetresponse');
+    const spreadsheet = require('../TestData/sheetresponse.json');
     const rows = spreadsheet.values;
     let message = halo.messageConstruct(rows);
 

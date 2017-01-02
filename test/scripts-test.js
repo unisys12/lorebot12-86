@@ -15,7 +15,7 @@ describe('scripts', function() {
   })
 
   it('randomQuote() should return a random index from an Object', function() {
-    const quotes = require('./testData/petra');
+    const quotes = require('./TestData/petra');
     const quoteOne = scripts.randomQuote(quotes);
     const quoteTwo = scripts.randomQuote(quotes);
     expect(quoteOne).to.not.equal(quoteTwo);
