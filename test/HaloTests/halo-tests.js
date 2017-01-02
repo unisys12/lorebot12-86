@@ -8,7 +8,7 @@ const halo = require('../../scripts/Halo/halo');
 const scripts = require('../../scripts/scripts');
 const google = require('googleapis');
 const sheet = google.sheets('v4');
-const spreadsheet = require('../testData/sheetresponse');
+const spreadsheet = require('../testData/sheetresponse.json');
 const values = spreadsheet.values;
 
 describe('halo', function() {
