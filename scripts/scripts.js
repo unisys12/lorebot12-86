@@ -35,20 +35,6 @@ normalizeItemInput: function (msg) {
 },
 
 /**
-  * very poor method of checking file type.
-  */
-filetype: function (file) {
-    let jpg = file.endsWith('.jpg');
-    let gif = file.endsWith('.gif');
-
-    if (jpg) {
-        return ".jpg";
-    } else {
-        return ".gif";
-    };
-},
-
-/**
   * Reads array of quotes and picks one at random
   */
 randomQuote: function (list) {

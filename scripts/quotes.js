@@ -1,8 +1,7 @@
 'use strict'
 
 const scripts = require('./scripts');
-const db = require('../db/index.js');
-const app = require.main.exports;
+const db = require('./DB/index');
 const _ = require('underscore');
 
 /**
@@ -41,8 +40,8 @@ let processNpcQuotes = function (npc, tag, message) {
                 results.push(quote.quote);
             }
 
-            // Send the message to chat
-            app.bot.sendMessage(message, results);
+            // Send the message to the bot
+            return results;
 
             // reset results to empty array
             results = [];
@@ -70,8 +69,8 @@ let processNpcQuotes = function (npc, tag, message) {
 
             }
 
-            // Send the message to chat
-            app.bot.sendMessage(message, results);
+            // Send the message to the bot
+            return results;
 
             // reset results to empty array
             results = [];
