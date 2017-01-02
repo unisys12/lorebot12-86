@@ -128,8 +128,7 @@ function haloRequest() {
     range: process.env.googleSheetRange
   }, function(err, response) {
     if (err) {
-      console.log(err)
-      return 'No rows found due to error: ' + err
+      return new Error('Error accessing spreadsheet', err)
     }else{
       let rows = response.values;
       if (rows.length == 0) {
