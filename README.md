@@ -1,4 +1,4 @@
-lorebot12-86 [![Coverage Status](https://coveralls.io/repos/github/unisys12/lorebot12-86/badge.svg?branch=testing)](https://coveralls.io/github/unisys12/lorebot12-86?branch=testing) [![Build Status](https://travis-ci.org/unisys12/lorebot12-86.svg?branch=testing)](https://travis-ci.org/unisys12/lorebot12-86)
+lorebot12-86 [![Coverage Status](https://coveralls.io/repos/github/unisys12/lorebot12-86/badge.svg?branch=testing)](https://coveralls.io/github/unisys12/lorebot12-86?branch=refactor) [![Build Status](https://travis-ci.org/unisys12/lorebot12-86.svg?branch=testing)](https://travis-ci.org/unisys12/lorebot12-86)
 ============
 Discord Bot, for use by Focused Fire Chat on their public Discord server.
 
