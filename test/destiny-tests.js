@@ -3,8 +3,8 @@
 
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const destiny = require('../../scripts/Destiny/destiny');
-const quotes = require('../../scripts/quotes');
+const destiny = require('../scripts/Destiny/destiny');
+const quotes = require('../scripts/quotes');
 
 describe('DestinyTests', function() {
 
@@ -13,7 +13,7 @@ describe('DestinyTests', function() {
   })
 
   it('should retrun a list of quotes for an NPC related to a tag or subject', sinon.test(function() {
-    const npcQuotes = require('../../scripts/quotes.js')
+    const npcQuotes = require('../scripts/quotes.js')
     const input = '!quotes petra -tag queen';
     let npc, tag
 

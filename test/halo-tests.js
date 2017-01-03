@@ -4,11 +4,11 @@ const expect = chai.expect;
 const sinon = require('sinon');
 
 // App Dependencies N/A
-const halo = require('../../scripts/Halo/halo');
-const scripts = require('../../scripts/scripts');
+const halo = require('../scripts/Halo/halo');
+const scripts = require('../scripts/scripts');
 const google = require('googleapis');
 const sheet = google.sheets('v4');
-const spreadsheet = require('../TestData/sheetresponse.json');
+const spreadsheet = require('./TestData/sheetresponse.json');
 const values = spreadsheet.values;
 
 describe('halo', function() {
@@ -53,7 +53,7 @@ describe('halo', function() {
   })
 
   it('messageConstruct() should contruct a message inside an array from the results of getDailyActivities()', function() {
-    const spreadsheet = require('../TestData/sheetresponse.json');
+    const spreadsheet = require('./TestData/sheetresponse.json');
     const rows = spreadsheet.values;
     let message = halo.messageConstruct(rows);
 

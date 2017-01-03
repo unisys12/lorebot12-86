@@ -2,7 +2,7 @@
 'use strict'
 
 const expect = require('chai').expect;
-const destiny = require('../../scripts/Destiny/destiny');
+const destiny = require('../scripts/Destiny/destiny');
 
 describe('IshtarTests', function() {
 
