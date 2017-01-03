@@ -8,8 +8,52 @@ const halo = require('../scripts/Halo/halo');
 const scripts = require('../scripts/scripts');
 const google = require('googleapis');
 const sheet = google.sheets('v4');
-const spreadsheet = require('./TestData/sheetresponse.json');
-const values = spreadsheet.values;
+
+const date = new Date()
+let month = scripts.curMonth()
+let day = scripts.curDay()
+let sheetExample = {
+  "range": "Timeline!A11:G1047",
+  "values": [
+    [
+      "500,000,000 BCE",
+      "January",
+      "03",
+      "The Precursors accumulated their total knowledge in a vast reserve of rules and a library of experiences.",
+      "",
+      "Halo: Silentium page 208",
+      "\"During our debate, the Gravemind hinted at a vast reserve of rules accumulated more than half a billion years ago, a huge library of experiences and disputes codified into the total wisdom of the Precursors.\""
+    ],
+    [
+      "500,000,000 BCE",
+      month,
+      day,
+      "The Precursors accumulated their total knowledge in a vast reserve of rules and a library of experiences.",
+      "",
+      "Halo: Silentium page 208",
+      "\"During our debate, the Gravemind hinted at a vast reserve of rules accumulated more than half a billion years ago, a huge library of experiences and disputes codified into the total wisdom of the Precursors.\""
+    ],
+    [
+      "500,000,000 BCE",
+      "N/A",
+      "03",
+      "The Precursors accumulated their total knowledge in a vast reserve of rules and a library of experiences.",
+      "",
+      "Halo: Silentium page 208",
+      "\"During our debate, the Gravemind hinted at a vast reserve of rules accumulated more than half a billion years ago, a huge library of experiences and disputes codified into the total wisdom of the Precursors.\""
+    ],
+    [
+      "500,000,000 BCE",
+      "N/A",
+      "N/A",
+      "The Precursors accumulated their total knowledge in a vast reserve of rules and a library of experiences.",
+      "",
+      "Halo: Silentium page 208",
+      "\"During our debate, the Gravemind hinted at a vast reserve of rules accumulated more than half a billion years ago, a huge library of experiences and disputes codified into the total wisdom of the Precursors.\""
+    ],
+  ]
+};
+let values = sheetExample.values
 
 describe('halo', function() {
 
@@ -43,12 +87,13 @@ describe('halo', function() {
 
   it('getNonMatchingEvents() should return an array of events containing "N/A" in the month and/or year column', function() {
     const nonMatchingEvents = [];
-    let results = halo.getNonMatchingEvents(spreadsheet);
+    let results = halo.getNonMatchingEvents(values);
 
     expect(results).to.be.a('array');
+
     for (var i = 0; i < results.length; i++) {
       let row = results[i];
-      expect(row[1] | row[2]).to.equal("N/A");
+      expect(row[1] || row[2]).to.equal("N/A");
     }
   })
 
