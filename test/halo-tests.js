@@ -53,9 +53,23 @@ describe('halo', function() {
   })
 
   it('messageConstruct() should contruct a message inside an array from the results of getDailyActivities()', function() {
-    const spreadsheet = require('./TestData/sheetresponse.json');
-    const rows = spreadsheet.values;
-    let message = halo.messageConstruct(rows);
+    // const spreadsheet = require('./TestData/sheetresponse.json');
+    // const rows = spreadsheet.values;
+    const objExample = {
+      "range": "Timeline!A11:G1047",
+      "values": [
+        [
+          "500,000,000 BCE",
+          "January",
+          "03",
+          "The Precursors accumulated their total knowledge in a vast reserve of rules and a library of experiences.",
+          "",
+          "Halo: Silentium page 208",
+          "\"During our debate, the Gravemind hinted at a vast reserve of rules accumulated more than half a billion years ago, a huge library of experiences and disputes codified into the total wisdom of the Precursors.\""
+        ]
+      ]
+    };
+    let message = halo.messageConstruct(objExample.values);
 
     expect(message).to.be.a('array');
   })
