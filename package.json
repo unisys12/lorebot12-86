@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/unisys12/lorebot12-86#readme",
   "dependencies": {
-    "discord.js": "^11.0.0",
     "googleapis": "^15.0.0",
     "mysql2": "^1.1.2",
     "underscore": "^1.8.3"
