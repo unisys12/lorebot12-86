@@ -167,24 +167,24 @@ function messageConstruct(rows){
 
 }
 
-function haloRequest() {
-  sheet.spreadsheets.values.get({
-    key: process.env.googleSheetsKey,
-    spreadsheetId: process.env.googleSheetID,
-    range: process.env.googleSheetRange
-  }, function(err, response) {
-    if (err) {
-      return new Error('Error accessing spreadsheet', err)
-    }else{
-      let rows = response.values;
-      if (rows.length == 0) {
-        return "No rows found! Something happend to the spreadsheet!!"
-      }else{
-        return gatherMessage(rows)
-      }
-    }
-  });
-}
+// function haloRequest() {
+//   sheet.spreadsheets.values.get({
+//     key: process.env.googleSheetsKey,
+//     spreadsheetId: process.env.googleSheetID,
+//     range: process.env.googleSheetRange
+//   }, function(err, response) {
+//     if (err) {
+//       return new Error('Error accessing spreadsheet', err)
+//     }else{
+//       let rows = response.values;
+//       if (rows.length == 0) {
+//         return "No rows found! Something happend to the spreadsheet!!"
+//       }else{
+//         return gatherMessage(rows)
+//       }
+//     }
+//   });
+// }
 
 module.exports.getMonthlyActivities = getMonthlyActivities;
 module.exports.getDailyActivities = getDailyActivities;
@@ -192,4 +192,4 @@ module.exports.getNonMatchingEvents = getNonMatchingEvents;
 module.exports.gatherMessage = gatherMessage
 module.exports.messageConstruct = messageConstruct;
 module.exports.messageStructure = messageStructure;
-module.exports.haloRequest = haloRequest;
+//module.exports.haloRequest = haloRequest;
