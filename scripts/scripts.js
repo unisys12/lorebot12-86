@@ -45,6 +45,7 @@ randomQuote: function (list) {
 curDay: function() {
   return date.getDate();
 },
+
 // Returns the current of month of the year
 curMonth: function() {
   let month = date.getMonth();
