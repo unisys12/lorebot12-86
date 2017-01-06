@@ -6,8 +6,6 @@ const sinon = require('sinon');
 // App Dependencies N/A
 const halo = require('../scripts/Halo/halo');
 const scripts = require('../scripts/scripts');
-const google = require('googleapis');
-const sheet = google.sheets('v4');
 
 const date = new Date()
 let month = scripts.curMonth()
@@ -97,9 +95,64 @@ describe('halo', function() {
     }
   })
 
-  it('messageConstruct() should contruct a message inside an array from the results of getDailyActivities()', function() {
-    // const spreadsheet = require('./TestData/sheetresponse.json');
-    // const rows = spreadsheet.values;
+  it('gatherMessage() should seperate the results before they are assembled, if they match curDay()', function() {
+    let dailyEvents = halo.gatherMessage(values);
+
+    expect(dailyEvents).to.not.be.empty
+  })
+
+  it('gatherMessage() does not return valid dailyEvents then it should gather nonMatchingEvents()', sinon.test(function() {
+    const objExample = {
+      "range": "Timeline!A11:G1047",
+      "values": [
+        [
+          "500,000,000 BCE",
+          "January",
+          "03",
+          "The Precursors accumulated their total knowledge in a vast reserve of rules and a library of experiences.",
+          "",
+          "Halo: Silentium page 208",
+          "\"During our debate, the Gravemind hinted at a vast reserve of rules accumulated more than half a billion years ago, a huge library of experiences and disputes codified into the total wisdom of the Precursors.\""
+        ]
+      ]
+    };
+    let gather = halo.gatherMessage(objExample.values);
+    let dailyEvents = halo.getDailyActivities(gather)
+
+    expect(dailyEvents).to.be.empty
+    expect(halo.getNonMatchingEvents(values)).isCalled
+  }))
+
+  // it('messageStructure() should assign the parts of the message if results are valid', function() {
+  //
+  //   let results = [
+  //     "500,000,000 BCE",
+  //     month,
+  //     day,
+  //     "The Precursors accumulated their total knowledge in a vast reserve of rules and a library of experiences.",
+  //     "",
+  //     "Halo: Silentium page 208",
+  //     "\"During our debate, the Gravemind hinted at a vast reserve of rules accumulated more than half a billion years ago, a huge library of experiences and disputes codified into the total wisdom of the Precursors.\""
+  //   ];
+  //
+  //   message = halo.messageStructure(results)
+  //
+  //   expect(message).to.be.a('array')
+  //
+  //   expect(message).to.include([
+  //     '**__TODAY IN HALO__**'
+  //     // "500,000,000 BCE"
+  //     // scripts.curMonth(),
+  //     // scripts.curDay(),
+  //     // "The Precursors accumulated their total knowledge in a vast reserve of rules and a library of experiences.",
+  //     // 'No HaloPedia Reference Found',
+  //     // 'Halo: Silentium page 208',
+  //     // "\"During our debate, the Gravemind hinted at a vast reserve of rules accumulated more than half a billion years ago, a huge library of experiences and disputes codified into the total wisdom of the Precursors.\""
+  //   ])
+  //   //expect(message).to.have.members([])
+  // })
+
+  it('messageConstruct() should contruct a message inside an array from the results of getDailyActivities() or throw an Error', function() {
     const objExample = {
       "range": "Timeline!A11:G1047",
       "values": [
@@ -117,28 +170,7 @@ describe('halo', function() {
     let message = halo.messageConstruct(objExample.values);
 
     expect(message).to.be.a('array');
+
   })
-
-  // it('haloRequest() should call the Google Sheets API wrapper to retrieve the spreadsheet', sinon.test(function() {
-  //   let spy = this.spy();
-  //   let mthd = sheet.spreadsheets.values.get(spy);
-  //
-  //   sheet.spreadsheets.values.get()
-  //
-  //   expect(spy.called);
-  //
-  // }))
-
-  // Come back to this test after I have everything else tested without using Sinon
-  /*it('haloRequest() should then fire the messageConstruct() if successful', sinon.test(function() {
-    let spy = this.spy()
-    let mthd = halo.messageConstruct(spy)
-    const spreadsheet = require('../testData/sheetresponse');
-    const rows = spreadsheet.values;
-
-    halo.messageConstruct(values)
-
-    expect(spy.called)
-  }))*/
 
 })
