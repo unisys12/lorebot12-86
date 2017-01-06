@@ -19,19 +19,16 @@ function filterDailyHaloEvents(data) {
       return data[i];
     }
   }
-
 }
 
 function getMonthlyActivities(spreadsheet) {
   return spreadsheet.filter(filterMonthlyHaloEvents);
 }
 
-function getDailyActivities(spreadsheet) {
-
+function getDailyActivities(rows) {
   // We now have an array with activities for the current month.
-  let monthlyActivities = getMonthlyActivities(spreadsheet);
+  let monthlyActivities = getMonthlyActivities(rows);
   return filterDailyHaloEvents(monthlyActivities);
-
 }
 
 function getNonMatchingEvents(list) {
@@ -46,79 +43,128 @@ function getNonMatchingEvents(list) {
   return nonMatchingEvents;
 }
 
-function messageConstruct(spreadsheet) {
-  let cannon = getDailyActivities(spreadsheet);
-  let year, month, day, pageSource, infoOrigin, notes;
-  let message = [];
+function gatherMessage(rows) {
+
+  let cannon = getDailyActivities(rows);
   let result = [];
 
   // Check if we have matching events for today
-  if (cannon.length > 0) {
+  if (cannon !== undefined) {
 
     for (var i = 0; i < cannon.length; i++) {
       result.push(cannon[i]);
     }
 
-    message.push('**__TODAY IN HALO__**');
+    return result
 
-    // If not, gather a random event
   }else {
 
-    let result = scripts.randomQuote(nonMatchingEvents);
+    let nonMatching = getNonMatchingEvents(rows)
+    let result = scripts.randomQuote(nonMatching)
 
-    message.push('**__RANDOM HALO CANNON__**');
+    return messageStructure(result)
+
+  }
+}
+
+function messageStructure(gather) {
+  let messageDetails = [];
+  let year, month, day, pageSource, infoOrigin, notes
+
+  try {
+
+    if (gather[0] == 'N/A') {
+      year = '__Unknown__'
+    }else{
+      year = gather[0]
+    }
+
+    messageDetails.push(year)
+
+    if (gather[1] == 'N/A') {
+      month = '__Unknown__'
+    }else{
+      month = gather[1]
+    }
+
+    messageDetails.push(month)
+
+    if (gather[2] == 'N/A') {
+      // If date is not present, we know this is a random event
+      messageDetails.push('**__RANDOM HALO CANNON__**')
+      day = '__Unknown__'
+    }else{
+      messageDetails.push('**__TODAY IN HALO__**')
+      day = gather[2]
+    }
+
+    messageDetails.push(day)
+
+    // gather[3] is the text of the gather
+    messageDetails.push(gather[3])
+
+    if (gather[4]) {
+      pageSource = gather[4]
+    }else{
+      pageSource = 'No HaloPedia Reference Found'
+    }
+
+    messageDetails.push(pageSource)
+
+    if (gather[5]) {
+      infoOrigin = gather[5]
+    }else{
+      infoOrigin = 'Information Origin Not Applicable'
+    }
+
+    messageDetails.push(infoOrigin)
+
+    if (gather[6]) {
+      notes = gather[6]
+    }else {
+      notes = 'No Notes Found on Selected Reference'
+    }
+
+    messageDetails.push(notes)
+
+  } catch (e) {
+
+    throw( new Error('There was a problem with the details of your results: ' + e) )
+
+  } finally {
+
+    return messageConstruct(messageDetails)
 
   }
 
-  if (result[0] == 'N/A') {
-    year = '__Unknown__'
-  }else{
-    year = result[0];
-  }
+}
 
-  if (result[1] == 'N/A') {
-    month = '__Unknown__'
-  }else{
-    month = result[1];
-  }
+function messageConstruct(rows){
 
-  if (result[2] == 'N/A') {
-    day = '__Unknown__'
-  }else{
-    day = result[2];
-  }
+  let message = [];
 
-  // result[3] is the text of the result
+    try {
 
-  if (result[4]) {
-    pageSource = result[4]
-  }else{
-    pageSource = 'No HaloPedia Reference Found'
-  }
+      let content = rows[2] + '\n'+'\n' +
+          '**Year:** ' + rows[0] + '\n' +
+          '**Month:** '+ rows[1] + '\n' +
+          '**Day:** ' + rows[3] + '\n' + '\n' +
+          '*' + rows[4] + '*' + '\n' + '\n' +
+          '**HaloPedia Ref:** ' + rows[5] + '\n' +
+          '**Info Origin:** ' + rows[6] + '\n' +
+          '**Notes:** ' + rows[7] + '\n';
 
-  if (result[5]) {
-    infoOrigin = result[5]
-  }else{
-    infoOrigin = 'Information Origin Not Applicable'
-  }
+      message.push(content)
 
-  if (result[6]) {
-    notes = result[6]
-  }else {
-    notes = 'No Notes Found on Selected Reference'
-  }
+      // Returns the messge that will be sent to chat window
+      return message
 
-  var content = '\n'+'\n' + '**Year:** ' + year + '\n' +
-  '**Month:** '+ month + '\n' +
-  '**Day:** ' + day + '\n' + '\n' +
-  '*' + result[3] + '*' + '\n' + '\n' +
-  '**HaloPedia Ref:** ' + pageSource + '\n' +
-  '**Info Origin:** ' + infoOrigin + '\n' +
-  '**Notes:** ' + notes + '\n';
+    } catch (e) {
 
-  message.push(content);
+      throw( new Error('There was an error assembling your message: ' + e) )
 
-  return message;
+    }
+
 }
 
 function haloRequest() {
@@ -134,7 +180,7 @@ function haloRequest() {
       if (rows.length == 0) {
         return "No rows found! Something happend to the spreadsheet!!"
       }else{
-        return messageConstruct(rows)
+        return gatherMessage(rows)
       }
     }
   });
@@ -143,5 +189,7 @@ function haloRequest() {
 module.exports.getMonthlyActivities = getMonthlyActivities;
 module.exports.getDailyActivities = getDailyActivities;
 module.exports.getNonMatchingEvents = getNonMatchingEvents;
+module.exports.gatherMessage = gatherMessage
 module.exports.messageConstruct = messageConstruct;
+module.exports.messageStructure = messageStructure;
 module.exports.haloRequest = haloRequest;
