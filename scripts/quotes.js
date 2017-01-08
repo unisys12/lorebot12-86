@@ -14,19 +14,22 @@ const _ = require('underscore');
  * @returns {object} - returns a message object to the chat
  */
 
-let processNpcQuotes = function (npc, tag, message) {
+let processNpcQuotes = function (npc, tag) {
     // Empty Message Body
     let results = [];
+    console.log('From processNpcQuotes(), ' + 'npc: ' + npc + ', ' + 'tag: ' + tag + '; ')
 
     // If no tags are passed, run findByNPC
     if (!tag) {
         // Return random quote for NPC from database
-
+        console.log('No Tag passed. Prepareing a random quote...')
         // Set Message Header
         results.push("__**Random Quote for " + npc + "**__");
 
         // Run Query to find NPC and return results
         db.findByNPC(npc, function (cb) {
+
+          //console.log(cb)
 
             // Return message if NPC is not in the database
             if (cb.length < 1) {
@@ -40,8 +43,10 @@ let processNpcQuotes = function (npc, tag, message) {
                 results.push(quote.quote);
             }
 
+            console.log('Processed Results', results.toString())
+
             // Send the message to the bot
-            return results;
+            return results.toString();
 
             // reset results to empty array
             results = [];
