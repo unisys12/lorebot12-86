@@ -60,21 +60,27 @@ function quotes (input) {
 
     // Captures all of users input
     let query = input.substr('8').toLowerCase();
+    console.log('query: ' + query)
 
     // Find if Tag is present, represents the "-" in "-tag"
     let tagIndex = query.indexOf("-tag");
+    console.log('tagIndex: ' + tagIndex)
 
     // Intialize NPC to act as though no tag is entered
     npc = query.substr(0);
+    console.log('npc: ' + npc)
 
     if (tagIndex > 0) {
         // Tag is present, represents tag
         tag = query.substr(tagIndex + 5);
         npc = query.substring(0, (tagIndex-1));
+        console.log('tag: ' + tag)
+        console.log('Newnpc: ' + npc)
     }
 
     // Initalize an empty let that holds the active NPC name
     let NPC;
+    let quote = {}
 
     switch (npc) {
         case "all":
@@ -128,7 +134,10 @@ function quotes (input) {
         case "queen of the reef":
         case "the queen of the reef":
             NPC = "Mara Sov";
-            return npcQuotes.processNpcQuotes(NPC, tag);
+            console.log('Quote before called processNpcQuotes(): ' + quote + '\n')
+            quote.text = npcQuotes.processNpcQuotes(NPC, tag)
+            console.log('What is Returned from npcQuotes(): ', quote.text + '\n')
+            //npcQuotes.processNpcQuotes(NPC, tag)
             break;
         case "osiris":
             NPC = "Osiris";
