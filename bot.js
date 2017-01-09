@@ -64,7 +64,7 @@ bot.on("message", function (message) {
     if (siteCmd) { message.reply(destiny.searchGrimoire(input)) };
 });
 
-bot.on('error', function() {
+bot.on('error', function(error) {
   console.log(error);
 })
 
