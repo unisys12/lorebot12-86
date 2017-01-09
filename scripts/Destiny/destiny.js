@@ -52,7 +52,7 @@ return "**LoreBot Help Menu**" +'\n'+'\n'+
 
 }
 
-function quotes (input) {
+function quotes (input, cb) {
 
     // Initialize Possible Empty Vars
     let npc,
@@ -86,39 +86,32 @@ function quotes (input) {
         case "all":
         case "a":
             NPC = "";
-            return npcQuotes.processTagQuotes(tag);
-            break;
+            return npcQuotes.processTagQuotes(tag, cb);
         case "speaker":
         case "the speaker":
             NPC = "The Speaker";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "cayde":
         case "cayde 6":
             NPC = 'Cayde-6';
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "ikora":
         case "ikora rey":
             NPC = "Ikora Rey";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "zavala":
         case "commander zavala":
             NPC = "Commander Zavala";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "xur":
         case "agent of the-nine":
         case "agent of the-9":
             NPC = "Xur";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "eris":
         case "eris morn":
             NPC = "Eris Morn";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "ives":
         case "master ives":
         case "reef cryptarch":
@@ -126,77 +119,63 @@ function quotes (input) {
         case "reefs cryptarch":
         case "the reefs cryptarch":
             NPC = "Master Ives";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "mara":
         case "mara sov":
         case "the queen":
         case "queen of the reef":
         case "the queen of the reef":
             NPC = "Mara Sov";
-            console.log('Quote before called processNpcQuotes(): ' + quote + '\n')
-            quote.text = npcQuotes.processNpcQuotes(NPC, tag)
-            console.log('What is Returned from npcQuotes(): ', quote.text + '\n')
-            //npcQuotes.processNpcQuotes(NPC, tag)
-            break;
+            npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "osiris":
             NPC = "Osiris";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "petra":
         case "petra venj":
             NPC = "Petra Venj";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "rahool":
         case "master rahool":
         case "the cryptarch":
         case "the tower cryptarch":
         case "the towers cryptarch":
             NPC = "Master Rahool";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "shaxx":
         case "lord shaxx":
             NPC = "Lord Shaxx";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "saladin":
         case "lord saladin":
         case "saladin forge":
         case "forge":
             NPC = "Lord Saladin";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "arcite":
         case "arcite 99-40":
         case "crucible quartermaster":
             NPC = "Arcite 99-40";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "kadi":
         case "kadi 55-30":
         case "postmaster":
         case "tower postmaster":
         case "vanguard postmaster":
             NPC = "Kadi 55-30";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "amanda":
         case "amanda holliday":
         case "shipwright":
             NPC = "Amanda Holliday";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb);
         case "banshee":
         case "banshee 44":
         case "banshee-44":
             NPC = "Banshee-44";
-            return npcQuotes.processNpcQuotes(NPC, tag);
-            break;
+            return npcQuotes.processNpcQuotes(NPC, tag, cb );
         case "list":
         case "show list":
-            return
+            return cb(null,
                 "**__List of NPC's Currently in My System Followed by How to Call Them__**" +'\n'+'\n'+
 
                 "**The Speaker** - _speaker_ , _the speaker_" +'\n'+
@@ -222,9 +201,9 @@ function quotes (input) {
                 "_ex:_ `!quotes petra -tag queen` will return a list of quotes related to The Queen of the Reef."+'\n'+'\n'+
                 "A special thanks to Focused Fire Community members @bluecrew86, @ryno-666 and @taylor-b- for helping me gather the quotes currently in LoreBot. More are on the way."+'\n'+
                 "If you have any questions, comments or requests, follow me on twitter @unisys12."
-            break;
+            );
         default:
-            return "Sorry, either that NPC does not exist or I have not gathered their qoutes just yet. For a listing of supported NPC's issue the following command `!quotes list`."
+            return cb(null, "Sorry, either that NPC does not exist or I have not gathered their qoutes just yet. For a listing of supported NPC's issue the following command `!quotes list`.");
     }
 }
 

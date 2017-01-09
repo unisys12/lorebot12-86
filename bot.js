@@ -49,7 +49,15 @@ bot.on("message", function (message) {
     let cardCmd = input.startsWith('!card');
     let siteCmd = input.startsWith('!search');
 
-    if (quoteCmd) { message.reply(destiny.quotes(input)) };
+    let reply = function(err, msg) {
+        if(err) {
+          return message.reply('something went wrong ```' + err + '```');
+        } else {
+          return message.reply(msg);
+        }
+    };
+
+    if (quoteCmd) { destiny.quotes(input, reply) }
     if (helpCmd) { user.sendMessage(destiny.help(input)) };
     if (itemCmd) { message.reply(destiny.searchItems(input)) };
     if (cardCmd) { message.reply(destiny.searchCard(input)) };
