@@ -27,32 +27,13 @@ bot.on("ready", function() {
 
   if (lb_channel) {
 
-    const google = require('googleapis');
-    const sheet = google.sheets('v4');
-
     setInterval(function() {
-    sheet.spreadsheets.values.get({
-      key: process.env.googleSheetsKey,
-      spreadsheetId: process.env.googleSheetID,
-      range: process.env.googleSheetRange
-    }, function(err, response) {
-      if (err) {
-        return new Error('Error accessing spreadsheet', err)
-      }else{
-        let rows = response.values;
-        if (rows.length == 0) {
-          return "No rows found! Something happend to the spreadsheet!!"
-        }else{
-          console.log('LoreBot12-86 has found a lot of data on the subject...')
-          let message = halo.gatherMessage(rows)
-            try {
-              lb_channel.sendMessage(message)
-            } catch (e) {
-              throw( new Error('There was an error assembling your message: ' + e) )
-            }
-          }
+      halo.haloRequest(function (err, motd) {
+        if (err) {
+          return console.error(err);
         }
-      })
+        lb_channel.sendMessage(motd).catch(console.error)
+      });
     }, process.env.halo_timer)
   }
 });
@@ -68,14 +49,22 @@ bot.on("message", function (message) {
     let cardCmd = input.startsWith('!card');
     let siteCmd = input.startsWith('!search');
 
-    if (quoteCmd) { message.reply(destiny.quotes(input)) };
+    let reply = function(err, msg) {
+        if(err) {
+          return message.reply('something went wrong ```' + err + '```');
+        } else {
+          return message.reply(msg);
+        }
+    };
+
+    if (quoteCmd) { destiny.quotes(input, reply) }
     if (helpCmd) { user.sendMessage(destiny.help(input)) };
     if (itemCmd) { message.reply(destiny.searchItems(input)) };
     if (cardCmd) { message.reply(destiny.searchCard(input)) };
     if (siteCmd) { message.reply(destiny.searchGrimoire(input)) };
 });
 
-bot.on('error', function() {
+bot.on('error', function(error) {
   console.log(error);
 })
 
