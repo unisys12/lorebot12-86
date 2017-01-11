@@ -53,7 +53,7 @@ bot.on("message", function (message) {
         if(err) {
           return message.reply('something went wrong ```' + err + '```');
         } else {
-          return message.reply(msg);
+          return channel.sendMessage(msg);
         }
     };
 
