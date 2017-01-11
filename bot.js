@@ -34,7 +34,7 @@ bot.on("ready", function() {
         }
         lb_channel.sendMessage(motd).catch(console.error)
       });
-    }, process.env.halo_timer)
+    }, 1000*60*60*24)
   }
 });
 
