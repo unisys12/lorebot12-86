@@ -56,7 +56,14 @@ bot.on("message", function (message) {
         }
     }
 
-    if (quoteCmd) { destiny.quotes(input, reply) }
+    // This really seems sloppy, but...
+    if (quoteCmd) {
+      if (input.indexOf('help') != -1) {
+        user.sendMessage(destiny.quotesHelp())
+      }else{
+        destiny.quotes(input, reply)
+      }
+    }
     if (helpCmd) { user.sendMessage(destiny.help(input)) }
     if (itemCmd) { message.reply(destiny.searchItems(input)) }
     if (cardCmd) { message.reply(destiny.searchCard(input)) }
