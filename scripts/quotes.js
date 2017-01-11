@@ -85,35 +85,30 @@ let processNpcQuotes = function (npc, tag, cb) {
 let processTagQuotes = function(tag, cb) {
     let results = [];
 
-    results.push("**__All quotes related to _" + tag + "_ __**" +'\n');
+    //results.push("**__All quotes related to _" + tag + "_ __**" +'\n');
 
     db.findByTag(tag, function(rows) {
 
-        if (rows.length < 1) {
-            results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any npc quotes.");
-        }else{
+        // Generate a list of names.
+        let names = _.pluck(rows, 'name');
+        // Generate a list of unique names
+        let uniq = _.uniq(names);
 
-            // Generate a list of names.
-            let names = _.pluck(rows, 'name');
-            // Generate a list of unique names
-            let uniq = _.uniq(names);
+        //iterate through that list, search for quotes within the object
+        for(var i=0; i<uniq.length; i++){
+          // Push out header containing NPC name of iteration
+          results.push('\n' + "__**Quotes by " + uniq[i] + " related to " + tag + "**__");
 
-            //iterate through that list, search for quotes within the object
-            for(var i=0; i<uniq.length; i++){
-              // Push out header containing NPC name of iteration
-              results.push("__**Quotes by " + uniq[i] + " related to " + tag + "**__");
-
-                for(var n=0; n<cb.length; n++) {
-                    if(rows[n].name === uniq[i]){
-                    results.push("- " + rows[n].quote);
-                    }
+            for(var n=0; n<rows.length; n++) {
+                if(rows[n].name === uniq[i]){
+                results.push("- " + rows[n].quote);
                 }
-
             }
+
         }
 
         // Send the message to chat
-        return(cb(null, results));
+        return(cb(null, results.join('\n')));
 
     });
 }
