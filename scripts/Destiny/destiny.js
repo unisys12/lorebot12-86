@@ -186,6 +186,11 @@ function quotes (input, cb) {
             NPC = "Banshee-44"
             return npcQuotes.processNpcQuotes(NPC, tag, cb )
             break
+        case "tyra"
+        case "tyra karn"
+            NPC = "Tyra Karn"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         default:
             return cb(null, "Sorry, either that NPC does not exist or I have not gathered their quotes just yet. For a listing of supported NPC's issue the following command `!quotes help`.")
     }
@@ -210,6 +215,7 @@ return "**__List of NPC's Currently in My System Followed by How to Call Them__*
     "**Arcite 99-40** - _arcite_ , _arcite 99-40_ , _crucible quartermaster_" +'\n'+
     "**Kadi 55-30** - _kadi_ , _postmaster_ , _tower postmaster_ , _vanguard postmaster_ " +'\n'+
     "**Amanda Holliday** - _amanda_ , _amanda holliday_ , _shipwright_ " +'\n'+
+    "**Tyra Karn** - _tyra_ , _tyra karn_ " + '\n'+
     ""+'\n'+
     "If you would like to view a random quote from an NPC "+'\n'+
     "_ex:_ `!quotes ives`" +'\n'+'\n'+
