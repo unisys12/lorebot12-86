@@ -60,22 +60,17 @@ function quotes (input, cb) {
 
     // Captures all of users input
     let query = input.substr('8').toLowerCase();
-    console.log('query: ' + query)
 
     // Find if Tag is present, represents the "-" in "-tag"
     let tagIndex = query.indexOf("-tag");
-    console.log('tagIndex: ' + tagIndex)
 
     // Intialize NPC to act as though no tag is entered
     npc = query.substr(0);
-    console.log('npc: ' + npc)
 
     if (tagIndex > 0) {
         // Tag is present, represents tag
         tag = query.substr(tagIndex + 5);
         npc = query.substring(0, (tagIndex-1));
-        console.log('tag: ' + tag)
-        console.log('Newnpc: ' + npc)
     }
 
     // Initalize an empty let that holds the active NPC name
