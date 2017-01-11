@@ -13,16 +13,16 @@ function searchGrimoire(input) {
 
 function searchCard(input) {
 
-        let stripeCmd = input.substr('6');
-        let query = scripts.normalizeCardInput(stripeCmd);
+        let stripeCmd = input.substr('6')
+        let query = scripts.normalizeCardInput(stripeCmd)
 
         return "http://www.ishtar-collective.net/cards/" + query
 }
 
 function searchItems(input) {
 
-        let stripeCmd = input.substr('6');
-        let query = scripts.normalizeItemInput(stripeCmd);
+        let stripeCmd = input.substr('6')
+        let query = scripts.normalizeItemInput(stripeCmd)
 
         return "http://www.ishtar-collective.net/items/" + query
 
@@ -56,118 +56,136 @@ function quotes (input, cb) {
 
     // Initialize Possible Empty Vars
     let npc,
-        tag;
+        tag
 
     // Captures all of users input
-    let query = input.substr('8').toLowerCase();
+    let query = input.substr('8').toLowerCase()
 
     // Find if Tag is present, represents the "-" in "-tag"
-    let tagIndex = query.indexOf("-tag");
+    let tagIndex = query.indexOf("-tag")
 
     // Intialize NPC to act as though no tag is entered
-    npc = query.substr(0);
+    npc = query.substr(0)
 
     if (tagIndex > 0) {
         // Tag is present, represents tag
-        tag = query.substr(tagIndex + 5);
-        npc = query.substring(0, (tagIndex-1));
+        tag = query.substr(tagIndex + 5)
+        npc = query.substring(0, (tagIndex-1))
     }
 
     // Initalize an empty let that holds the active NPC name
-    let NPC;
+    let NPC
     let quote = {}
 
     switch (npc) {
         case "all":
         case "a":
-            NPC = "";
-            return npcQuotes.processTagQuotes(tag, cb);
+            NPC = ""
+            return npcQuotes.processTagQuotes(tag, cb)
+            break
         case "speaker":
         case "the speaker":
-            NPC = "The Speaker";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "The Speaker"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "cayde":
         case "cayde 6":
-            NPC = 'Cayde-6';
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = 'Cayde-6'
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "ikora":
         case "ikora rey":
-            NPC = "Ikora Rey";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Ikora Rey"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "zavala":
         case "commander zavala":
-            NPC = "Commander Zavala";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Commander Zavala"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "xur":
         case "agent of the-nine":
         case "agent of the-9":
-            NPC = "Xur";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Xur"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "eris":
         case "eris morn":
-            NPC = "Eris Morn";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Eris Morn"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "ives":
         case "master ives":
         case "reef cryptarch":
         case "the reef cryptarch":
         case "reefs cryptarch":
         case "the reefs cryptarch":
-            NPC = "Master Ives";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Master Ives"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "mara":
         case "mara sov":
         case "the queen":
         case "queen of the reef":
         case "the queen of the reef":
-            NPC = "Mara Sov";
-            npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Mara Sov"
+            npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "osiris":
-            NPC = "Osiris";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Osiris"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "petra":
         case "petra venj":
-            NPC = "Petra Venj";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Petra Venj"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "rahool":
         case "master rahool":
         case "the cryptarch":
         case "the tower cryptarch":
         case "the towers cryptarch":
-            NPC = "Master Rahool";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Master Rahool"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "shaxx":
         case "lord shaxx":
-            NPC = "Lord Shaxx";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Lord Shaxx"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "saladin":
         case "lord saladin":
         case "saladin forge":
         case "forge":
-            NPC = "Lord Saladin";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Lord Saladin"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "arcite":
         case "arcite 99-40":
         case "crucible quartermaster":
-            NPC = "Arcite 99-40";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Arcite 99-40"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "kadi":
         case "kadi 55-30":
         case "postmaster":
         case "tower postmaster":
         case "vanguard postmaster":
-            NPC = "Kadi 55-30";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Kadi 55-30"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "amanda":
         case "amanda holliday":
         case "shipwright":
-            NPC = "Amanda Holliday";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb);
+            NPC = "Amanda Holliday"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb)
+            break
         case "banshee":
         case "banshee 44":
         case "banshee-44":
-            NPC = "Banshee-44";
-            return npcQuotes.processNpcQuotes(NPC, tag, cb );
+            NPC = "Banshee-44"
+            return npcQuotes.processNpcQuotes(NPC, tag, cb )
+            break
         case "list":
         case "show list":
             return cb(null,
@@ -196,9 +214,10 @@ function quotes (input, cb) {
                 "_ex:_ `!quotes petra -tag queen` will return a list of quotes related to The Queen of the Reef."+'\n'+'\n'+
                 "A special thanks to Focused Fire Community members @bluecrew86, @ryno-666 and @taylor-b- for helping me gather the quotes currently in LoreBot. More are on the way."+'\n'+
                 "If you have any questions, comments or requests, follow me on twitter @unisys12."
-            );
+            )
+            break
         default:
-            return cb(null, "Sorry, either that NPC does not exist or I have not gathered their qoutes just yet. For a listing of supported NPC's issue the following command `!quotes list`.");
+            return cb(null, "Sorry, either that NPC does not exist or I have not gathered their qoutes just yet. For a listing of supported NPC's issue the following command `!quotes list`.")
     }
 }
 

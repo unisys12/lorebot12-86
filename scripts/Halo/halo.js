@@ -1,58 +1,58 @@
 'use strict'
 
-const scripts = require('../scripts');
-const google = require('googleapis');
-const sheet = google.sheets('v4');
-const date = new Date();
-let msg;
-let thisMonthInHalo = [];
-let nonMatchingEvents = [];
-let todayInHalo = [];
+const scripts = require('../scripts')
+const google = require('googleapis')
+const sheet = google.sheets('v4')
+const date = new Date()
+let msg
+let thisMonthInHalo = []
+let nonMatchingEvents = []
+let todayInHalo = []
 
 function filterMonthlyHaloEvents(data) {
-  return data[1] == scripts.curMonth();
+  return data[1] == scripts.curMonth()
 }
 
 function filterDailyHaloEvents(data) {
   for (var i = 0; i < data.length; i++) {
     if (data[i][2] == scripts.curDay()) {
-      return data[i];
+      return data[i]
     }
   }
 }
 
 function getMonthlyActivities(spreadsheet) {
-  return spreadsheet.filter(filterMonthlyHaloEvents);
+  return spreadsheet.filter(filterMonthlyHaloEvents)
 }
 
 function getDailyActivities(rows) {
   // We now have an array with activities for the current month.
-  let monthlyActivities = getMonthlyActivities(rows);
-  return filterDailyHaloEvents(monthlyActivities);
+  let monthlyActivities = getMonthlyActivities(rows)
+  return filterDailyHaloEvents(monthlyActivities)
 }
 
 function getNonMatchingEvents(list) {
   // Make sure array is empty before adding to it
-  nonMatchingEvents = [];
+  nonMatchingEvents = []
   for (var i = 0; i < list.length; i++) {
-    let row = list[i];
+    let row = list[i]
     if (row[1] | row[2] == "N/A") {
-      nonMatchingEvents.push(row);
+      nonMatchingEvents.push(row)
     }
   }
-  return nonMatchingEvents;
+  return nonMatchingEvents
 }
 
 function gatherMessage(rows) {
 
-  let cannon = getDailyActivities(rows);
-  let result = [];
+  let cannon = getDailyActivities(rows)
+  let result = []
 
   // Check if we have matching events for today
   if (cannon !== undefined) {
 
     for (var i = 0; i < cannon.length; i++) {
-      result.push(cannon[i]);
+      result.push(cannon[i])
     }
 
     return result
@@ -68,7 +68,7 @@ function gatherMessage(rows) {
 }
 
 function messageStructure(gather) {
-  let messageDetails = [];
+  let messageDetails = []
   let year, month, day, pageSource, infoOrigin, notes
 
   try {
@@ -141,7 +141,7 @@ function messageStructure(gather) {
 
 function messageConstruct(rows){
 
-  let message = [];
+  let message = []
 
     try {
 
@@ -152,7 +152,7 @@ function messageConstruct(rows){
           '*' + rows[4] + '*' + '\n' + '\n' +
           '**HaloPedia Ref:** ' + rows[5] + '\n' +
           '**Info Origin:** ' + rows[6] + '\n' +
-          '**Notes:** ' + rows[7] + '\n';
+          '**Notes:** ' + rows[7] + '\n'
 
       message.push(content)
 
@@ -176,20 +176,20 @@ function haloRequest(cb) {
     if (err) {
       return cb(new Error('Error accessing spreadsheet', err))
     } else {
-      let rows = response.values;
+      let rows = response.values
       if (rows.length == 0) {
-        return cb(new Error("No rows found! Something happend to the spreadsheet!!"));
+        return cb(new Error("No rows found! Something happend to the spreadsheet!!"))
       } else {
         return cb(null, gatherMessage(rows))
       }
     }
-  });
+  })
 }
 
-module.exports.getMonthlyActivities = getMonthlyActivities;
-module.exports.getDailyActivities = getDailyActivities;
-module.exports.getNonMatchingEvents = getNonMatchingEvents;
+module.exports.getMonthlyActivities = getMonthlyActivities
+module.exports.getDailyActivities = getDailyActivities
+module.exports.getNonMatchingEvents = getNonMatchingEvents
 module.exports.gatherMessage = gatherMessage
-module.exports.messageConstruct = messageConstruct;
-module.exports.messageStructure = messageStructure;
-module.exports.haloRequest = haloRequest;
+module.exports.messageConstruct = messageConstruct
+module.exports.messageStructure = messageStructure
+module.exports.haloRequest = haloRequest

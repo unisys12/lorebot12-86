@@ -1,7 +1,7 @@
 'use strict'
 
-const mysql = require('mysql2');
-const scripts = require('../scripts');
+const mysql = require('mysql2')
+const scripts = require('../scripts')
 
 // Configure MySQL2 Connection
 let pool = mysql.createPool({
@@ -9,7 +9,7 @@ let pool = mysql.createPool({
     database: process.env.DB_DATABASE,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD
-});
+})
 
 /**
  * Returns all instances of a single tag
@@ -24,7 +24,7 @@ let findByTag = function (tag, callback) {
             // Handle any errors. Display errors and exit program
             if (err) {
                 callback(err)
-                return;
+                return
             }
 
             // Check number of rows returned. If none, then output message showing their input.
@@ -32,8 +32,8 @@ let findByTag = function (tag, callback) {
                 callback("No results found when searching for '" + tag + "'")
             }
 
-            callback(rows);
-    });
+            callback(rows)
+    })
 }
 
 /**
@@ -43,18 +43,18 @@ let findByTag = function (tag, callback) {
  * @returns {resource}
  */
 let findByNPC = function (name, callback) {
-    let npcColumns = ['name', 'quote'];
+    let npcColumns = ['name', 'quote']
     let npcQuery = pool.query("SELECT ?? FROM ?? WHERE ?? = ?",
         [npcColumns, 'npcs', 'name', name], function (err, rows) {
 
         // Handle any errors. Display errors and exit program
         if (err) {
-            callback("Error Connecting: " + err + ". Do me a favor and let '@Unisys12#5080' know.");
+            callback("Error Connecting: " + err + ". Do me a favor and let '@Unisys12#5080' know.")
         }
 
         // Send the results to be processed
-        callback(rows);
-    });
+        callback(rows)
+    })
 }
 
 /**
@@ -71,15 +71,15 @@ let findTagByNPC = function (name, tag, callback) {
 
         // Handle any errors. Display errors and exit program
         if (err) {
-            console.log("Error occured in findTagByNPC: " + err);
-            callback("Error Connecting: " + err + ". Do me a favor and let '@unisys12' know.");
+            console.log("Error occured in findTagByNPC: " + err)
+            callback("Error Connecting: " + err + ". Do me a favor and let '@unisys12' know.")
         }
 
         // simply return the callback...
-        callback(rows);
-    });
+        callback(rows)
+    })
 }
 
-module.exports.findByTag = findByTag;
-module.exports.findByNPC = findByNPC;
-module.exports.findTagByNPC = findTagByNPC;
+module.exports.findByTag = findByTag
+module.exports.findByNPC = findByNPC
+module.exports.findTagByNPC = findTagByNPC

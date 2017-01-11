@@ -1,6 +1,6 @@
 'use strict'
 
-const date = new Date();
+const date = new Date()
 
 module.exports = {
 
@@ -13,11 +13,11 @@ module.exports = {
   * - removes any spaces and replaces with slug "-"
   */
 normalizeCardInput: function (msg) {
-    let lowercaseify = msg.toLowerCase();
-    let removeColon = lowercaseify.replace(":", "");
-    let output = removeColon.replace(/\s+/g, "-");
+    let lowercaseify = msg.toLowerCase()
+    let removeColon = lowercaseify.replace(":", "")
+    let output = removeColon.replace(/\s+/g, "-")
 
-    return output;
+    return output
 },
 
 /**
@@ -27,28 +27,28 @@ normalizeCardInput: function (msg) {
   * - removes any spaces and replaces with slug "-"
   */
 normalizeItemInput: function (msg) {
-    let lowercaseify = msg.toLowerCase();
-    let stripApostrophe = lowercaseify.replace("'", "");
-    let output = stripApostrophe.replace(/\s+/g, "-");
+    let lowercaseify = msg.toLowerCase()
+    let stripApostrophe = lowercaseify.replace("'", "")
+    let output = stripApostrophe.replace(/\s+/g, "-")
 
-    return output;
+    return output
 },
 
 /**
   * Reads array of quotes and picks one at random
   */
 randomQuote: function (list) {
-    return list[Math.round(Math.random()*(list.length-1))];
+    return list[Math.round(Math.random()*(list.length-1))]
 },
 
 // Returns the current day of the week
 curDay: function() {
-  return date.getDate();
+  return date.getDate()
 },
 
 // Returns the current of month of the year
 curMonth: function() {
-  let month = date.getMonth();
+  let month = date.getMonth()
   const months = [
     "January",
     "February",
@@ -62,8 +62,8 @@ curMonth: function() {
     "October",
     "November",
     "December"
-  ];
-  return months[month];
+  ]
+  return months[month]
 }
 
 }
