@@ -17,19 +17,15 @@ const _ = require('underscore');
 let processNpcQuotes = function (npc, tag, cb) {
     // Empty Message Body
     let results = [];
-    console.log('From processNpcQuotes(), ' + 'npc: ' + npc + ', ' + 'tag: ' + tag + '; ')
 
     // If no tags are passed, run findByNPC
     if (!tag) {
         // Return random quote for NPC from database
-        console.log('No Tag passed. Prepareing a random quote...')
         // Set Message Header
         results.push("__**Random Quote for " + npc + "**__");
 
         // Run Query to find NPC and return results
         db.findByNPC(npc, function (rows) {
-
-          //console.log(cb)
 
             // Return message if NPC is not in the database
             if (rows.length < 1) {
@@ -42,8 +38,6 @@ let processNpcQuotes = function (npc, tag, cb) {
                 // Add response to message body
                 results.push(quote.quote);
             }
-
-            console.log('Processed Results', results.toString())
 
             // Send the message to the bot
             return cb(null, results.toString());
