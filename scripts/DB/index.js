@@ -1,13 +1,15 @@
-var mysql = require('mysql2');
-var scripts = require('../scripts/scripts');
+'use strict'
+
+const mysql = require('mysql2')
+const scripts = require('../scripts')
 
 // Configure MySQL2 Connection
-var pool = mysql.createPool({
+let pool = mysql.createPool({
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD
-});
+})
 
 /**
  * Returns all instances of a single tag
@@ -15,14 +17,14 @@ var pool = mysql.createPool({
  * @param {string} tag - Tag user is searching for
  * @returns {resource}
  */
-var findByTag = function (tag, callback) {
+let findByTag = function (tag, callback) {
     pool.query(
         "SELECT * FROM `npcs` WHERE `tags` LIKE '%" + tag + "%'", function (err, rows){
-            
+
             // Handle any errors. Display errors and exit program
             if (err) {
                 callback(err)
-                return;
+                return
             }
 
             // Check number of rows returned. If none, then output message showing their input.
@@ -30,8 +32,8 @@ var findByTag = function (tag, callback) {
                 callback("No results found when searching for '" + tag + "'")
             }
 
-            callback(rows);
-    });
+            callback(rows)
+    })
 }
 
 /**
@@ -40,19 +42,19 @@ var findByTag = function (tag, callback) {
  * @param {string} name - Tag user is searching for
  * @returns {resource}
  */
-var findByNPC = function (name, callback) {
-    var npcColumns = ['name', 'quote'];
-    var npcQuery = pool.query("SELECT ?? FROM ?? WHERE ?? = ?", 
+let findByNPC = function (name, callback) {
+    let npcColumns = ['name', 'quote']
+    let npcQuery = pool.query("SELECT ?? FROM ?? WHERE ?? = ?",
         [npcColumns, 'npcs', 'name', name], function (err, rows) {
 
         // Handle any errors. Display errors and exit program
         if (err) {
-            callback("Error Connecting: " + err + ". Do me a favor and let '@Unisys12#5080' know.");
+            callback("Error Connecting: " + err + ". Do me a favor and let '@Unisys12#5080' know.")
         }
 
         // Send the results to be processed
-        callback(rows);
-    });
+        callback(rows)
+    })
 }
 
 /**
@@ -62,22 +64,22 @@ var findByNPC = function (name, callback) {
  * @param {string} tag - tag user is searching with NPC
  * @returns {callback}
  */
-var findTagByNPC = function (name, tag, callback) {
-    var query = pool.query("SELECT `quote` FROM `npcs` WHERE `name` = " + "'" + name + "'" + " AND `tags` LIKE '%" + tag + "%'",
-    
+let findTagByNPC = function (name, tag, callback) {
+    let query = pool.query("SELECT `quote` FROM `npcs` WHERE `name` = " + "'" + name + "'" + " AND `tags` LIKE '%" + tag + "%'",
+
      function (err, rows) {
-        
+
         // Handle any errors. Display errors and exit program
         if (err) {
-            console.log("Error occured in findTagByNPC: " + err);
-            callback("Error Connecting: " + err + ". Do me a favor and let '@unisys12' know.");
+            console.log("Error occured in findTagByNPC: " + err)
+            callback("Error Connecting: " + err + ". Do me a favor and let '@unisys12' know.")
         }
 
         // simply return the callback...
-        callback(rows);
-    });
+        callback(rows)
+    })
 }
 
-module.exports.findByTag = findByTag;
-module.exports.findByNPC = findByNPC;
-module.exports.findTagByNPC = findTagByNPC;
+module.exports.findByTag = findByTag
+module.exports.findByNPC = findByNPC
+module.exports.findTagByNPC = findTagByNPC

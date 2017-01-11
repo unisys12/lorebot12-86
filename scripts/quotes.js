@@ -1,8 +1,8 @@
 'use strict'
 
-var db = require('../db/index.js');
-var app = require.main.exports;
-var _ = require('underscore');
+const scripts = require('./scripts')
+const db = require('./DB/index')
+const _ = require('underscore')
 
 /**
  * Process query results for NPC quoutes from the database
@@ -13,74 +13,62 @@ var _ = require('underscore');
  *
  * @returns {object} - returns a message object to the chat
  */
- 
-var processNpcQuotes = function (npc, tag, message) {
+
+let processNpcQuotes = function (npc, tag, cb) {
     // Empty Message Body
-    var results = [];
+    let results = []
 
     // If no tags are passed, run findByNPC
     if (!tag) {
         // Return random quote for NPC from database
-
         // Set Message Header
-        results.push("__**Random Quote for " + npc + "**__");
+        results.push("__**Random Quote for " + npc + "**__")
 
         // Run Query to find NPC and return results
-        db.findByNPC(npc, function (cb) {
+        db.findByNPC(npc, function (rows) {
 
             // Return message if NPC is not in the database
-            if (cb.length < 1) {
-                results.push(npc + " is currently not in the database! Let @Unisys12#5080 know.");
+            if (rows.length < 1) {
+                results.push(npc + " is currently not in the database! Let @Unisys12#5080 know.")
             }else{
 
                 // Pick a random number between 0 and the length of the results
-                var num = Math.floor(Math.random() * (cb.length - 1));
-
-                // Iterate over the results to retrieve the index from above.
-                for (var i = 0; i < cb.length; i++) {
-                    var quote = cb[num].quote;
-                }
+                let quote = scripts.randomQuote(rows)
 
                 // Add response to message body
-                results.push(quote);
-            }            
+                results.push(quote.quote)
+            }
 
-            // Send the message to chat
-            app.bot.sendMessage(message, results);
+            // Send the message to the bot
+            return cb(null, results.toString())
 
-            // reset results to empty array
-            results = [];
-
-        });                
+        })
     }else{
         /**
           * Return set of quotes for npc based on tag
           */
 
         // Set Message Header
-        results.push("__**" + npc + " Quotes on the topic of `" + tag + "` : **__");
-        
-        db.findTagByNPC(npc, tag, function (cb) {
-            
+        results.push("__**" + npc + " Quotes on the topic of `" + tag + "` : **__")
+
+        db.findTagByNPC(npc, tag, function (rows) {
+
             // Check for results
-            if (cb.length < 1) {
-                results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any of _" + npc + "'s_ quotes.");
+            if (rows.length < 1) {
+                results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any of _" + npc + "'s_ quotes.")
             }else{
                 // Process results into separate reponses
-                for (var i = 0; i < cb.length; i++) {
+                for (var i = 0; i < rows.length; i++) {
                     // Add responses to message body
-                    results.push("- " + cb[i].quote);
+                    results.push("- " + rows[i].quote)
                 }
-                
+
             }
 
-            // Send the message to chat
-            app.bot.sendMessage(message, results);
+            // Send the message to the bot
+            return cb(null, results)
 
-            // reset results to empty array
-            results = [];
-            
-        });
+        })
     }
 }
 
@@ -88,46 +76,36 @@ var processNpcQuotes = function (npc, tag, message) {
  * Return a message containing quotes related to a tag
  */
 
-var processTagQuotes = function(tag, message) {
-    var results = [];
+let processTagQuotes = function(tag, cb) {
+    let results = []
 
-    results.push("**__All quotes related to _" + tag + "_ __**" +'\n');
+    //results.push("**__All quotes related to _" + tag + "_ __**" +'\n')
 
-    db.findByTag(tag, function(cb) {
-        
-        if (cb.length < 1) {
-            results.push("Sorry, but the tag _" + tag + "_ has not been assigned to any npc quotes.");
-        }else{
-            
-            // Generate a list of names.
-            var names = _.pluck(cb, 'name');
-            // Generate a list of unique names
-            var uniq = _.uniq(names);
+    db.findByTag(tag, function(rows) {
 
-            results = [];
+        // Generate a list of names.
+        let names = _.pluck(rows, 'name')
+        // Generate a list of unique names
+        let uniq = _.uniq(names)
 
-            //iterate through that list, search for quotes within the object
-            for(var i=0; i<uniq.length; i++){
-              // Push out header containing NPC name of iteration
-              results.push("__**Quotes by " + uniq[i] + " related to " + tag + "**__");
-                
-                for(var n=0; n<cb.length; n++) {
-                    if(cb[n].name === uniq[i]){
-                    results.push("- " + cb[n].quote);
-                    }
+        //iterate through that list, search for quotes within the object
+        for(var i=0; i<uniq.length; i++){
+          // Push out header containing NPC name of iteration
+          results.push('\n' + "__**Quotes by " + uniq[i] + " related to " + tag + "**__")
+
+            for(var n=0; n<rows.length; n++) {
+                if(rows[n].name === uniq[i]){
+                results.push("- " + rows[n].quote)
                 }
-
             }
+
         }
 
         // Send the message to chat
-        app.bot.sendMessage(message, results);
+        return(cb(null, results.join('\n')))
 
-        // reset results to empty array
-        results = [];
-
-    });
+    })
 }
 
-module.exports.processNpcQuotes = processNpcQuotes;
-module.exports.processTagQuotes = processTagQuotes;
+module.exports.processNpcQuotes = processNpcQuotes
+module.exports.processTagQuotes = processTagQuotes

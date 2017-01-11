@@ -1,3 +1,7 @@
+'use strict'
+
+const date = new Date()
+
 module.exports = {
 
 // Utility Functions for Bot.js
@@ -9,46 +13,57 @@ module.exports = {
   * - removes any spaces and replaces with slug "-"
   */
 normalizeCardInput: function (msg) {
-    var lowercaseify = msg.toLowerCase();
-    var removeColon = lowercaseify.replace(":", "");
-    var output = removeColon.replace(/\s+/g, "-");
+    let lowercaseify = msg.toLowerCase()
+    let removeColon = lowercaseify.replace(":", "")
+    let output = removeColon.replace(/\s+/g, "-")
 
-    return output;    
+    return output
 },
 
-/** 
+/**
   * Normalizes input from chat for item searches
   * - converts all characters to lower case
   * - removes any semi-colons
   * - removes any spaces and replaces with slug "-"
   */
 normalizeItemInput: function (msg) {
-    var lowercaseify = msg.toLowerCase();
-    var stripApostrophe = lowercaseify.replace("'", "");
-    var output = stripApostrophe.replace(/\s+/g, "-");
+    let lowercaseify = msg.toLowerCase()
+    let stripApostrophe = lowercaseify.replace("'", "")
+    let output = stripApostrophe.replace(/\s+/g, "-")
 
-    return output;
-},
-
-/**
-  * very poor method of checking file type. 
-  */
-filetype: function (file) {
-    var jpg = file.endsWith('.jpg');
-    var gif = file.endsWith('.gif');
-    
-    if (jpg) {
-        return ".jpg";
-    } else {
-        return ".gif";
-    };
+    return output
 },
 
 /**
   * Reads array of quotes and picks one at random
   */
 randomQuote: function (list) {
-    return list[Math.round(Math.random()*(list.length-1))];
+    return list[Math.round(Math.random()*(list.length-1))]
 },
+
+// Returns the current day of the week
+curDay: function() {
+  return date.getDate()
+},
+
+// Returns the current of month of the year
+curMonth: function() {
+  let month = date.getMonth()
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ]
+  return months[month]
+}
 
 }
