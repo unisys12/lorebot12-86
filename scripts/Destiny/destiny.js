@@ -186,8 +186,8 @@ function quotes (input, cb) {
             NPC = "Banshee-44"
             return npcQuotes.processNpcQuotes(NPC, tag, cb )
             break
-        case "tyra"
-        case "tyra karn"
+        case "tyra":
+        case "tyra karn":
             NPC = "Tyra Karn"
             return npcQuotes.processNpcQuotes(NPC, tag, cb)
             break
