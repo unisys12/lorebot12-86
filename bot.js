@@ -22,8 +22,8 @@ bot.on("ready", function() {
 
   //Today In Halo
   let channels =  bot.channels
-  let lb_channel = channels.find('name', 'lorebot')
-  let lb_id = channels.find('name', process.env.halo_channel).id
+  let lb_channel = channels.find('name', 'lore__halo')
+  let lb_id = channels.find('name', 'lore__halo').id
 
   if (lb_channel) {
     setInterval(function() {
@@ -33,7 +33,7 @@ bot.on("ready", function() {
         }
         lb_channel.sendMessage(motd).catch(console.error)
       })
-    }, 1000*60*60*24)
+    }, 1000*60*60*24, false)
   }
 })
 
