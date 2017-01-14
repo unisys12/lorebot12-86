@@ -25,21 +25,14 @@ bot.on("ready", function() {
   let guilds = bot.guilds
   let halo_channels = []
   halo_channels.push(channels.find('name', 'lore__halo'))
-  //let lb_id = channels.find('name', 'lore__halo').ids
 
   guilds.map(function(x) {
-    console.log('__GUILD INFO__')
-    console.log(x.name)
-    console.log(x.id)
-    console.log('====')
-  })
+    let halo_channel = x.channels.find('name', 'lore__halo')
 
-  // Testing if I can find FFC Guild Info
-  halo_channels.map(function(x) {
-    console.log('__CHANNEL INFO__')
-    console.log(x.guild.name)
-    console.log(x.name)
-    console.log(x.id)
+    // If a Guild/Server running LoreBot has a '#lore__halo' channel, add it
+    if (halo_channel) {
+      halo_channels.push(halo_channel)
+    }
   })
 
   if (halo_channels) {
@@ -48,7 +41,9 @@ bot.on("ready", function() {
         if (err) {
           return console.error(err)
         }
-        //halo_channel.sendMessage(motd).catch(console.error)
+        halo_channels.map(function(x) {
+          x.sendMessage(motd).catch(console.error)
+        })
       })
     }, 1000*60*60*24)
   }
