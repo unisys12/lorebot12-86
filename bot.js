@@ -22,12 +22,21 @@ bot.on("ready", function() {
 
   //Today In Halo
   let channels =  bot.channels
+  let guilds = bot.guilds
   let halo_channels = []
   halo_channels.push(channels.find('name', 'lore__halo'))
   //let lb_id = channels.find('name', 'lore__halo').ids
 
+  guilds.map(function(x) {
+    console.log('__GUILD INFO__')
+    console.log(x.name)
+    console.log(x.id)
+    console.log('====')
+  })
+
   // Testing if I can find FFC Guild Info
   halo_channels.map(function(x) {
+    console.log('__CHANNEL INFO__')
     console.log(x.guild.name)
     console.log(x.name)
     console.log(x.id)
