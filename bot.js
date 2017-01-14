@@ -22,16 +22,24 @@ bot.on("ready", function() {
 
   //Today In Halo
   let channels =  bot.channels
-  let lb_channel = channels.find('name', 'lore__halo')
-  let lb_id = channels.find('name', 'lore__halo').ids
+  let halo_channels = []
+  halo_channels.push(channels.find('name', 'lore__halo'))
+  //let lb_id = channels.find('name', 'lore__halo').ids
 
-  if (lb_channel) {
+  // Testing if I can find FFC Guild Info
+  halo_channels.map(function(x) {
+    console.log(x.guild.name)
+    console.log(x.name)
+    console.log(x.id)
+  })
+
+  if (halo_channels) {
     setInterval(function() {
       halo.haloRequest(function (err, motd) {
         if (err) {
           return console.error(err)
         }
-        lb_channel.sendMessage(motd).catch(console.error)
+        //halo_channel.sendMessage(motd).catch(console.error)
       })
     }, 1000*60*60*24)
   }
