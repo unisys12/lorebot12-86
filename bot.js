@@ -48,7 +48,7 @@ bot.on("ready", function() {
           x.sendMessage(motd).catch(console.error)
         })
       })
-    }, 10000)
+    }, 1000*60*60*24)
   }
 })
 
