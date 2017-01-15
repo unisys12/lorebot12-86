@@ -38,6 +38,9 @@ bot.on("ready", function() {
   if (halo_channels) {
     setInterval(function() {
       halo.haloRequest(function (err, motd) {
+        // Marker to simply stamp what time the request is running
+        // Request is working, but a day behind.
+        console.log('Makeing Today In Halo Request!', new Date())
         if (err) {
           return console.error(err)
         }
@@ -45,7 +48,7 @@ bot.on("ready", function() {
           x.sendMessage(motd).catch(console.error)
         })
       })
-    }, 1000*60*60*24)
+    }, 10000)
   }
 })
 
