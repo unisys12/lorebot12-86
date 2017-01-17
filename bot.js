@@ -35,18 +35,19 @@ bot.on("ready", function() {
     }
   })
 
-  let timestamp = new Date()
-
-  if (halo_channels && timestamp.getHours() === 14) {
-    halo.haloRequest(function (err, motd) {
-      if (err) {
-        return console.error(err)
-      }
-      halo_channels.map(function(x) {
-        x.sendMessage(motd).catch(console.error)
+  setInterval(function() {
+    let timestamp = new Date()
+    if (halo_channels && timestamp.getHours() === 14) {
+      halo.haloRequest(function (err, motd) {
+        if (err) {
+          return console.error(err)
+        }
+        halo_channels.map(function(x) {
+          x.sendMessage(motd).catch(console.error)
+        })
       })
-    })
-  }
+    }
+  }, 1000*60*60)
 })
 
 bot.on("message", function (message) {
