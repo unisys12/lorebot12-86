@@ -37,22 +37,15 @@ bot.on("ready", function() {
 
   let timestamp = new Date()
 
-  console.log('The hour of the day is: ' + timestamp.getHours())
-
-  if (halo_channels && timestamp.getHours() === 8) {
-    //setInterval(function() {
-      halo.haloRequest(function (err, motd) {
-        // Marker to simply stamp what time the request is running
-        // Request is working, but a day behind.
-        console.log('Makeing Today In Halo Request!')
-        if (err) {
-          return console.error(err)
-        }
-        halo_channels.map(function(x) {
-          x.sendMessage(motd).catch(console.error)
-        })
+  if (halo_channels && timestamp.getHours() === 14) {
+    halo.haloRequest(function (err, motd) {
+      if (err) {
+        return console.error(err)
+      }
+      halo_channels.map(function(x) {
+        x.sendMessage(motd).catch(console.error)
       })
-    //}, 1000*60*60*24)
+    })
   }
 })
 
