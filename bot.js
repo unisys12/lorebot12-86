@@ -24,7 +24,6 @@ bot.on("ready", function() {
   let channels =  bot.channels
   let guilds = bot.guilds
   let halo_channels = []
-  halo_channels.push(channels.find('name', 'lore__halo'))
 
   guilds.map(function(x) {
     let halo_channel = x.channels.find('name', 'lore__halo')
