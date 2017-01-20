@@ -55,7 +55,7 @@ function gatherMessage(rows) {
       result.push(cannon[i])
     }
 
-    return result
+    return messageStructure(result)
 
   }else {
 
