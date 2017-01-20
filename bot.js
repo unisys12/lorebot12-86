@@ -36,7 +36,8 @@ bot.on("ready", function() {
 
   setInterval(function() {
     let timestamp = new Date()
-    if (timestamp.getHours() === 14 && timestamp.getMinutes() === 00) {
+
+    if (timestamp.getHours() === 14 && timestamp.getUTCMinutes() === 0) {
       halo.haloRequest(function (err, motd) {
         if (err) {
           return console.error(err)
@@ -46,7 +47,7 @@ bot.on("ready", function() {
         })
       })
     }
-  }, 1000*60*60)
+  }, 10000)
 })
 
 bot.on("message", function (message) {
