@@ -17,7 +17,7 @@ bot.login(process.env.TOKEN, function (token, err) {
   }
 })
 
-bot.on("ready", function() {
+bot.once("ready", function() {
   console.log('LoreBot12-86 is ready and running!')
 
   //Today In Halo
@@ -37,7 +37,7 @@ bot.on("ready", function() {
   setInterval(function() {
     let timestamp = new Date()
 
-    if (timestamp.getHours() === 14 && timestamp.getUTCMinutes() === 0) {
+    if (timestamp.getHours() === 14) {
       halo.haloRequest(function (err, motd) {
         if (err) {
           return console.error(err)
