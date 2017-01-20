@@ -47,7 +47,7 @@ bot.on("ready", function() {
         })
       })
     }
-  }, 10000)
+}, 1000*60*60)
 })
 
 bot.on("message", function (message) {
