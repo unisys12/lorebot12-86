@@ -36,7 +36,7 @@ bot.on("ready", function() {
 
   setInterval(function() {
     let timestamp = new Date()
-    if (halo_channels && timestamp.getHours() === 14) {
+    if (timestamp.getHours() === 14 && timestamp.getMinutes() === 00) {
       halo.haloRequest(function (err, motd) {
         if (err) {
           return console.error(err)
