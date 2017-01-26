@@ -91,7 +91,7 @@ function messageStructure(gather) {
 
     if (gather[2] == 'N/A') {
       // If date is not present, we know this is a random event
-      messageDetails.push('**__RANDOM HALO CANNON__**')
+      messageDetails.push('**__RANDOM HALO CANON__**')
       day = '__Unknown__'
     }else{
       messageDetails.push('**__TODAY IN HALO__**')
