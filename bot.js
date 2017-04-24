@@ -10,12 +10,15 @@ const scripts = require('./scripts/scripts')
 const Discord = require('discord.js')
 const bot = new Discord.Client()
 
-
-bot.login(process.env.TOKEN, function (token, err) {
-  if(err){
+let connect = ()=>{
+  bot.login(process.env.TOKEN, (token, err)=>{
+    if(err){
       console.log(err)
-  }
-})
+    }
+  })
+}
+
+connect()
 
 bot.once("ready", function() {
   console.log('LoreBot12-86 is ready and running!')
@@ -24,6 +27,11 @@ bot.once("ready", function() {
   let channels =  bot.channels
   let guilds = bot.guilds
   let halo_channels = []
+
+  console.log("List of Servers currently running LoreBot: ")
+  guilds.map((x)=>{
+    console.log(x.name)
+  })
 
   guilds.map(function(x) {
     let halo_channel = x.channels.find('name', 'lore__halo')
@@ -88,6 +96,11 @@ bot.on('error', function(error) {
   console.log('LoreBot returned an error: ', error)
 })
 
-bot.on('disconnect', function() {
-  console.log('LoreBot12-86 has disconnected from Discord Services')
+bot.on('disconnect', function(e) {
+  console.log('LoreBot12-86 has disconnected from Discord Services', e)
+
+  if(e.code === 1000) {
+    bot.destroy()
+      .then(connect())
+  }
 })
