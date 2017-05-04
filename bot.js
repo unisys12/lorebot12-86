@@ -99,7 +99,7 @@ bot.on('error', function(error) {
 bot.on('disconnect', function(e) {
   console.log('LoreBot12-86 has disconnected from Discord Services', e)
 
-  if(e.code === 1000) {
+  if(e.code != 1000 || e.reason.length < 1) {
     bot.destroy()
       .then(connect())
   }
