@@ -22,6 +22,8 @@ connect()
 
 bot.once("ready", function() {
   console.log('LoreBot12-86 is ready and running!')
+  
+  bot.user.setGame('Brought to you by FFC')
 
   //Today In Halo
   let channels =  bot.channels
