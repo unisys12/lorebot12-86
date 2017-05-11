@@ -48,8 +48,8 @@ return "**LoreBot Help Menu**" +'\n'+'\n'+
 "ex: `!quotes mara`" +'\n'+
 "This will return a single random quote from Mara Sov. You can type in Mara, mara, mara sov or queen of the reef, etc to get these quotes." +'\n'+'\n'+
 "**__Display Help Menu__**" +'\n'+
-"`!lorehelp` - Displays this help menu" +'\n'+'\n'
-
+"`!lorehelp` - Displays this help menu" +'\n'+'\n'+
+"`Brought to you by your friends at Focused Fire Chat`"
 }
 
 function quotes (input, cb) {
@@ -222,8 +222,8 @@ return "**__List of NPC's Currently in My System Followed by How to Call Them__*
     "To see a list of quotes for an NPC related to a tag or subject"+'\n'+
     "_ex:_ `!quotes petra -tag queen` will return a list of quotes related to The Queen of the Reef."+'\n'+'\n'+
     "A special thanks to Focused Fire Community members @bluecrew86, @ryno-666 and @taylor-b- for helping me gather the quotes currently in LoreBot. More are on the way."+'\n'+
-    "If you have any questions, comments or requests, follow me on twitter @unisys12."
-
+    "If you have any questions, comments or requests, follow me on twitter @unisys12."+'\n'+'\n'+
+    "`Brought to you by your friends at Focused Fire Chat`"
 }
 
 module.exports.searchGrimoire = searchGrimoire
