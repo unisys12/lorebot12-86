@@ -53,7 +53,7 @@ bot.once("ready", function() {
           return console.error(err)
         }
         halo_channels.map(function(x) {
-          x.sendMessage(motd).catch(console.error)
+          x.send(motd).catch(console.error)
         })
       })
     }
@@ -75,20 +75,20 @@ bot.on("message", function (message) {
         if(err) {
           return message.reply('something went wrong ```' + err + '```')
         } else {
-          return channel.sendMessage(msg)
+          return channel.send(msg)
         }
     }
 
     // This really seems sloppy, but...
     if (quoteCmd) {
       if (input.indexOf('help') != -1) {
-        user.sendMessage(destiny.quotesHelp())
+        user.send(destiny.quotesHelp())
       }else{
         destiny.quotes(input, reply)
       }
     }
 
-    if (helpCmd) { user.sendMessage(destiny.help(input)) }
+    if (helpCmd) { user.send(destiny.help(input)) }
     if (itemCmd) { message.reply(destiny.searchItems(input)) }
     if (cardCmd) { message.reply(destiny.searchCard(input)) }
     if (siteCmd) { message.reply(destiny.searchGrimoire(input)) }
