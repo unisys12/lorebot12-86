@@ -2,6 +2,7 @@
 
 const npcQuotes = require('../quotes')
 const scripts = require('../scripts')
+const Ishtar = require('../Ishtar');
 
 function searchGrimoire(input) {
 
@@ -15,7 +16,7 @@ function searchCard(input) {
 
         let stripeCmd = input.substr('6')
         let query = scripts.normalizeCardInput(stripeCmd)
-
+        
         return "http://www.ishtar-collective.net/cards/" + query
 }
 
@@ -23,8 +24,9 @@ function searchItems(input) {
 
         let stripeCmd = input.substr('6')
         let query = scripts.normalizeItemInput(stripeCmd)
+        let request = Ishtar.testEntry(query)
 
-        return "http://www.ishtar-collective.net/items/" + query
+        return {"result": request, "query": query}
 
 }
 

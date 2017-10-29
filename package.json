@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/unisys12/lorebot12-86#readme",
   "dependencies": {
+    "axios": "^0.17.0",
     "discord.js": "^11.1.0",
     "googleapis": "^15.0.0",
     "mysql2": "^1.1.2",

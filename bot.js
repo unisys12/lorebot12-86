@@ -38,7 +38,7 @@ bot.once("ready", function() {
   guilds.map(function(x) {
     let halo_channel = x.channels.find('name', 'lore__halo')
 
-    // If a Guild/Server running LoreBot has a '#lore__halo' channel, add it
+    // If a Guild/Server is running LoreBot has a '#lore__halo' channel, add it
     if (halo_channel) {
       halo_channels.push(halo_channel)
     }
@@ -79,7 +79,6 @@ bot.on("message", function (message) {
         }
     }
 
-    // This really seems sloppy, but...
     if (quoteCmd) {
       if (input.indexOf('help') != -1) {
         user.send(destiny.quotesHelp())
@@ -88,8 +87,24 @@ bot.on("message", function (message) {
       }
     }
 
+    if (itemCmd) {
+      let data = destiny.searchItems(input)
+      let result = data.result
+      let query = data.query
+
+      result.then((x) => {
+        if(x.status != 200) {
+          message.reply("http://www.ishtar-collective.net/items/" + query)
+        }else{
+          message.reply(
+          `
+          **Item:** http://www.ishtar-collective.net/items/${query} 
+          **Entry:** http://www.ishtar-collective.net/entries/${query}`)
+        }
+      })
+    }
+
     if (helpCmd) { user.send(destiny.help(input)) }
-    if (itemCmd) { message.reply(destiny.searchItems(input)) }
     if (cardCmd) { message.reply(destiny.searchCard(input)) }
     if (siteCmd) { message.reply(destiny.searchGrimoire(input)) }
 })
