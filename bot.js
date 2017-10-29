@@ -30,12 +30,10 @@ bot.once("ready", function() {
   let guilds = bot.guilds
   let halo_channels = []
 
-  console.log("List of Servers currently running LoreBot: ")
-  guilds.map((x)=>{
-    console.log(x.name)
-  })
-
   guilds.map(function(x) {
+    console.log("List of Servers currently running LoreBot: ")
+    console.log(x.name)
+
     let halo_channel = x.channels.find('name', 'lore__halo')
 
     // If a Guild/Server is running LoreBot has a '#lore__halo' channel, add it
