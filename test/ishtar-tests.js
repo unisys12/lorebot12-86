@@ -22,12 +22,12 @@ describe('IshtarTests', function() {
     expect(actual).to.be.equal(expected);
   })
 
-  it('searchItems() should return a string containing a url to ishtar parsed with user input', function() {
-    const input = '!item bad juju'
-    const expected = 'http://www.ishtar-collective.net/items/bad-juju'
-    let actual = destiny.searchItems(input)
+  // it('searchItems() should return a string containing a url to ishtar parsed with user input', function() {
+  //   const input = '!item bad juju'
+  //   const expected = 'http://www.ishtar-collective.net/items/bad-juju'
+  //   let actual = destiny.searchItems(input)
 
-    expect(actual).to.be.equal(expected)
-  })
+  //   expect(actual).to.be.equal(expected)
+  // })
 
 })
