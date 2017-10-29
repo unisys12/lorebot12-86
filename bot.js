@@ -30,8 +30,9 @@ bot.once("ready", function() {
   let guilds = bot.guilds
   let halo_channels = []
 
-  guilds.map(function(x) {
-    console.log("List of Servers currently running LoreBot: ")
+  console.log("List of Servers currently running LoreBot: ")
+
+  guilds.map(function(x) {    
     console.log(x.name)
 
     let halo_channel = x.channels.find('name', 'lore__halo')
