@@ -6,6 +6,7 @@ if (!process.env.TOKEN) {
 
 const destiny = require('./scripts/Destiny/destiny')
 const halo = require('./scripts/Halo/halo')
+const es = require('./scripts/ES')
 const scripts = require('./scripts/scripts')
 const Discord = require('discord.js')
 const bot = new Discord.Client()
@@ -29,6 +30,7 @@ bot.once("ready", function() {
   let channels =  bot.channels
   let guilds = bot.guilds
   let halo_channels = []
+  let test_channel = channels.find('name', 'lorebot')
 
   console.log("List of Servers currently running LoreBot: ")
 
@@ -46,7 +48,9 @@ bot.once("ready", function() {
   setInterval(function() {
     let timestamp = new Date()
 
-    if (timestamp.getHours() === 14) {
+    console.log(timestamp.getHours())
+
+    if (timestamp.getHours() === 21) {
       halo.haloRequest(function (err, motd) {
         if (err) {
           return console.error(err)
@@ -55,8 +59,16 @@ bot.once("ready", function() {
           x.send(motd).catch(console.error)
         })
       })
+
+      es.ElderScrolls((err, motd)=>{
+        console.log('Elder Scrolls thing fired!')
+        if(err) {
+          console.error(err)
+        }
+        test_channel.send(motd).catch(console.error)
+      })
     }
-}, 1000*60*60)
+}, 1000*30)//1000*60*60)
 })
 
 bot.on("message", function (message) {
