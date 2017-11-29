@@ -31,7 +31,7 @@ module.exports = (()=>{
     nonMatchingEvents = []
     for (var i = 0; i < list.length; i++) {
       let row = list[i]
-      if (row[1] | row[2] == "N/A") {
+      if (row[1] | row[2] == "" || "N/A") {
         nonMatchingEvents.push(row)
       }
     }
@@ -49,14 +49,14 @@ module.exports = (()=>{
       for (var i = 0; i < cannon.length; i++) {
         result.push(cannon[i])
       }
-  
+
       return messageStructure(result)
   
     }else {
   
       let nonMatching = getNonMatchingEvents(rows)
       let result = scripts.randomQuote(nonMatching)
-  
+
       return messageStructure(result)
   
     }
