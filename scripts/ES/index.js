@@ -5,7 +5,7 @@ const sheet = google.sheets('v4')
 module.exports = (()=>{
 
   filterMonthlyEsEvents = (data) => {
-    return data[1] == scripts.curMonth()
+    return data[1] == scripts.esMonths()
   }
   
   filterDailyEsEvents = (data) => {

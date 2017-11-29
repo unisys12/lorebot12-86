@@ -30,7 +30,7 @@ bot.once("ready", function() {
   let channels =  bot.channels
   let guilds = bot.guilds
   let halo_channels = []
-  let test_channel = channels.find('name', 'lorebot')
+  let es_channel = channels.find('name', process.env.elderScrollsChannel)
 
   console.log("List of Servers currently running LoreBot: ")
 
@@ -50,7 +50,7 @@ bot.once("ready", function() {
 
     console.log(timestamp.getHours())
 
-    if (timestamp.getHours() === 21) {
+    if (timestamp.getHours() === 14) {
       halo.haloRequest(function (err, motd) {
         if (err) {
           return console.error(err)
@@ -65,10 +65,10 @@ bot.once("ready", function() {
         if(err) {
           console.error(err)
         }
-        test_channel.send(motd).catch(console.error)
+        es_channel.send(motd).catch(console.error)
       })
     }
-}, 1000*30)//1000*60*60)
+  }, 1000*60*60)//1000*30)
 })
 
 bot.on("message", function (message) {
