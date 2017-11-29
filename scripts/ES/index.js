@@ -137,6 +137,10 @@ module.exports = (()=>{
   messageConstruct = (rows) => {
   
     let message = []
+
+    if(rows[7].includes('- ')){
+      rows[7].replace('- ', '\/n- ')
+    }
   
       try {
   
