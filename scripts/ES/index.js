@@ -76,7 +76,7 @@ module.exports = (()=>{
   
       messageDetails.push(year)
   
-      if (gather[1] == 'N/A') {
+      if (gather[1] == 'N/A' || '') {
         month = '__Unknown__'
       }else{
         month = gather[1]
@@ -84,7 +84,7 @@ module.exports = (()=>{
   
       messageDetails.push(month)
   
-      if (gather[2] == 'N/A') {
+      if (gather[2] == 'N/A' || '') {
         // If date is not present, we know this is a random event
         messageDetails.push('**__RANDOM ELDER SCROLLS CANON__**')
         day = '__Unknown__'
