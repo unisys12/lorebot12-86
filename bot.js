@@ -59,7 +59,6 @@ bot.once("ready", function() {
       })
 
       es.ElderScrolls((err, motd)=>{
-        console.log('Elder Scrolls thing fired!')
         if(err) {
           console.error(err)
         }
