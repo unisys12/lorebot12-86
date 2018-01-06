@@ -68,43 +68,41 @@ curMonth: function() {
 
 esMonths: function(month) {
 
-  let normMonth = this.curMonth()
-
-  switch (normMonth) {
-    case 'January':
+  switch (date.getMonth()) {
+    case 0:
       return 'Morning Star'
       break;
-    case 'February':
+    case 1:
       return "Sun's Dawn"
       break;
-    case 'March':
+    case 2:
       return "First Seed"
       break;
-    case 'April':
+    case 3:
       return "Rain's Hand"
       break;
-    case 'May':
+    case 4:
       return 'Second Seed'
       break;
-    case 'June':
+    case 5:
       return 'Mid Year'
       break;
-    case 'July':
+    case 6:
       return "Sun's Height"
       break;
-    case 'August':
+    case 7:
       return 'Last Seed'
       break;
-    case 'September':
+    case 8:
       return 'Hearthfire'
       break;
-    case 'October':
+    case 9:
       return 'Frostfall'
       break;
-    case 'November':
+    case 10:
       return "Sun's Dusk"
       break;
-    case 'December':
+    case 11:
       return 'Evening Star'
       break;
     default: ""
