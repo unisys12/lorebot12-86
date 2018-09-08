@@ -1,10 +1,8 @@
 const Axios = require('axios')
 
-let testEntry = (query) => {
-  let response = Axios.get(`http://ishtar-collective.net/entries/${query}`)
-    .catch((e) => e)
-
-  return response
+let loreEntry = (input) => {
+  let alteredInput = input.substr('9').replace(/\s+/g, "-")
+  return `https://ishtar-collective.net/entries/${alteredInput}`
 }
 
-module.exports.testEntry = testEntry
+module.exports.loreEntry = loreEntry

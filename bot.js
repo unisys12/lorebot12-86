@@ -7,6 +7,7 @@ if (!process.env.TOKEN) {
 const destiny = require('./scripts/Destiny/destiny')
 const halo = require('./scripts/Halo/halo')
 const es = require('./scripts/ES')
+const Ishtar = require('./scripts/Ishtar')
 const scripts = require('./scripts/scripts')
 const Discord = require('discord.js')
 const bot = new Discord.Client()
@@ -78,6 +79,7 @@ bot.on("message", function (message) {
     let itemCmd = input.startsWith('!item')
     let cardCmd = input.startsWith('!card')
     let siteCmd = input.startsWith('!search')
+    let entriesCmd = input.startsWith('!entries')
 
     let reply = function(err, msg) {
         if(err) {
@@ -115,6 +117,7 @@ bot.on("message", function (message) {
     if (helpCmd) { user.send(destiny.help(input)) }
     if (cardCmd) { message.reply(destiny.searchCard(input)) }
     if (siteCmd) { message.reply(destiny.searchGrimoire(input)) }
+    if (entriesCmd) { message.reply(Ishtar.loreEntry(input)) }
 })
 
 bot.on('error', function(error) {

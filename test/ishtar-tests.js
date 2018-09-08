@@ -3,6 +3,7 @@
 
 const expect = require('chai').expect;
 const destiny = require('../scripts/Destiny/destiny');
+const Ishtar = require('../scripts/Ishtar')
 
 describe('IshtarTests', function() {
 
@@ -22,12 +23,12 @@ describe('IshtarTests', function() {
     expect(actual).to.be.equal(expected);
   })
 
-  // it('searchItems() should return a string containing a url to ishtar parsed with user input', function() {
-  //   const input = '!item bad juju'
-  //   const expected = 'http://www.ishtar-collective.net/items/bad-juju'
-  //   let actual = destiny.searchItems(input)
+  it('loreEntry() should return a string containing a url to Ishtar parsed with user input', function() {
+    const input = '!entries ace of spades'
+    const expected = 'https://ishtar-collective.net/entries/ace-of-spades'
+    let actual = Ishtar.loreEntry(input)
 
-  //   expect(actual).to.be.equal(expected)
-  // })
+    expect(actual).to.be.equal(expected)
+  })
 
 })
