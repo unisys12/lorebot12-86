@@ -13,11 +13,9 @@ module.exports = {
   * - removes any spaces and replaces with slug "-"
   */
 normalizeCardInput: function (msg) {
-    let lowercaseify = msg.toLowerCase()
-    let removeColon = lowercaseify.replace(":", "")
-    let output = removeColon.replace(/\s+/g, "-")
-
-    return output
+    return msg.toLowerCase()
+              .replace(":", "")
+              .replace(/\s+/g, "-")
 },
 
 /**
@@ -27,11 +25,9 @@ normalizeCardInput: function (msg) {
   * - removes any spaces and replaces with slug "-"
   */
 normalizeItemInput: function (msg) {
-    let lowercaseify = msg.toLowerCase()
-    let stripApostrophe = lowercaseify.replace("'", "")
-    let output = stripApostrophe.replace(/\s+/g, "-")
-
-    return output
+    return msg.toLowerCase()
+              .replace("'", "")
+              .replace(/\s+/g, "-")
 },
 
 /**

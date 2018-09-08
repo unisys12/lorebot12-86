@@ -14,16 +14,14 @@ function searchGrimoire(input) {
 
 function searchCard(input) {
 
-        let stripeCmd = input.substr('6')
-        let query = scripts.normalizeCardInput(stripeCmd)
+        let query = scripts.normalizeCardInput(input.substr('6'))
         
         return "http://www.ishtar-collective.net/cards/" + query
 }
 
 function searchItems(input) {
 
-        let stripeCmd = input.substr('6')
-        let query = scripts.normalizeItemInput(stripeCmd)
+        let query = scripts.normalizeItemInput(input.substr('6'))
         let request = Ishtar.testEntry(query)
 
         return {"result": request, "query": query}
