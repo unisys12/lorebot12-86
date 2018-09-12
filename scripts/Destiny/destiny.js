@@ -43,6 +43,10 @@ return "**LoreBot Help Menu**" +'\n'+'\n'+
 "**!item** *item you want to show in chat*" +'\n'+
 "ex: `!item ace of spades`" +'\n'+
 "This will, like the card command, return a link to the item or weapon along with the flavor text and an image of the item. If not, then your search did not match. Follow the link to Ishtar and check if it's suggestions match what you were looking for." +'\n'+'\n'+
+"**__Search Ishtar for a Lore Tab/Entry__**" +'\n'+
+"**!entries** *the lore tab/entry or book entry that you want to reference*" +'\n'+
+"ex: `!entries ace of spades` *this will display a link to the Ace of Spades Lore Tab*" +'\n'+
+"ex: `!entries pressure` *this will display a link to the Ghost Stories Book entry for Pressure*" +'\n'+'\n'+
 "**__NPC Quotes__**" +'\n'+
 "**!quotes** *the person your wanting the quotes from*" +'\n'+
 "ex: `!quotes mara`" +'\n'+
