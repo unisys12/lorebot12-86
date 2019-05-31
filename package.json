@@ -8,9 +8,7 @@
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
-    "test": "mocha test --recursive",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha -- --recursive",
-    "dev": "mocha test --recursive --watch"
+    "test": "mocha test --recursive"
   },
   "repository": {
     "type": "git",
@@ -38,10 +36,8 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "coveralls": "^2.11.15",
     "dotenv": "^2.0.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
+    "mocha": "^6.1.4",
     "sinon": "^1.17.7"
   }
 }
