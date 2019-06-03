@@ -25,20 +25,22 @@ connect();
 bot.once("ready", function() {
   console.log("LoreBot12-86 is ready and running!");
 
-  bot.user.setGame("Brought to you by FFC");
+  bot.user.setActivity("Brought to you by FFC");
 
   //Today In Halo
   let channels = bot.channels;
   let guilds = bot.guilds;
   let halo_channels = [];
-  let es_channel = channels.find("name", process.env.elderScrollsChannel);
+  let es_channel = channels.find(
+    ch => ch.name === process.env.elderScrollsChannel
+  );
 
   console.log("List of Servers currently running LoreBot: ");
 
   guilds.map(function(x) {
     console.log(x.name);
 
-    let halo_channel = x.channels.find("name", "lore__halo");
+    let halo_channel = x.channels.find(ch => ch.name === "lore__halo");
 
     // If a Guild/Server is running LoreBot has a '#lore__halo' channel, add it
     if (halo_channel) {
