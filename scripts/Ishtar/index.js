@@ -1,8 +1,11 @@
-const Axios = require('axios')
+const Axios = require("axios");
 
-let loreEntry = (input) => {
-  let alteredInput = input.substr('9').replace(/\s+/g, "-")
-  return `https://ishtar-collective.net/entries/${alteredInput}`
-}
+let loreEntry = input => {
+  let alteredInput = input
+    .substr("9")
+    .replace(/\s+/g, "-")
+    .toLowerCase();
+  return `https://ishtar-collective.net/entries/${alteredInput}`;
+};
 
-module.exports.loreEntry = loreEntry
+module.exports.loreEntry = loreEntry;
