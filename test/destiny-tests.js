@@ -12,7 +12,7 @@ describe("DestinyTests", function() {
   });
 
   it(
-    "should retrun a list of quotes for an NPC related to a tag or subject",
+    "quotes() should return a list of quotes for an NPC related to a tag or subject",
     sinon.test(function() {
       const npcQuotes = require("../scripts/quotes.js");
       const input = "!quotes petra -tag queen";
@@ -49,4 +49,12 @@ describe("DestinyTests", function() {
       expect(processStub.withArgs(tag));
     })
   );
+
+  it("searchItems should return a url to Ishtar with the input lowercased and slugged", function() {
+    const input = "!item Bad Juju";
+    const expected = "https://www.ishtar-collective.net/items/bad-juju";
+    let actual = destiny.searchItems(input);
+
+    expect(actual).to.be.equal(expected);
+  });
 });
