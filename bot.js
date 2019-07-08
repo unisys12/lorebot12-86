@@ -101,23 +101,8 @@ bot.on("message", function(message) {
   }
 
   if (itemCmd) {
-    let data = destiny.searchItems(input);
-    let result = data.result;
-    let query = data.query;
-
-    result.then(x => {
-      if (x.status != 200) {
-        message.reply("http://www.ishtar-collective.net/items/" + query);
-      } else {
-        message.reply(
-          `
-          **Item:** http://www.ishtar-collective.net/items/${query} 
-          **Entry:** http://www.ishtar-collective.net/entries/${query}`
-        );
-      }
-    });
+    message.reply(destiny.searchItems(input));
   }
-
   if (helpCmd) {
     user.send(destiny.help(input));
   }
