@@ -37,39 +37,9 @@ bot.once("ready", function() {
 
   console.log("List of Servers currently running LoreBot: ");
 
-  guilds.map(function(x) {
+  guilds.forEach(function(x) {
     console.log(x.name);
-
-    let halo_channel = x.channels.find(ch => ch.name === "lore__halo");
-
-    // If a Guild/Server is running LoreBot has a '#lore__halo' channel, add it
-    if (halo_channel) {
-      halo_channels.push(halo_channel);
-    }
   });
-
-  setInterval(function() {
-    let timestamp = new Date();
-
-    if (timestamp.getHours() === 14) {
-      halo.haloRequest(function(err, motd) {
-        if (err) {
-          return console.error(err);
-        }
-        halo_channels.map(function(x) {
-          x.send(motd).catch(console.error);
-        });
-      });
-
-      es.ElderScrolls((err, motd) => {
-        if (err) {
-          console.error(err);
-        }
-        es_channel.send(motd).catch(console.error);
-      });
-    }
-  }, 1000 * 60 * 60);
-  // }, 1000 * 10); // Testing Locally
 });
 
 bot.on("message", function(message) {
