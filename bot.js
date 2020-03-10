@@ -29,7 +29,9 @@ bot.once("ready", function() {
   let channels = bot.channels;
   let guilds = bot.guilds;
 
-  console.log("List of Servers currently running LoreBot: ");
+  let total_active = guilds.size;
+
+  console.log(`List of Servers currently running LoreBot: ${total_active}`);
 
   guilds.forEach(function(x) {
     console.log(x.name);
