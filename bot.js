@@ -5,8 +5,6 @@ if (!process.env.TOKEN) {
 }
 
 const destiny = require("./scripts/Destiny/destiny");
-const halo = require("./scripts/Halo/halo");
-const es = require("./scripts/ES");
 const Ishtar = require("./scripts/Ishtar");
 const scripts = require("./scripts/scripts");
 const Discord = require("discord.js");
@@ -30,10 +28,6 @@ bot.once("ready", function() {
   //Today In Halo
   let channels = bot.channels;
   let guilds = bot.guilds;
-  let halo_channels = [];
-  let es_channel = channels.find(
-    ch => ch.name === process.env.elderScrollsChannel
-  );
 
   console.log("List of Servers currently running LoreBot: ");
 
