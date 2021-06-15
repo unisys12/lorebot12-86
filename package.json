@@ -1,6 +1,6 @@
 {
   "name": "lorebot12-86",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Discord Bot, for use by Focused Fire Chat on their public Discord server.",
   "engines": {
     "node": "7.10.1"
@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/unisys12/lorebot12-86#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "discord.js": "^11.5.1",
     "mysql2": "^1.1.2",
-    "underscore": "^1.8.3"
+    "underscore": "^1.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
