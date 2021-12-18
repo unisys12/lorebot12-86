@@ -41,7 +41,7 @@ bot.once("ready", function () {
     table.push([x.name]);
     // table.push([{ server_name: `${x.name}` }]);
   });
-  console.table(table, "Server Name");
+  console.table(table, ["Server Name"]);
   console.groupEnd();
 
   console.log("");
