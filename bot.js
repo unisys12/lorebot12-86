@@ -31,14 +31,17 @@ bot.once("ready", function () {
   //Today In Halo
   let channels = bot.channels;
   let guilds = bot.guilds;
+  let table = [];
 
   console.group();
   console.log("List of Discord Servers Actively Using LoreBot:");
   console.log("=============================================");
   guilds.cache.forEach(function (x) {
     total_active.push(x.name);
-    console.table([{ server_name: `${x.name}`, server_region: `${x.region}` }]);
+    table.push([x.name]);
+    table.push([{ server_name: `${x.name}` }]);
   });
+  console.table($table);
   console.groupEnd();
 
   console.log("");
