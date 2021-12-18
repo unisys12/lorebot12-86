@@ -9,6 +9,8 @@ const Ishtar = require("./scripts/Ishtar");
 const scripts = require("./scripts/scripts");
 const Discord = require("discord.js");
 const bot = new Discord.Client();
+let total_active = [];
+let total_active_count;
 
 let connect = () => {
   bot.login(process.env.TOKEN, (token, err) => {
@@ -20,8 +22,9 @@ let connect = () => {
 
 connect();
 
-bot.once("ready", function() {
+bot.once("ready", function () {
   console.log("LoreBot12-86 is ready and running!");
+  console.log("");
 
   bot.user.setActivity("Brought to you by FFC");
 
@@ -29,16 +32,23 @@ bot.once("ready", function() {
   let channels = bot.channels;
   let guilds = bot.guilds;
 
-  let total_active = guilds.size;
-
-  console.log(`List of Servers currently running LoreBot: ${total_active}`);
-
-  guilds.forEach(function(x) {
-    console.log(x.name);
+  console.group();
+  console.log("List of Discord Servers Actively Using LoreBot:");
+  console.log("=============================================");
+  guilds.cache.forEach(function (x) {
+    total_active.push(x.name);
+    console.table([{ server_name: `${x.name}`, server_region: `${x.region}` }]);
   });
+  console.groupEnd();
+
+  console.log("");
+
+  console.log(
+    `Number of Servers currently running LoreBot: ${total_active.length}`
+  );
 });
 
-bot.on("message", function(message) {
+bot.on("message", function (message) {
   let input = message.content;
   let channel = message.channel;
   let user = message.author;
@@ -50,7 +60,7 @@ bot.on("message", function(message) {
   let siteCmd = input.startsWith("!search");
   let entriesCmd = input.startsWith("!entries");
 
-  let reply = function(err, msg) {
+  let reply = function (err, msg) {
     if (err) {
       return message.reply("something went wrong ```" + err + "```");
     } else {
@@ -83,11 +93,11 @@ bot.on("message", function(message) {
   }
 });
 
-bot.on("error", function(error) {
-  console.log("LoreBot returned an error: ", error);
+bot.on("error", function (error) {
+  console.error("LoreBot returned an error: ", error);
 });
 
-bot.on("disconnect", function(e) {
+bot.on("disconnect", function (e) {
   console.log("LoreBot12-86 has disconnected from Discord Services", e);
 
   if (e.code != 1000 || e.reason.length < 1) {
