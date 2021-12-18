@@ -38,10 +38,10 @@ bot.once("ready", function () {
   console.log("=============================================");
   guilds.cache.forEach(function (x) {
     total_active.push(x.name);
-    // table.push([x.name]);
-    table.push([{ server_name: `${x.name}` }]);
+    table.push([x.name]);
+    // table.push([{ server_name: `${x.name}` }]);
   });
-  console.table(table);
+  console.table(table, "Server Name");
   console.groupEnd();
 
   console.log("");
